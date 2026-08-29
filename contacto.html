@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda Krusty Burger</title>
-    <link rel="stylesheet" href="style-contacto.css">
+    <link rel="stylesheet" href="css/style-contacto.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
 </head>
 
@@ -22,38 +22,50 @@
         <div class="nav-icons">
             <a href="favoritos.html"><i class="ti ti-heart"></i></a>
             <a href="carrito.html"><i class="ti ti-shopping-cart"></i></a>
-            <a href="perfil.html"><i class="ti ti-user"></i></a>
+            <a href="login.html"><i class="ti ti-user"></i></a>
         </div>
         <a href="ordenar.html" class="btn-ordenar"><button>Ordenar Ahora</button></a>
     </nav>
-    <hero>
-        <h1>¡GRITA TUS QUEJAS AQUÍ!</h1>
-        <p>¿Krusty te dio una hamburguesa cruda? ¿El Ribwich te dio alucinaciones? ¡Dejanos saber! Nos importa (un
-            poco).</p>
-        <div>
-            <form method="POST">
-                <label for="nombre">Nombre Completo:</label>
-                <input type="text" id="nombre" name="nombre" required>
+    <main>
+        <section class="titulo">
+            <div>
+                <h1>¡Grita tus quejas aquí!</h1>
+                <p>¿Krusty te dio una hamburguesa cruda? ¿El Ribwich te dio alucinaciones? ¡Dejanos
+                    saber! Nos importa (un poco).</p>
+            </div>
+        </section>
+        <section class="contacto">
+            <div class="formulario-contenedor">
+                <form>
+                    <div class="formulario-filas">
+                        <div class="formulario-grupo">
+                            <label for="nombre">NOMBRE COMPLETO</label>
+                            <input type="text" id="nombre" name="nombre" required placeholder="Ej. Homero Simpson">
+                        </div>
+                        <div class="formulario-grupo">
+                            <label for="email">EMAIL (Opcional si huyes)</label>
+                            <input type="email" id="email" name="email" placeholder="Ej. homero_lover@simpson.com">
+                        </div>
+                    </div>
 
-                <label for="email">Correo electrónico:</label>
-                <input type="email" id="email" name="email" required>
-
-                <label for="mensaje">Mensaje:</label>
-                <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
-
-                <button>Enviar Queja</button>
-            </form>
-        </div>
-        <div>
-            <h2>¿DONDE ESTAMOS?</h2>
-            <p>Krusty Burger Principal</p>
-            <p>742 Evergreen Terrace, Springfield (o cerca de ahí, pregunta) </p>
-            <p>Teléfono: +1 (555) 123-4567 (no llamen a la policía)</p>
-        </div>
-        <div>
-            <h2>MMM... QUEJAS...</h2>
-        </div>
-    </hero>
+                    <div class="formulario-grupo">
+                        <label for="mensaje">¿QUE HIZO KRUSTY ESTA VEZ?</label>
+                        <textarea id="mensaje" required
+                            placeholder="Ej. Describe tu trauma aquí... ¡No escatimes en detalles grotescos!"></textarea>
+                    </div>
+                    <button type="submit">Enviar queja <i class="ti ti-send"></i></button>
+                </form>
+            </div>
+            <aside class="info-contacto">
+                <h2><i class="ti ti-map-pin"></i> ¿DÓNDE ESTAMOS?</h2>
+                <p><i class="ti ti-home"></i> Krusty Burger Principal</p>
+                <p>742 Evergreen Terrace, Springfield<br>(o cerca de ahí, pregunta por Ned)</p>
+                <p><i class="ti ti-phone"></i> (555) 123-4567 (no llamen a la policía)</p>
+                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCY1g6BoQSr6StNQKIvY7ENHNKj9vcBCsG_bgJXFZZBcL3LV8Ev27DIsaOJXvWh-r8T7O0Z4SZD5W9SNiPe4B9dm7Lqr8St39iVQb_c5iFKL-2u7_yun9JwckoKng2g1tOKeRc4jdUz7K4LJCabzQU4L6ZuaYbeIOz4kW6pNV2Q2MMH3Nw8mb5GovUzmabykcPsKV2rZfDF7GcE3L88EOXmabokTOl4TuavEIdrxMbUVhdIXi3YHB3OUQ"
+                    alt="Mapa de Krusty Burger">
+            </aside>
+        </section>
+    </main>
     <footer>
         <h2>Krusty Burguer</h2>
         <ul>
