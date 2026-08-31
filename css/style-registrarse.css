@@ -1,0 +1,157 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background: #f1f1ee;
+    color: #1A1A1A;
+    background-image: radial-gradient(#cfcfcf 1px, transparent 1px);
+    background-size: 8px 8px;
+}
+
+.registro {
+    width: 100%;
+    min-height: 100vh;
+    padding: 40px 38px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 36px;
+    align-items: center;
+    background: #f3f1ee;
+}
+
+.columna-izquierda {
+    padding-left: 100px;
+}
+
+.titulo {
+    max-width: 680px;
+    font-size: 80px;
+    line-height: 0.97;
+    font-weight: 900;
+    color: #1A1A1A;
+    margin-bottom: 18px;
+}
+
+.texto {
+    max-width: 540px;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #1A1A1A;
+    margin-bottom: 20px;
+}
+
+.imagen-izquierda {
+    width: 100%;
+    max-width: 500px;
+    min-height: 230px;
+    background: #f0ece4;
+    border: 3px solid #1A1A1A;
+    border-radius: 18px;
+    box-shadow: 6px 6px 0 #1A1A1A;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 22px;
+    margin-top: 10px;
+}
+
+.imagen-izquierda img {
+    width: 100%;
+    max-width: 250px;
+    display: block;
+}
+
+.formulario-registro {
+    width: 100%;
+    max-width: 500px;
+    background: #f7f6f2;
+    border: 3px solid #1A1A1A;
+    border-radius: 18px;
+    padding: 26px;
+    box-shadow: 6px 6px 0 #1A1A1A;
+    justify-self: center;
+}
+
+.formulario-titulo {
+    font-size: 2rem;
+    margin-bottom: 18px;
+    font-weight: 900;
+    color: #1A1A1A;
+}
+
+.registro-formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.formulario-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.formulario-grupo label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: #1A1A1A;
+}
+
+.formulario-grupo input {
+    width: 100%;
+    border: 2px solid #1A1A1A;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 1rem;
+    background: #fff;
+    color: #1A1A1A;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-top: 4px;
+}
+
+.checkbox input {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+}
+
+.boton-registro {
+    margin-top: 8px;
+    width: 100%;
+    border: 3px solid #1A1A1A;
+    border-radius: 12px;
+    background: #d9121d;
+    color: #fff;
+    padding: 15px 20px;
+    font-size: 1rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    box-shadow: 0 5px 0 #000;
+}
+
+.login-texto {
+    text-align: center;
+    margin-top: 12px;
+    font-size: 0.96rem;
+}
+
+.login-texto a {
+    color: #1A1A1A;
+    font-weight: 800;
+    text-decoration: underline;
+}
+
