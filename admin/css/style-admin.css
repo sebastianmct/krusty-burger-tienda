@@ -29,13 +29,11 @@ a {
     text-decoration: none;
 }
 
-/* ---------- Layout shell ---------- */
 .admin-shell {
     display: flex;
     min-height: 100vh;
 }
 
-/* ---------- Sidebar ---------- */
 .admin-sidebar {
     width: 260px;
     flex-shrink: 0;
@@ -156,7 +154,6 @@ a {
     color: #fff;
 }
 
-/* ---------- Main column ---------- */
 .admin-main {
     flex: 1;
     min-width: 0;
@@ -240,7 +237,6 @@ a {
     display: none;
 }
 
-/* ---------- Cards ---------- */
 .card-kb {
     background: #fff;
     border: 1px solid var(--kb-border);
@@ -292,7 +288,6 @@ a {
     margin-bottom: 2px;
 }
 
-/* Quote / personaje callouts */
 .quote-personaje {
     display: flex;
     gap: 14px;
@@ -327,7 +322,6 @@ a {
     color: #3a352e;
 }
 
-/* ---------- Tables ---------- */
 .tabla-admin-wrap {
     background: #fff;
     border: 1px solid var(--kb-border);
@@ -428,7 +422,6 @@ table.tabla-admin td .subtexto {
     line-height: 1;
 }
 
-/* ---------- Forms ---------- */
 .form-admin .form-label {
     font-weight: 700;
     font-size: .85rem;
@@ -512,7 +505,6 @@ table.tabla-admin td .subtexto {
     color: var(--kb-border);
 }
 
-/* ---------- Responsive ---------- */
 @media (max-width: 991.98px) {
     .admin-sidebar {
         position: fixed;
