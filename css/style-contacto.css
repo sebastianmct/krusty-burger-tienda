@@ -331,3 +331,40 @@ footer p {
     width: 100%;
     object-fit: cover;
 }
+
+.krusty-homero-caminando {
+    position: relative;
+    height: 0;
+    overflow: visible;
+    z-index: 10;
+    pointer-events: none;
+}
+
+.krusty-homero-caminando img {
+    position: absolute;
+    right: -180px;
+    bottom: 160px;
+    width: 150px;
+    height: auto;
+    object-fit: contain;
+    animation: caminar-krusty-homero 14s linear infinite;
+    will-change: transform;
+}
+
+@keyframes caminar-krusty-homero {
+    0% {
+        transform: translateX(0) translateY(0) rotate(2deg);
+    }
+    25% {
+        transform: translateX(-30vw) translateY(-4px) rotate(-2deg);
+    }
+    50% {
+        transform: translateX(-60vw) translateY(0) rotate(2deg);
+    }
+    75% {
+        transform: translateX(-90vw) translateY(-4px) rotate(-2deg);
+    }
+    100% {
+        transform: translateX(calc(-100vw - 200px)) translateY(0) rotate(2deg);
+    }
+}
