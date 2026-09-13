@@ -225,6 +225,19 @@ textarea {
     resize: vertical;
 }
 
+.campo-error {
+    color: #8e1010;
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.mensaje-exito {
+    padding: 10px;
+    border: 2px solid #1A1A1A;
+    background: #fff;
+    font-weight: 800;
+}
+
 button {
     width: 100%;
     max-width: 260px;
@@ -279,7 +292,7 @@ footer {
     background: #17110f;
     color: #ffd90f;
     padding: 35px 80px 20px;
-    min-height: 80vh;
+    min-height: auto;
 }
 
 footer h2 {
@@ -306,4 +319,15 @@ footer p {
     padding-top: 18px;
     font-size: 0.9rem;
     color: #d7d1c8;
+}
+
+.mou_container {
+    width: 300px;
+    align-self: center;
+}
+
+.moe-img {
+    display: block;
+    width: 100%;
+    object-fit: cover;
 }

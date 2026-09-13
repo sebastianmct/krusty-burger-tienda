@@ -1,0 +1,224 @@
+body {
+    background: #f1f1ee;
+}
+
+.detalle-pagina {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 28px 30px 70px;
+}
+
+.volver-menu {
+    display: inline-block;
+    color: #1A1A1A;
+    font-size: 0.82rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+}
+
+.volver-menu i {
+    color: #d9121d;
+    margin-right: 5px;
+}
+
+.detalle-producto {
+    display: grid;
+    grid-template-columns: 1fr 0.9fr;
+    gap: 46px;
+    align-items: start;
+}
+
+.detalle-predeterminado {
+    display: grid;
+}
+
+.galeria {
+    padding: 16px;
+    background: #fffdf7;
+    border: 3px solid #1A1A1A;
+    box-shadow: 6px 7px 0 #1A1A1A;
+}
+
+.galeria input {
+    position: absolute;
+    opacity: 0;
+}
+
+.visor {
+    position: relative;
+    height: 390px;
+    background: #f4d40b;
+    border: 2px solid #1A1A1A;
+    overflow: hidden;
+}
+
+.visor img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+}
+
+.visor .foto-1 {
+    opacity: 1;
+}
+
+.galeria input:nth-of-type(1):checked ~ .visor .foto-1,
+.galeria input:nth-of-type(2):checked ~ .visor .foto-2,
+.galeria input:nth-of-type(3):checked ~ .visor .foto-3 {
+    opacity: 1;
+}
+
+.miniaturas {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 12px;
+}
+
+.miniaturas label {
+    display: block;
+    height: 78px;
+    border: 2px solid #1A1A1A;
+    background: #f4d40b;
+    cursor: pointer;
+}
+
+.miniaturas img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.galeria input:nth-of-type(1):checked ~ .miniaturas label:nth-child(1),
+.galeria input:nth-of-type(2):checked ~ .miniaturas label:nth-child(2),
+.galeria input:nth-of-type(3):checked ~ .miniaturas label:nth-child(3) {
+    outline: 4px solid #d9121d;
+    outline-offset: -4px;
+}
+
+.comentario {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 230px;
+    padding: 8px;
+    background: #fff;
+    border: 2px solid #1A1A1A;
+    box-shadow: 3px 4px 0 #1A1A1A;
+}
+
+.comentario img {
+    width: 48px;
+    height: 58px;
+    object-fit: cover;
+}
+
+.comentario p {
+    font-size: 0.72rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.personaje-millhouse {
+    margin: 18px 0 0 auto;
+    transform: rotate(-3deg);
+}
+
+.personaje-burns {
+    width: 250px;
+    margin-top: 28px;
+    transform: rotate(3deg);
+}
+
+.detalle-categoria {
+    color: #d9121d;
+    font-size: 0.75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.detalle-info h1 {
+    max-width: 460px;
+    font-family: "Arial Black", Impact, sans-serif;
+    font-size: 3.8rem;
+    line-height: 0.9;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+}
+
+.detalle-descripcion {
+    max-width: 450px;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.detalle-precio {
+    display: block;
+    color: #d9121d;
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 14px;
+}
+
+.detalle-nota {
+    max-width: 390px;
+    padding: 10px 12px;
+    background: #FFD90F;
+    border: 2px solid #1A1A1A;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.boton-carrito {
+    border: 3px solid #1A1A1A;
+    background: #d9121d;
+    color: #fff;
+    box-shadow: 0 5px 0 #1A1A1A;
+    padding: 15px 22px;
+    font-size: 0.9rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+
+.boton-carrito i {
+    margin-left: 7px;
+}
+
+.detalle-invalido {
+    max-width: 620px;
+    padding: 36px;
+    background: #fffdf7;
+    border: 3px solid #1A1A1A;
+    box-shadow: 6px 7px 0 #1A1A1A;
+}
+
+.detalle-invalido h1 {
+    margin-bottom: 14px;
+    text-transform: uppercase;
+}
+
+.detalle-invalido p {
+    margin-bottom: 20px;
+}
+
+footer {
+    min-height: auto;
+}
+
+@media (max-width: 800px) {
+    .detalle-producto {
+        grid-template-columns: 1fr;
+    }
+
+    .detalle-info h1 {
+        font-size: 3rem;
+    }
+}

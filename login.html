@@ -13,18 +13,17 @@
     <nav>
         <h2>Krusty Burger</h2>
         <ul>
-            <li><a href="home.html">Inicio</a></li>
+            <li><a href="index.html">Inicio</a></li>
             <li><a href="menu.html">Menú</a></li>
             <li><a href="contacto.html">Contacto</a></li>
             <li><a href="nosotros.html">Nosotros</a></li>
             <li><a href="promociones.html">Promociones</a></li>
         </ul>
         <div class="nav-icons">
-            <a href="favoritos.html"><i class="ti ti-heart"></i></a>
             <a href="carrito.html"><i class="ti ti-shopping-cart"></i></a>
             <a href="login.html"><i class="ti ti-user"></i></a>
         </div>
-        <a href="ordenar.html" class="btn-ordenar"><button>Ordenar Ahora</button></a>
+        <a href="menu.html" class="btn-ordenar"><button>Ordenar Ahora</button></a>
     </nav>
 
     <main class="pagina-login">
@@ -36,12 +35,16 @@
             <h1 class="titulo-login">¡HOLA DE<br> NUEVO, VIEJO<br> PINTO!</h1>
             <p class="subtitulo-login">Ingresa tus credenciales para ordenar.</p>
 
-            <form class="formulario-login">
+            <form class="formulario-login" id="login-form">
                 <label class="etiqueta-campo" for="email">EMAIL</label>
-                <input type="email" id="email" name="email" placeholder="tu@email.com">
+                <input type="email" id="email" name="email" maxlength="100" autocomplete="email" required
+                    placeholder="tu@email.com">
 
                 <label class="etiqueta-campo" for="password">CONTRASEÑA</label>
-                <input type="password" id="password" name="password" placeholder="********">
+                <input type="password" id="password" name="password" minlength="4" maxlength="10"
+                    pattern="(?=.*[A-Za-z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{4,10}"
+                    title="Usa entre 4 y 10 caracteres, incluyendo letras, números y un carácter especial."
+                    autocomplete="current-password" required placeholder="********">
 
                 <button type="submit" class="boton-login">ENTRAR A COMER</button>
 
@@ -49,19 +52,22 @@
                 <a href="registrarse.html">
                     <p class="registro-login">No tengo cuenta, quiero registrarme</p>
                 </a>
+                <a href="admin/index.html" class="enlace-pequeno">¿Eres administrador o vendedor? Entra al panel</a>
             </form>
         </div>
     </main>
 
-    <footer class="pie-pagina">
+    <footer>
         <h2>Krusty Burguer</h2>
         <ul>
-            <li><a href="home.html">Inicio</a></li>
+            <li><a href="index.html">Inicio</a></li>
             <li><a href="menu.html">Menú</a></li>
             <li><a href="contacto.html">Contacto</a></li>
         </ul>
         <p>&copy; 2026 Krusty Burguer. Todos los derechos reservados.</p>
+        <img src="assets/cerdo_footer.png" alt="Imagen del cerdo de Krusty Burger">
     </footer>
+    <script src="js/validaciones-formularios.js" defer></script>
 </body>
 
 </html>

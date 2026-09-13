@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del producto | Krusty Burger</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+    <link rel="stylesheet" href="css/style-home.css">
+    <link rel="stylesheet" href="css/style-detalle-producto.css">
+</head>
+
+<body>
+    <nav>
+        <h2>Krusty Burger</h2>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="menu.html">Menú</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="nosotros.html">Nosotros</a></li>
+            <li><a href="promociones.html">Promociones</a></li>
+        </ul>
+        <div class="nav-icons">
+            <a href="carrito.html" aria-label="Ver carrito"><i class="ti ti-shopping-cart" aria-hidden="true"></i><span
+                    class="contador-carrito" data-cart-count hidden>0</span></a>
+            <a href="login.html"><i class="ti ti-user" aria-hidden="true"></i></a>
+        </div>
+        <a href="menu.html" class="btn-ordenar"><button type="button">Ordenar Ahora</button></a>
+    </nav>
+
+    <main class="detalle-pagina">
+        <a class="volver-menu" href="menu.html"><i class="ti ti-arrow-left" aria-hidden="true"></i> Volver al menú</a>
+        <div id="detalle-contenido"></div>
+    </main>
+
+    <footer>
+        <h2>Krusty Burguer</h2>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="menu.html">Menú</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+        <p>&copy; 2026 Krusty Burguer. Todos los derechos reservados.</p>
+    </footer>
+    <script src="js/productos.js" defer></script>
+    <script src="js/carrito.js" defer></script>
+    <script src="js/detalle.js" defer></script>
+</body>
+
+</html>

@@ -101,6 +101,19 @@ nav ul li a:hover::after {
     color: #ED1C24;
 }
 
+.contador-carrito {
+    margin-left: -8px;
+    margin-top: -20px;
+    min-width: 18px;
+    padding: 2px 5px;
+    border-radius: 10px;
+    background: #ED1C24;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 900;
+    text-align: center;
+}
+
 .btn-ordenar {
     display: inline-block;
 }
@@ -192,6 +205,74 @@ hero img {
     max-width: 45%;
     margin-right: 20px;
     filter: drop-shadow(0 10px 0 rgba(0, 0, 0, 0.05));
+}
+
+.club-section {
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(320px, 1fr);
+    align-items: center;
+    gap: 48px;
+    padding: 70px 80px;
+    background: #ED1C24;
+}
+
+.club-imagen {
+    display: flex;
+    justify-content: center;
+    min-height: 360px;
+    background: #fff;
+    border: 3px solid #1A1A1A;
+    box-shadow: 6px 7px 0 #1A1A1A;
+    transform: rotate(-2deg);
+    overflow: hidden;
+}
+
+.club-imagen img {
+    width: 100%;
+    max-width: 450px;
+    height: 360px;
+    object-fit: contain;
+}
+
+.club-contenido {
+    max-width: 520px;
+    padding: 34px;
+    border: 3px solid #1A1A1A;
+    background: #f8f6f3;
+    box-shadow: 6px 7px 0 #1A1A1A;
+}
+
+.club-contenido h2 {
+    font-family: "Arial Black", Impact, sans-serif;
+    font-size: clamp(2.4rem, 4vw, 4rem);
+    line-height: 0.95;
+    color: #1A1A1A;
+    margin-bottom: 24px;
+}
+
+.club-contenido h2 span {
+    display: inline-block;
+    color: #d9121d;
+    background: #FFD90F;
+    padding: 4px 8px;
+}
+
+.club-contenido p {
+    max-width: 460px;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+.club-boton {
+    display: inline-block;
+    background: #d9121d;
+    color: #fff;
+    border: 3px solid #1A1A1A;
+    box-shadow: 0 4px 0 #000;
+    padding: 14px 24px;
+    font-weight: 900;
+    text-transform: uppercase;
 }
 
 .menu-section {
@@ -363,6 +444,13 @@ hero img {
     border-color: #1A1A1A;
 }
 
+.tarjeta > .enlace-producto {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    color: inherit;
+}
+
 .tarjeta-combo {
     background: #f4f3f1;
 }
@@ -390,7 +478,7 @@ footer {
     background: #17110f;
     color: #ffd90f;
     padding: 35px 80px 20px;
-    min-height: 80vh;
+    min-height: auto;
 }
 
 footer h2 {
