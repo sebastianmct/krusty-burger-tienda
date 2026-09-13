@@ -5,25 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda Krusty Burger</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style-login.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
 </head>
 
 <body>
-    <nav>
-        <h2>Krusty Burger</h2>
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="menu.html">Menú</a></li>
-            <li><a href="contacto.html">Contacto</a></li>
-            <li><a href="nosotros.html">Nosotros</a></li>
-            <li><a href="promociones.html">Promociones</a></li>
-        </ul>
-        <div class="nav-icons">
-            <a href="carrito.html"><i class="ti ti-shopping-cart"></i></a>
-            <a href="login.html"><i class="ti ti-user"></i></a>
+    <nav class="navbar bg-white border-bottom border-3 border-dark px-4 px-lg-5 py-3">
+        <div class="container-fluid p-0 d-flex align-items-center justify-content-between flex-wrap gap-3">
+            <h2 class="kb-logo m-0">Krusty Burger</h2>
+            <ul class="nav gap-4 flex-grow-1 justify-content-center mb-0">
+                <li class="nav-item"><a class="nav-link kb-nav-link" href="index.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link kb-nav-link" href="menu.html">Menú</a></li>
+                <li class="nav-item"><a class="nav-link kb-nav-link" href="contacto.html">Contacto</a></li>
+                <li class="nav-item"><a class="nav-link kb-nav-link" href="nosotros.html">Nosotros</a></li>
+                <li class="nav-item"><a class="nav-link kb-nav-link" href="promociones.html">Promociones</a></li>
+            </ul>
+            <div class="d-flex align-items-center gap-3">
+                <a href="carrito.html" class="kb-icon-link"><i class="ti ti-shopping-cart"></i></a>
+                <a href="login.html" class="kb-icon-link"><i class="ti ti-user"></i></a>
+            </div>
+            <a href="menu.html" class="btn btn-kb-primario rounded-pill">Ordenar Ahora</a>
         </div>
-        <a href="menu.html" class="btn-ordenar"><button>Ordenar Ahora</button></a>
     </nav>
 
     <main class="pagina-login">
@@ -35,18 +38,18 @@
             <h1 class="titulo-login">¡HOLA DE<br> NUEVO, VIEJO<br> PINTO!</h1>
             <p class="subtitulo-login">Ingresa tus credenciales para ordenar.</p>
 
-            <form class="formulario-login" id="login-form">
+            <form class="formulario-login d-flex flex-column" id="login-form">
                 <label class="etiqueta-campo" for="email">EMAIL</label>
                 <input type="email" id="email" name="email" maxlength="100" autocomplete="email" required
-                    placeholder="tu@email.com">
+                    placeholder="tu@email.com" class="form-control">
 
                 <label class="etiqueta-campo" for="password">CONTRASEÑA</label>
                 <input type="password" id="password" name="password" minlength="4" maxlength="10"
                     pattern="(?=.*[A-Za-z])(?=.*[0-9])(?=.*[^A-Za-z0-9]).{4,10}"
                     title="Usa entre 4 y 10 caracteres, incluyendo letras, números y un carácter especial."
-                    autocomplete="current-password" required placeholder="********">
+                    autocomplete="current-password" required placeholder="********" class="form-control">
 
-                <button type="submit" class="boton-login">ENTRAR A COMER</button>
+                <button type="submit" class="boton-login btn">ENTRAR A COMER</button>
 
                 <a href="#" class="enlace-pequeno" id="link-olvido">Olvidé mi contraseña</a>
 
@@ -64,20 +67,21 @@
         </div>
     </main>
 
-    <footer>
-        <h2>Krusty Burguer</h2>
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="menu.html">Menú</a></li>
-            <li><a href="contacto.html">Contacto</a></li>
+    <footer class="kb-footer px-4 px-lg-5 pt-5 pb-3">
+        <h2 class="kb-footer-title">Krusty Burguer</h2>
+        <ul class="nav gap-4 mb-3">
+            <li class="nav-item"><a class="nav-link p-0 kb-footer-link" href="index.html">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link p-0 kb-footer-link" href="menu.html">Menú</a></li>
+            <li class="nav-item"><a class="nav-link p-0 kb-footer-link" href="contacto.html">Contacto</a></li>
         </ul>
-        <p>&copy; 2026 Krusty Burguer. Todos los derechos reservados.</p>
+        <p class="kb-footer-copy">&copy; 2026 Krusty Burguer. Todos los derechos reservados.</p>
         <img src="assets/cerdo_footer.png" alt="Imagen del cerdo de Krusty Burger">
 
         <div class="krusty-homero-caminando">
             <img src="assets/krusty-homero.jpg" alt="Krusty y Homero caminando">
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/validaciones-formularios.js" defer></script>
     <script src="js/nelson.js"></script>
 </body>

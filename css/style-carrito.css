@@ -1,236 +1,187 @@
-body {
-    background: #f8f6f3;
-}
-
 .carrito {
-    display: grid;
-    grid-template-columns: 1.35fr 0.85fr;
-    gap: 42px;
-    max-width: 1120px;
-    margin: 0 auto;
-    padding: 54px 30px 80px;
+	max-width: 1120px;
+	margin: 0 auto;
 }
 
 .carrito-productos h1 {
-    font-size: 2.4rem;
-    text-transform: uppercase;
-    margin-bottom: 10px;
+	font-size: 2.4rem;
+	text-transform: uppercase;
+	margin-bottom: 10px;
 }
 
 .linea-titulo {
-    width: 220px;
-    border-top: 3px solid #1A1A1A;
-    margin-bottom: 18px;
+	width: 220px;
+	border-top: 3px solid var(--kb-dark);
+	margin-bottom: 18px;
 }
 
 .producto {
-    display: grid;
-    grid-template-columns: 82px 1fr auto;
-    gap: 18px;
-    align-items: start;
-    background: #fff;
-    border: 2px solid #1A1A1A;
-    padding: 12px;
-    margin-bottom: 18px;
+	display: grid;
+	grid-template-columns: 82px 1fr auto;
+	gap: 18px;
+	align-items: start;
+	background: #fff;
+	border: 2px solid var(--kb-dark);
+	padding: 12px;
+	margin-bottom: 18px;
 }
 
 .producto > img {
-    width: 82px;
-    height: 82px;
-    object-fit: cover;
-    border: 2px solid #1A1A1A;
+	width: 82px;
+	height: 82px;
+	object-fit: cover;
+	border: 2px solid var(--kb-dark);
 }
 
 .producto-info h2 {
-    font-size: 1.2rem;
-    text-transform: uppercase;
-    margin-bottom: 5px;
+	font-size: 1.2rem;
+	text-transform: uppercase;
+	margin-bottom: 5px;
 }
 
 .producto-info p {
-    font-size: 0.78rem;
-    color: #555;
-    margin-bottom: 10px;
+	font-size: 0.78rem;
+	color: #555;
+	margin-bottom: 10px;
 }
 
 .cantidad {
-    display: inline-flex;
-    align-items: center;
-    border: 2px solid #1A1A1A;
-    padding: 0;
-    font-weight: 800;
-    font-size: 0.8rem;
+	display: inline-flex;
+	align-items: center;
+	border: 2px solid var(--kb-dark);
+	padding: 0;
+	font-weight: 800;
+	font-size: 0.8rem;
 }
 
 .cantidad span,
 .cantidad-control {
-    min-width: 30px;
-    padding: 6px 8px;
-    text-align: center;
+	min-width: 30px;
+	padding: 6px 8px;
+	text-align: center;
 }
 
 .cantidad-control {
-    border: 0;
-    background: #FFD90F;
-    color: #1A1A1A;
-    font-size: 1rem;
-    font-weight: 900;
-    cursor: pointer;
+	border: 0;
+	background: var(--kb-yellow);
+	color: var(--kb-dark);
+	font-size: 1rem;
+	font-weight: 900;
+	cursor: pointer;
 }
 
 .eliminar {
-    border: 0;
-    background: transparent;
-    color: #d9121d;
-    font-size: 0.65rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    margin-left: 10px;
-    cursor: pointer;
+	border: 0;
+	background: transparent;
+	color: var(--kb-red-dark);
+	font-size: 0.65rem;
+	font-weight: 900;
+	text-transform: uppercase;
+	margin-left: 10px;
+	cursor: pointer;
 }
 
 .producto-precio {
-    background: #d9121d;
-    color: #fff;
-    padding: 7px 9px;
-    font-size: 1rem;
+	background: var(--kb-red-dark);
+	color: #fff;
+	padding: 7px 9px;
+	font-size: 1rem;
 }
 
 .carrito-lateral {
-    padding-top: 6px;
+	padding-top: 6px;
 }
 
 .frase {
-    border: 2px solid #1A1A1A;
-    background: #fff;
-    padding: 18px;
-    text-align: center;
-    font-size: 0.8rem;
-    font-style: italic;
-    margin-bottom: 12px;
+	border: 2px solid var(--kb-dark);
+	background: #fff;
+	padding: 18px;
+	text-align: center;
+	font-size: 0.8rem;
+	font-style: italic;
+	margin-bottom: 12px;
 }
 
 .krusty-imagen {
-    height: 450px;
-    border: 3px solid #1A1A1A;
-    background: #fff;
-    text-align: center;
-    overflow: hidden;
+	height: 450px;
+	border: 3px solid var(--kb-dark);
+	background: #fff;
+	text-align: center;
+	overflow: hidden;
 }
 
 .krusty-imagen img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
 }
 
 .resumen {
-    background: #FFD90F;
-    border: 3px solid #1A1A1A;
-    padding: 16px 18px 20px;
-    margin-top: 16px;
+	background: var(--kb-yellow);
+	border: 3px solid var(--kb-dark);
+	padding: 16px 18px 20px;
+	margin-top: 16px;
 }
 
 .resumen h2 {
-    font-size: 1.2rem;
-    text-transform: uppercase;
-    border-bottom: 2px solid #1A1A1A;
-    padding-bottom: 10px;
-    margin-bottom: 12px;
+	font-size: 1.2rem;
+	text-transform: uppercase;
+	border-bottom: 2px solid var(--kb-dark);
+	padding-bottom: 10px;
+	margin-bottom: 12px;
 }
 
 .resumen p,
 .total {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.72rem;
-    margin-bottom: 8px;
+	display: flex;
+	justify-content: space-between;
+	font-size: 0.72rem;
+	margin-bottom: 8px;
 }
 
 .total {
-    align-items: end;
-    font-size: 1.1rem;
-    font-weight: 900;
-    margin-top: 24px;
+	align-items: end;
+	font-size: 1.1rem;
+	font-weight: 900;
+	margin-top: 24px;
 }
 
 .total strong {
-    font-size: 2.2rem;
+	font-size: 2.2rem;
 }
 
 .resumen a {
-    display: block;
-    background: #d9121d;
-    color: #fff;
-    border: 3px solid #1A1A1A;
-    padding: 12px;
-    text-align: center;
-    font-weight: 900;
-    text-transform: uppercase;
-    margin-top: 12px;
-}
-
-footer {
-    min-height: auto;
+	display: block;
+	background: var(--kb-red-dark);
+	color: #fff;
+	border: 3px solid var(--kb-dark);
+	padding: 12px;
+	text-align: center;
+	font-weight: 900;
+	text-transform: uppercase;
+	margin-top: 12px;
 }
 
 .carrito-vacio {
-    padding: 28px;
-    background: #fff;
-    border: 2px solid #1A1A1A;
+	padding: 28px;
+	background: #fff;
+	border: 2px solid var(--kb-dark);
 }
 
 .carrito-vacio h2 {
-    margin-bottom: 8px;
-    text-transform: uppercase;
+	margin-bottom: 8px;
+	text-transform: uppercase;
 }
 
 .carrito-vacio p {
-    margin-bottom: 18px;
+	margin-bottom: 18px;
 }
 
 .carrito-vacio a {
-    display: inline-block;
-    padding: 10px 14px;
-    background: #d9121d;
-    color: #fff;
-    font-weight: 900;
-    text-transform: uppercase;
-}
-
-.krusty-homero-caminando {
-    position: relative;
-    height: 0;
-    overflow: visible;
-    z-index: 10;
-    pointer-events: none;
-}
-
-.krusty-homero-caminando img {
-    position: absolute;
-    right: -180px;
-    bottom: 160px;
-    width: 150px;
-    height: auto;
-    object-fit: contain;
-    animation: caminar-krusty-homero 14s linear infinite;
-    will-change: transform;
-}
-
-@keyframes caminar-krusty-homero {
-    0% {
-        transform: translateX(0) translateY(0) rotate(2deg);
-    }
-    25% {
-        transform: translateX(-30vw) translateY(-4px) rotate(-2deg);
-    }
-    50% {
-        transform: translateX(-60vw) translateY(0) rotate(2deg);
-    }
-    75% {
-        transform: translateX(-90vw) translateY(-4px) rotate(-2deg);
-    }
-    100% {
-        transform: translateX(calc(-100vw - 200px)) translateY(0) rotate(2deg);
-    }
+	display: inline-block;
+	padding: 10px 14px;
+	background: var(--kb-red-dark);
+	color: #fff;
+	font-weight: 900;
+	text-transform: uppercase;
 }

@@ -5,64 +5,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda Krusty Burger</title>
-    <link rel="stylesheet" href="css/style-promociones.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <link rel="stylesheet" href="css/style-promociones.css">
 </head>
 
 <body>
-    <nav>
-        <h2>Krusty Burger</h2>
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="menu.html">Menú</a></li>
-            <li><a href="contacto.html">Contacto</a></li>
-            <li><a href="nosotros.html">Nosotros</a></li>
-            <li><a href="promociones.html">Promociones</a></li>
-        </ul>
-        <div class="nav-icons">
-            <a href="carrito.html"><i class="ti ti-shopping-cart"></i></a>
-            <a href="login.html"><i class="ti ti-user"></i></a>
+    <nav class="navbar bg-white border-bottom border-3 border-dark px-4 px-lg-5 py-3">
+        <div class="container-fluid p-0 d-flex align-items-center justify-content-between flex-wrap gap-3">
+            <h2 class="kb-logo m-0">Krusty Burger</h2>
+            <ul class="nav gap-4 flex-grow-1 justify-content-center mb-0">
+                <li class="nav-item"><a class="nav-link kb-nav-link" href="index.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link kb-nav-link" href="menu.html">Menú</a></li>
+                <li class="nav-item"><a class="nav-link kb-nav-link" href="contacto.html">Contacto</a></li>
+                <li class="nav-item"><a class="nav-link kb-nav-link" href="nosotros.html">Nosotros</a></li>
+                <li class="nav-item"><a class="nav-link kb-nav-link" href="promociones.html">Promociones</a></li>
+            </ul>
+            <div class="d-flex align-items-center gap-3">
+                <a href="carrito.html" class="kb-icon-link"><i class="ti ti-shopping-cart"></i></a>
+                <a href="login.html" class="kb-icon-link"><i class="ti ti-user"></i></a>
+            </div>
+            <a href="menu.html" class="btn btn-kb-primario rounded-pill">Ordenar Ahora</a>
         </div>
-        <a href="menu.html" class="btn-ordenar"><button>Ordenar Ahora</button></a>
     </nav>
     <div class="puerco-caminando" aria-hidden="true">
         <img src="assets/puerco_araña.png" alt="">
     </div>
-    <hero>
+    <section class="hero-promo px-4 px-lg-5 py-5">
         <div class="hero-text">
             <h1>OFERTAS QUE NO PUEDES RECHAZAR</h1>
             <p>Aprovecha nuestros combos especiales. Diseñados para saciar el hambre más voraz con el auténtico sabor de
                 Springfield.</p>
             <div class="botones">
-                <a href="ordenar.html"><button>Ordenar Ahora</button></a>
+                <a href="menu.html"><button>Ordenar Ahora</button></a>
                 <a href="menu.html"><button>Ver Menú</button></a>
             </div>
         </div>
-        <div class="oferta-combo">
-            <img src="assets/krusty_combo_promo.png" alt="Combo Krusty con hamburguesa, papas y bebida">
-            <h2 class="tag">EL CLÁSICO</h2>
-            <h2 class="titulo-oferta">Krusty Combo</h2>
-            <p>La experiencia completa. Burger con queso derretido,ración doble de papas fritas y una bebida gigante
-                para pasar el bocado.</p>
-            <span class="precio">$9.990</span>
-            <button href="menu.html">AGREGAR</button>
+        <div class="row g-3">
+            <div class="col-lg-8">
+                <div class="oferta-combo">
+                    <img src="assets/krusty_combo_promo.png" alt="Combo Krusty con hamburguesa, papas y bebida">
+                    <h2 class="tag">EL CLÁSICO</h2>
+                    <h2 class="titulo-oferta">Krusty Combo</h2>
+                    <p>La experiencia completa. Burger con queso derretido,ración doble de papas fritas y una bebida
+                        gigante
+                        para pasar el bocado.</p>
+                    <span class="precio">$9.990</span>
+                    <a href="menu.html"><button>AGREGAR</button></a>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="oferta-dos-por-uno">
+                    <img src="assets/2x1.webp" alt="Promoción 2x1 en burgers">
+                    <h3>2x1 en Burgers</h3>
+                    <p>Porque una nunca es suficiente. ven con un amigo o cómetelas tu solo.</p>
+                    <a href="menu.html"><button>ORDENAR AHORA</button></a>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="oferta-kids">
+                    <img src="assets/krusty_kids.jpg" alt="Caja Krusty para niños">
+                    <h2>Caja Krusty para Niños</h2>
+                    <p>La diversión en una caja. Incluye una burger pequeña, papitas, bebida y un juguete coleccionable
+                        exclusivo de nuestra nueva serie.</p>
+                    <p class="badge">INCLUYE JUGUETE</p>
+                    <button>VER JUGUETES</button>
+                </div>
+            </div>
         </div>
-        <div class="oferta-dos-por-uno">
-            <img src="assets/2x1.webp" alt="Promoción 2x1 en burgers">
-            <h3>2x1 en Burgers</h3>
-            <p>Porque una nunca es suficiente. ven con un amigo o cómetelas tu solo.</p>
-            <button href="menu.html">ORDENAR AHORA</button>
-        </div>
-        <div class="oferta-kids">
-            <img src="assets/krusty_kids.jpg" alt="Caja Krusty para niños">
-            <h2>Caja Krusty para Niños</h2>
-            <p>La diversión en una caja. Incluye una burger pequeña, papitas, bebida y un juguete coleccionable
-                exclusivo de nuestra nueva serie.</p>
-            <p class="badge">INCLUYE JUGUETE</p>
-            <button>VER JUGUETES</button>
-        </div>
-    </hero>
-    <section class="historia">
+    </section>
+    <section class="historia px-4 px-lg-5 py-5">
         <h3>HISTORIA OFICIAL</h3>
         <h2>LA HISTORIA DETRÁS DE LA BURGER</h2>
         <p class="intro">Todo comenzó con un payaso, un sueño y una parrilla sospechosamente barata.</p>
@@ -75,20 +87,22 @@
             vigentes.</p>
         <img src="assets/krusty_burguer_fisica.jpg" alt="Dona Homero en la historia de Krusty Burger">
     </section>
-    <footer>
-        <h2>Krusty Burguer</h2>
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="menu.html">Menú</a></li>
-            <li><a href="contacto.html">Contacto</a></li>
+    <footer class="kb-footer px-4 px-lg-5 pt-5 pb-3">
+        <h2 class="kb-footer-title">Krusty Burguer</h2>
+        <ul class="nav gap-4 mb-3">
+            <li class="nav-item"><a class="nav-link p-0 kb-footer-link" href="index.html">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link p-0 kb-footer-link" href="menu.html">Menú</a></li>
+            <li class="nav-item"><a class="nav-link p-0 kb-footer-link" href="contacto.html">Contacto</a></li>
         </ul>
-        <p>&copy; 2026 Krusty Burguer. Todos los derechos reservados.</p>
+        <p class="kb-footer-copy">&copy; 2026 Krusty Burguer. Todos los derechos reservados.</p>
         <img src="assets/cerdo_footer.png" alt="Imagen del cerdo de Krusty Burger">
 
         <div class="krusty-homero-caminando">
             <img src="assets/krusty-homero.jpg" alt="Krusty y Homero caminando">
         </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

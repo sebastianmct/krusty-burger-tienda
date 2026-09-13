@@ -209,10 +209,6 @@ body {
     margin-bottom: 20px;
 }
 
-footer {
-    min-height: auto;
-}
-
 @media (max-width: 800px) {
     .detalle-producto {
         grid-template-columns: 1fr;

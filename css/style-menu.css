@@ -1,22 +1,15 @@
-body {
-    background: #f1f1ee;
-}
-
 .pagina-menu {
-    display: grid;
-    grid-template-columns: 250px 1fr;
-    gap: 26px;
     max-width: 1360px;
     margin: 0 auto;
     padding: 34px 34px 70px;
 }
 
-.menu-lateral {
+.kb-menu-lateral {
     position: relative;
     padding-top: 54px;
 }
 
-.burbuja-menu {
+.kb-burbuja-menu {
     position: absolute;
     z-index: 2;
     top: 0;
@@ -24,21 +17,22 @@ body {
     width: 225px;
     padding: 16px 18px;
     background: #fff;
-    border: 3px solid #1A1A1A;
+    border: 3px solid var(--kb-dark);
     border-radius: 48% 52% 45% 55%;
     transform: rotate(-5deg);
-    box-shadow: 4px 4px 0 #1A1A1A;
+    box-shadow: 4px 4px 0 var(--kb-dark);
 }
 
-.burbuja-menu p {
+.kb-burbuja-menu p {
     font-size: 0.98rem;
     font-weight: 900;
     line-height: 1.05;
     text-transform: uppercase;
     text-align: center;
+    margin-bottom: 0;
 }
 
-.burbuja-menu span {
+.kb-burbuja-menu span {
     display: block;
     margin-top: 10px;
     font-size: 0.68rem;
@@ -47,41 +41,41 @@ body {
     text-align: center;
 }
 
-.barney-ilustracion {
+.kb-barney-ilustracion {
     height: 330px;
     overflow: hidden;
-    background: #FFD90F;
-    border: 3px solid #1A1A1A;
-    box-shadow: 6px 7px 0 #1A1A1A;
+    background: var(--kb-yellow);
+    border: 3px solid var(--kb-dark);
+    box-shadow: 6px 7px 0 var(--kb-dark);
     transform: rotate(2deg);
 }
 
-.barney-ilustracion img {
+.kb-barney-ilustracion img {
     width: 100%;
     height: 100%;
     object-fit: contain;
     object-position: center bottom;
 }
 
-.categorias {
+.kb-categorias {
     margin-top: 28px;
     padding: 18px 14px;
     background: #f7f6f2;
-    border: 3px solid #1A1A1A;
-    box-shadow: 5px 6px 0 #1A1A1A;
+    border: 3px solid var(--kb-dark);
+    box-shadow: 5px 6px 0 var(--kb-dark);
 }
 
-.categorias h2 {
-    color: #1A1A1A;
+.kb-categorias h2 {
+    color: var(--kb-dark);
     font-family: "Arial Black", Impact, sans-serif;
     font-size: 1.3rem;
     text-transform: uppercase;
-    border-bottom: 2px solid #1A1A1A;
+    border-bottom: 2px solid var(--kb-dark);
     padding-bottom: 8px;
     margin-bottom: 8px;
 }
 
-.categorias button {
+.categoria-filtro {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -94,38 +88,38 @@ body {
     cursor: pointer;
 }
 
-.categorias button:last-child {
+.categoria-filtro:last-child {
     border-bottom: 0;
 }
 
-.categorias button.activo {
-    background: #FFD90F;
+.categoria-filtro.activo {
+    background: var(--kb-yellow);
 }
 
-.categorias i {
+.categoria-filtro i {
     display: grid;
     place-items: center;
     width: 36px;
     height: 36px;
-    border: 2px solid #1A1A1A;
+    border: 2px solid var(--kb-dark);
     border-radius: 50%;
-    background: #FFD90F;
+    background: var(--kb-yellow);
     font-size: 1.2rem;
 }
 
-.categorias span {
+.categoria-filtro span {
     font-size: 0.78rem;
     font-weight: 900;
 }
 
-.categorias small {
+.categoria-filtro small {
     display: block;
     margin-top: 3px;
     font-size: 0.62rem;
     font-weight: 500;
 }
 
-.productos-menu {
+.kb-productos-menu {
     padding: 18px 0;
 }
 
@@ -145,7 +139,7 @@ body {
     width: 100%;
     height: 155px;
     object-fit: cover;
-    border: 2px solid #1A1A1A;
+    border: 2px solid var(--kb-dark);
     background: #f5f0e8;
     margin-bottom: 12px;
 }
@@ -161,39 +155,33 @@ body {
     height: 100%;
 }
 
-.encabezado-menu {
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    gap: 20px;
-    border-bottom: 3px solid #1A1A1A;
+.kb-encabezado-menu {
+    border-bottom: 3px solid var(--kb-dark);
     padding: 0 8px 18px;
 }
 
-.etiqueta-menu {
-    color: #d9121d;
+.kb-etiqueta-menu {
+    color: var(--kb-red-dark);
     font-size: 0.78rem;
     font-weight: 900;
     text-transform: uppercase;
-    margin-bottom: 8px;
 }
 
-.encabezado-menu h1 {
+.kb-encabezado-menu h1 {
     font-family: "Arial Black", Impact, sans-serif;
     font-size: 3rem;
     line-height: 0.95;
     text-transform: uppercase;
 }
 
-.encabezado-menu label {
+.kb-orden-label {
     font-size: 0.75rem;
     font-weight: 800;
 }
 
-.encabezado-menu select {
+.kb-orden-select {
     margin-left: 8px;
-    padding: 9px 12px;
-    border: 2px solid #1A1A1A;
+    border: 2px solid var(--kb-dark);
     border-radius: 8px;
     background: #fff;
     font-weight: 700;
@@ -212,7 +200,7 @@ body {
     min-height: 365px;
     padding: 12px;
     background: #fffdf7;
-    border: 2px solid #1A1A1A;
+    border: 2px solid var(--kb-dark);
     border-radius: 10px;
     box-shadow: 4px 5px 0 rgba(0, 0, 0, 0.2);
 }
@@ -229,13 +217,13 @@ body {
     width: 100%;
     height: 155px;
     object-fit: cover;
-    border: 2px solid #1A1A1A;
+    border: 2px solid var(--kb-dark);
     background: #f5f0e8;
     margin-bottom: 12px;
 }
 
 .producto-categoria {
-    color: #d9121d;
+    color: var(--kb-red-dark);
     font-size: 0.62rem;
     font-weight: 900;
     text-transform: uppercase;
@@ -259,7 +247,7 @@ body {
 
 .producto-menu strong {
     display: block;
-    color: #d9121d;
+    color: var(--kb-red-dark);
     font-size: 1.25rem;
     margin-top: auto;
     margin-bottom: 10px;
@@ -269,10 +257,10 @@ body {
     display: block;
     width: 100%;
     padding: 10px 8px;
-    border: 2px solid #1A1A1A;
+    border: 2px solid var(--kb-dark);
     border-radius: 8px;
-    background: #FFD90F;
-    color: #1A1A1A;
+    background: var(--kb-yellow);
+    color: var(--kb-dark);
     font-size: 0.7rem;
     font-weight: 900;
     text-transform: uppercase;
@@ -283,46 +271,4 @@ body {
 .producto-menu button i {
     margin-left: 5px;
     font-size: 0.9rem;
-}
-
-footer {
-    min-height: auto;
-}
-
-
-.krusty-homero-caminando {
-    position: relative;
-    height: 0;
-    overflow: visible;
-    z-index: 10;
-    pointer-events: none;
-}
-
-.krusty-homero-caminando img {
-    position: absolute;
-    right: -180px;
-    bottom: 160px;
-    width: 150px;
-    height: auto;
-    object-fit: contain;
-    animation: caminar-krusty-homero 14s linear infinite;
-    will-change: transform;
-}
-
-@keyframes caminar-krusty-homero {
-    0% {
-        transform: translateX(0) translateY(0) rotate(2deg);
-    }
-    25% {
-        transform: translateX(-30vw) translateY(-4px) rotate(-2deg);
-    }
-    50% {
-        transform: translateX(-60vw) translateY(0) rotate(2deg);
-    }
-    75% {
-        transform: translateX(-90vw) translateY(-4px) rotate(-2deg);
-    }
-    100% {
-        transform: translateX(calc(-100vw - 200px)) translateY(0) rotate(2deg);
-    }
 }

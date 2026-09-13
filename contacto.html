@@ -5,85 +5,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tienda Krusty Burger</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style-contacto.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
 </head>
 
 <body>
-    <nav>
-        <h2>Krusty Burger</h2>
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="menu.html">Menú</a></li>
-            <li><a href="contacto.html">Contacto</a></li>
-            <li><a href="nosotros.html">Nosotros</a></li>
-            <li><a href="promociones.html">Promociones</a></li>
-        </ul>
-        <div class="nav-icons">
-            <a href="carrito.html"><i class="ti ti-shopping-cart"></i></a>
-            <a href="login.html"><i class="ti ti-user"></i></a>
+    <nav class="navbar bg-white border-bottom border-3 border-dark px-4 px-lg-5 py-3">
+        <div class="container-fluid p-0 d-flex align-items-center justify-content-between flex-wrap gap-3">
+            <h2 class="kb-logo m-0">Krusty Burger</h2>
+            <ul class="nav gap-4 flex-grow-1 justify-content-center mb-0">
+                <li class="nav-item"><a class="nav-link kb-nav-link" href="index.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link kb-nav-link" href="menu.html">Menú</a></li>
+                <li class="nav-item"><a class="nav-link kb-nav-link" href="contacto.html">Contacto</a></li>
+                <li class="nav-item"><a class="nav-link kb-nav-link" href="nosotros.html">Nosotros</a></li>
+                <li class="nav-item"><a class="nav-link kb-nav-link" href="promociones.html">Promociones</a></li>
+            </ul>
+            <div class="d-flex align-items-center gap-3">
+                <a href="carrito.html" class="kb-icon-link"><i class="ti ti-shopping-cart"></i></a>
+                <a href="login.html" class="kb-icon-link"><i class="ti ti-user"></i></a>
+            </div>
+            <a href="menu.html" class="btn btn-kb-primario rounded-pill">Ordenar Ahora</a>
         </div>
-        <a href="menu.html" class="btn-ordenar"><button>Ordenar Ahora</button></a>
     </nav>
+
     <main>
-        <section class="titulo">
-            <div>
-                <h1>¡Grita tus quejas aquí!</h1>
-                <p>¿Krusty te dio una hamburguesa cruda? ¿El Ribwich te dio alucinaciones? ¡Dejanos
+        <section class="kb-titulo text-center px-4 px-lg-5 pt-5 pb-4">
+            <div class="mx-auto kb-titulo-inner">
+                <h1 class="kb-titulo-h1">¡Grita tus quejas aquí!</h1>
+                <p class="mb-0">¿Krusty te dio una hamburguesa cruda? ¿El Ribwich te dio alucinaciones? ¡Dejanos
                     saber! Nos importa (un poco).</p>
             </div>
         </section>
 
-        <section class="contacto">
-            <div class="mou_container">
-                <img src="assets/mou_escopeta.jpg" alt="Moe sosteniendo escopeta" class="moe-img" />
-            </div>
-            <div class="formulario-contenedor">
-                <form id="contacto-form">
-                    <div class="formulario-filas">
-                        <div class="formulario-grupo">
-                            <label for="nombre">NOMBRE COMPLETO</label>
-                            <input type="text" id="nombre" name="nombre" maxlength="100" autocomplete="name" required
-                                placeholder="Ej. Homero Simpson">
-                        </div>
-                        <div class="formulario-grupo">
-                            <label for="email">EMAIL (Opcional si huyes)</label>
-                            <input type="email" id="email" name="email" maxlength="100" autocomplete="email"
-                                placeholder="Ej. homero_lover@simpson.com">
-                        </div>
+        <section class="kb-contacto px-3 px-lg-4 pb-5">
+            <div class="row g-4 justify-content-center align-items-start">
+                <div class="col-lg-2 d-flex justify-content-center">
+                    <div class="kb-mou-container">
+                        <img src="assets/mou_escopeta.jpg" alt="Moe sosteniendo escopeta" class="moe-img" />
                     </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="kb-formulario-contenedor">
+                        <form id="contacto-form" class="d-flex flex-column gap-3">
+                            <div class="row g-3">
+                                <div class="col-md-6 d-flex flex-column gap-2">
+                                    <label for="nombre" class="kb-label">NOMBRE COMPLETO</label>
+                                    <input type="text" id="nombre" name="nombre" maxlength="100" autocomplete="name" required
+                                        class="form-control kb-input" placeholder="Ej. Homero Simpson">
+                                </div>
+                                <div class="col-md-6 d-flex flex-column gap-2">
+                                    <label for="email" class="kb-label">EMAIL (Opcional si huyes)</label>
+                                    <input type="email" id="email" name="email" maxlength="100" autocomplete="email"
+                                        class="form-control kb-input" placeholder="Ej. homero_lover@simpson.com">
+                                </div>
+                            </div>
 
-                    <div class="formulario-grupo">
-                        <label for="mensaje">¿QUE HIZO KRUSTY ESTA VEZ?</label>
-                        <textarea id="mensaje" name="comentario" maxlength="500" required
-                            placeholder="Ej. Describe tu trauma aquí... ¡No escatimes en detalles grotescos!"></textarea>
+                            <div class="d-flex flex-column gap-2">
+                                <label for="mensaje" class="kb-label">¿QUE HIZO KRUSTY ESTA VEZ?</label>
+                                <textarea id="mensaje" name="comentario" maxlength="500" required
+                                    class="form-control kb-input kb-textarea"
+                                    placeholder="Ej. Describe tu trauma aquí... ¡No escatimes en detalles grotescos!"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-kb-enviar">Enviar queja <i class="ti ti-send"></i></button>
+                        </form>
                     </div>
-                    <button type="submit">Enviar queja <i class="ti ti-send"></i></button>
-                </form>
+                </div>
+                <aside class="col-lg-4">
+                    <div class="kb-info-contacto">
+                        <h2><i class="ti ti-map-pin"></i> ¿DÓNDE ESTAMOS?</h2>
+                        <p><i class="ti ti-home"></i> Krusty Burger Principal</p>
+                        <p>742 Evergreen Terrace, Springfield<br>(o cerca de ahí, pregunta por Ned)</p>
+                        <p><i class="ti ti-phone"></i> (555) 123-4567 (no llamen a la policía)</p>
+                        <img src="assets/springfield.png" alt="Krusty Burger">
+                    </div>
+                </aside>
             </div>
-            <aside class="info-contacto">
-                <h2><i class="ti ti-map-pin"></i> ¿DÓNDE ESTAMOS?</h2>
-                <p><i class="ti ti-home"></i> Krusty Burger Principal</p>
-                <p>742 Evergreen Terrace, Springfield<br>(o cerca de ahí, pregunta por Ned)</p>
-                <p><i class="ti ti-phone"></i> (555) 123-4567 (no llamen a la policía)</p>
-                <img src="assets/springfield.png" alt="Krusty Burger">
-            </aside>
         </section>
     </main>
-    <footer>
-        <h2>Krusty Burguer</h2>
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="menu.html">Menú</a></li>
-            <li><a href="contacto.html">Contacto</a></li>
+
+    <footer class="kb-footer px-4 px-lg-5 pt-5 pb-3">
+        <h2 class="kb-footer-title">Krusty Burguer</h2>
+        <ul class="nav gap-4 mb-3">
+            <li class="nav-item"><a class="nav-link p-0 kb-footer-link" href="index.html">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link p-0 kb-footer-link" href="menu.html">Menú</a></li>
+            <li class="nav-item"><a class="nav-link p-0 kb-footer-link" href="contacto.html">Contacto</a></li>
         </ul>
-        <p>&copy; 2026 Krusty Burguer. Todos los derechos reservados.</p>
+        <p class="kb-footer-copy">&copy; 2026 Krusty Burguer. Todos los derechos reservados.</p>
         <img src="assets/cerdo_footer.png" alt="Imagen del cerdo de Krusty Burger">
 
         <div class="krusty-homero-caminando">
             <img src="assets/krusty-homero.jpg" alt="Krusty y Homero caminando">
         </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/validaciones-formularios.js" defer></script>
 </body>
 

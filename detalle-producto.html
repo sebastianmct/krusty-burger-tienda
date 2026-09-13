@@ -5,27 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalle del producto | Krusty Burger</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
     <link rel="stylesheet" href="css/style-home.css">
     <link rel="stylesheet" href="css/style-detalle-producto.css">
 </head>
 
 <body>
-    <nav>
-        <h2>Krusty Burger</h2>
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="menu.html">Menú</a></li>
-            <li><a href="contacto.html">Contacto</a></li>
-            <li><a href="nosotros.html">Nosotros</a></li>
-            <li><a href="promociones.html">Promociones</a></li>
-        </ul>
-        <div class="nav-icons">
-            <a href="carrito.html" aria-label="Ver carrito"><i class="ti ti-shopping-cart" aria-hidden="true"></i><span
-                    class="contador-carrito" data-cart-count hidden>0</span></a>
-            <a href="login.html"><i class="ti ti-user" aria-hidden="true"></i></a>
+    <nav class="navbar bg-white border-bottom border-3 border-dark px-4 px-lg-5 py-3">
+        <div class="container-fluid p-0 d-flex align-items-center justify-content-between flex-wrap gap-3">
+            <h2 class="kb-logo m-0">Krusty Burger</h2>
+            <ul class="nav gap-4 flex-grow-1 justify-content-center mb-0">
+                <li class="nav-item"><a class="nav-link kb-nav-link" href="index.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link kb-nav-link" href="menu.html">Menú</a></li>
+                <li class="nav-item"><a class="nav-link kb-nav-link" href="contacto.html">Contacto</a></li>
+                <li class="nav-item"><a class="nav-link kb-nav-link" href="nosotros.html">Nosotros</a></li>
+                <li class="nav-item"><a class="nav-link kb-nav-link" href="promociones.html">Promociones</a></li>
+            </ul>
+            <div class="d-flex align-items-center gap-3">
+                <a href="carrito.html" class="kb-icon-link position-relative" aria-label="Ver carrito"><i
+                        class="ti ti-shopping-cart" aria-hidden="true"></i><span class="contador-carrito"
+                        data-cart-count hidden>0</span></a>
+                <a href="login.html" class="kb-icon-link"><i class="ti ti-user" aria-hidden="true"></i></a>
+            </div>
+            <a href="menu.html" class="btn btn-kb-primario rounded-pill">Ordenar Ahora</a>
         </div>
-        <a href="menu.html" class="btn-ordenar"><button type="button">Ordenar Ahora</button></a>
     </nav>
 
     <main class="detalle-pagina">
@@ -33,20 +37,21 @@
         <div id="detalle-contenido"></div>
     </main>
 
-    <footer>
-        <h2>Krusty Burguer</h2>
-        <ul>
-            <li><a href="index.html">Inicio</a></li>
-            <li><a href="menu.html">Menú</a></li>
-            <li><a href="contacto.html">Contacto</a></li>
+    <footer class="kb-footer px-4 px-lg-5 pt-5 pb-3">
+        <h2 class="kb-footer-title">Krusty Burguer</h2>
+        <ul class="nav gap-4 mb-3">
+            <li class="nav-item"><a class="nav-link p-0 kb-footer-link" href="index.html">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link p-0 kb-footer-link" href="menu.html">Menú</a></li>
+            <li class="nav-item"><a class="nav-link p-0 kb-footer-link" href="contacto.html">Contacto</a></li>
         </ul>
-        <p>&copy; 2026 Krusty Burguer. Todos los derechos reservados.</p>
+        <p class="kb-footer-copy">&copy; 2026 Krusty Burguer. Todos los derechos reservados.</p>
         <img src="assets/cerdo_footer.png" alt="Imagen del cerdo de Krusty Burger">
 
         <div class="krusty-homero-caminando">
             <img src="assets/krusty-homero.jpg" alt="Krusty y Homero caminando">
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/productos.js" defer></script>
     <script src="js/carrito.js" defer></script>
     <script src="js/detalle.js" defer></script>

@@ -16,10 +16,6 @@ body {
     width: 100%;
     min-height: 100vh;
     padding: 40px 38px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 36px;
-    align-items: center;
     background: #f3f1ee;
 }
 
