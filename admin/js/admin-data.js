@@ -187,6 +187,61 @@
         return lista;
     }
 
+    /* ---------- Sincroniza el admin con el catálogo de la tienda (js/productos.js) ----------
+     * El admin guarda su propia copia en localStorage (para poder editar stock, código, etc.
+     * sin depender de un backend). El problema es que esa copia se crea una sola vez: si
+     * después se agregan, editan o quitan productos en js/productos.js, el admin se queda
+     * con datos viejos. Esta función corrige eso en cada carga:
+     *   - Si aparece un producto nuevo en el catálogo que el admin no tiene, lo agrega.
+     *   - Si un producto que el admin ya tiene cambió de nombre/precio/categoría/imagen en
+     *     el catálogo, actualiza esos campos (los campos propios del admin como stock,
+     *     stockCritico y código NO se tocan).
+     *   - Los productos creados directamente desde el admin (que no existen en el catálogo)
+     *     se dejan intactos.
+     */
+    function sincronizarConCatalogo(lista) {
+        const catalogo = window.KrustyProductos || [];
+        if (!catalogo.length) {
+            return lista;
+        }
+        const porId = {};
+        lista.forEach(function (producto) { porId[producto.id] = producto; });
+
+        let cambio = false;
+        const camposDeCatalogo = ["nombre", "descripcion", "precio", "categoria", "categoriaLabel", "imagen"];
+
+        catalogo.forEach(function (fuente, indice) {
+            const existente = porId[fuente.id];
+            if (existente) {
+                camposDeCatalogo.forEach(function (campo) {
+                    if (existente[campo] !== fuente[campo]) {
+                        existente[campo] = fuente[campo];
+                        cambio = true;
+                    }
+                });
+            } else {
+                lista.push({
+                    id: fuente.id,
+                    codigo: "KB-" + String(indice + 1).padStart(3, "0"),
+                    nombre: fuente.nombre,
+                    descripcion: fuente.descripcion,
+                    precio: fuente.precio,
+                    stock: 25,
+                    stockCritico: 5,
+                    categoria: fuente.categoria,
+                    categoriaLabel: fuente.categoriaLabel,
+                    imagen: fuente.imagen
+                });
+                cambio = true;
+            }
+        });
+
+        if (cambio) {
+            guardarLista(CLAVE_PRODUCTOS, lista);
+        }
+        return lista;
+    }
+
     function generarId(prefijo) {
         return prefijo + "-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
     }
@@ -194,7 +249,8 @@
     /* ---------- API de Productos ---------- */
     const Productos = {
         listar: function () {
-            return cargarConSeed(CLAVE_PRODUCTOS, seedProductos);
+            const lista = cargarConSeed(CLAVE_PRODUCTOS, seedProductos);
+            return sincronizarConCatalogo(lista);
         },
         obtener: function (id) {
             return this.listar().find(function (p) { return p.id === id; }) || null;

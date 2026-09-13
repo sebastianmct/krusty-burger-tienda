@@ -504,6 +504,25 @@
         )];
     };
 
+    
+    var METADATOS_CATEGORIA = {
+        hamburguesas: { etiqueta: "Hamburguesas", icono: "ti-burger", subtitulo: "Las favoritas" },
+        papas: { etiqueta: "Papas", icono: "ti-tools-kitchen-2", subtitulo: "Crujientes y doradas" },
+        dulces: { etiqueta: "Rosquillas", icono: "ti-chart-donut", subtitulo: "Dulces y glaseadas" },
+        bebidas: { etiqueta: "Bebidas", icono: "ti-cup", subtitulo: "Frías y refrescantes" },
+        especiales: { etiqueta: "Especiales", icono: "ti-star", subtitulo: "Ediciones de Springfield" }
+    };
+
+    window.KrustyCategorias = window.KrustyObtenerCategorias().map(function (valor) {
+        var metadatos = METADATOS_CATEGORIA[valor] || {};
+        return {
+            valor: valor,
+            etiqueta: metadatos.etiqueta || (valor.charAt(0).toUpperCase() + valor.slice(1)),
+            icono: metadatos.icono || "ti-category",
+            subtitulo: metadatos.subtitulo || ""
+        };
+    });
+
     window.KrustyBuscar = function (texto) {
 
         var busqueda = texto.toLowerCase().trim();

@@ -1,25 +1,36 @@
 (function () {
     "use strict";
 
-    const CATEGORIAS = [
-        { valor: "hamburguesas", etiqueta: "Hamburguesas" },
-        { valor: "combos", etiqueta: "Combos" },
-        { valor: "papas", etiqueta: "Papas" },
-        { valor: "dulces", etiqueta: "Dulces" },
-        { valor: "bebidas", etiqueta: "Bebidas" }
-    ];
+    // Las categorías del formulario se obtienen de window.KrustyCategorias (definidas en
+    // js/productos.js a partir de los productos reales), en vez de una lista escrita a mano.
+    // Así el selector del admin nunca queda desincronizado con las categorías de la tienda.
+    function obtenerCategorias() {
+        return (window.KrustyCategorias && window.KrustyCategorias.length) ? window.KrustyCategorias : [
+            { valor: "hamburguesas", etiqueta: "Hamburguesas" },
+            { valor: "papas", etiqueta: "Papas" },
+            { valor: "dulces", etiqueta: "Dulces" },
+            { valor: "bebidas", etiqueta: "Bebidas" },
+            { valor: "especiales", etiqueta: "Especiales" }
+        ];
+    }
 
     function poblarSelectCategorias(select, seleccionada) {
         if (!select) {
             return;
         }
-        select.innerHTML = '<option value="">Selecciona una categoría</option>' + CATEGORIAS.map(function (cat) {
+        const categorias = obtenerCategorias();
+        // Si el producto tiene una categoría que ya no está en el catálogo (por ejemplo,
+        // una categoría antigua que fue eliminada), igual se muestra para no perder el dato.
+        const opciones = seleccionada && !categorias.some(function (c) { return c.valor === seleccionada; })
+            ? categorias.concat([{ valor: seleccionada, etiqueta: seleccionada }])
+            : categorias;
+        select.innerHTML = '<option value="">Selecciona una categoría</option>' + opciones.map(function (cat) {
             return '<option value="' + cat.valor + '"' + (cat.valor === seleccionada ? " selected" : "") + ">" + cat.etiqueta + "</option>";
         }).join("");
     }
 
     function etiquetaCategoria(valor) {
-        const cat = CATEGORIAS.find(function (c) { return c.valor === valor; });
+        const cat = obtenerCategorias().find(function (c) { return c.valor === valor; });
         return cat ? cat.etiqueta : valor;
     }
 
@@ -52,7 +63,7 @@
                 const stockBajo = p.stockCritico != null && p.stock <= p.stockCritico;
                 return "" +
                     '<tr>' +
-                    '<td class="celda-producto"><img src="' + escaparHtml(p.imagen || "") + '" alt="">' +
+                    '<td class="celda-producto"><img src="' + escaparHtml(resolverImagen(p.imagen)) + '" alt="">' +
                     '<div><div class="fw-semibold">' + escaparHtml(p.nombre) + '</div><div class="subtexto">' + escaparHtml(p.codigo) + '</div></div></td>' +
                     '<td>' + escaparHtml(etiquetaCategoria(p.categoria)) + '</td>' +
                     '<td>' + window.KrustyAdmin.formatoPrecio(p.precio) + '</td>' +
@@ -89,6 +100,22 @@
         return div.innerHTML;
     }
 
+    // Las imágenes guardadas en productos (tanto las que vienen de js/productos.js como el
+    // valor por defecto) usan rutas relativas a la raíz del sitio, por ejemplo "assets/foo.jpg".
+    // Eso funciona en las páginas de la tienda (que están en la raíz), pero las páginas del
+    // admin viven una carpeta más adentro (admin/*.html), así que esa misma ruta sin corregir
+    // apunta a "admin/assets/foo.jpg", que no existe. Esta función sube un nivel cuando hace
+    // falta, sin tocar URLs absolutas, data URLs, blobs ni rutas que ya empiecen con "../".
+    function resolverImagen(ruta) {
+        if (!ruta) {
+            return "";
+        }
+        if (/^(https?:)?\/\//.test(ruta) || ruta.startsWith("data:") || ruta.startsWith("blob:") || ruta.startsWith("../") || ruta.startsWith("/")) {
+            return ruta;
+        }
+        return "../" + ruta;
+    }
+
     function mostrarToast(mensaje) {
         const contenedor = document.querySelector("#toast-admin");
         if (!contenedor) {
@@ -122,7 +149,7 @@
                 poblarSelectCategorias(selectCategoria, productoActual.categoria);
                 const previa = formulario.querySelector("#imagen-previa");
                 if (previa && productoActual.imagen) {
-                    previa.src = productoActual.imagen;
+                    previa.src = resolverImagen(productoActual.imagen);
                     previa.hidden = false;
                 }
                 document.querySelectorAll("[data-titulo-form]").forEach(function (el) { el.textContent = "Editar producto"; });
@@ -214,7 +241,7 @@
             return;
         }
         document.querySelectorAll("[data-titulo-ficha]").forEach(function (el) { el.textContent = producto.nombre; });
-        contenedor.querySelector("[data-img]").src = producto.imagen || "";
+        contenedor.querySelector("[data-img]").src = producto.imagen ? resolverImagen(producto.imagen) : "";
         contenedor.querySelector("[data-img]").alt = producto.nombre;
         contenedor.querySelector("[data-codigo]").textContent = producto.codigo;
         contenedor.querySelector("[data-nombre]").textContent = producto.nombre;
