@@ -254,7 +254,7 @@
             imagenes: [
                 "assets/orange-drink.webp",
                 "assets/orange-drink1.jpg",
-                "assets/orange-drink2.jpg"
+                "assets/orange-drink.webp"
             ],
             alt: "Krusty Orange Drink",
             tema: "producto-amarillo",
