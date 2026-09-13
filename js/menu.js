@@ -50,7 +50,7 @@
     }
 
     document.addEventListener("DOMContentLoaded", function () {
-        const filtros = document.querySelectorAll(".categoria-filtro, .filtro[data-filter]");
+        const filtros = document.querySelectorAll(".categoria-filtro, .filtro[data-filter], .kb-filtro[data-filter]");
         const orden = document.querySelector("#orden-menu");
         let categoriaActiva = document.querySelector("#productos-inicio") ? "hamburguesas" : "todos";
 
