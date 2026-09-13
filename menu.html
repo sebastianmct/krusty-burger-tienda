@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú | Krusty Burger</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+    <link rel="stylesheet" href="css/style-home.css">
+    <link rel="stylesheet" href="css/style-menu.css">
+</head>
+
+<body>
+    <nav>
+        <h2>Krusty Burger</h2>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="menu.html">Menú</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="nosotros.html">Nosotros</a></li>
+            <li><a href="promociones.html">Promociones</a></li>
+        </ul>
+        <div class="nav-icons">
+            <a href="carrito.html" aria-label="Ver carrito"><i class="ti ti-shopping-cart"></i><span
+                    class="contador-carrito" data-cart-count hidden>0</span></a>
+            <a href="login.html"><i class="ti ti-user"></i></a>
+        </div>
+        <a href="ordenar.html" class="btn-ordenar"><button>Ordenar Ahora</button></a>
+    </nav>
+
+    <main class="pagina-menu">
+        <aside class="menu-lateral">
+            <div class="burbuja-menu">
+                <p>¿Hamburguesas?<br>¿Rosquillas?<br>¿Felicidad?</p>
+                <span>Todo en el mismo lugar,<br>¡qué buena idea!</span>
+            </div>
+            <div class="barney-ilustracion">
+                <img src="assets/barney-cerveza1.png" alt="Barney sosteniendo una cerveza">
+            </div>
+            <div class="categorias">
+                <h2>Categorías</h2>
+                <button type="button" class="categoria-filtro activo" data-filter="todos" aria-pressed="true"><i
+                        class="ti ti-layout-grid"></i><span>Todos<small>Ver el menú completo</small></span></button>
+                <button type="button" class="categoria-filtro" data-filter="hamburguesas" aria-pressed="false"><i
+                        class="ti ti-burger"></i><span>Hamburguesas<small>Las favoritas</small></span></button>
+                <button type="button" class="categoria-filtro" data-filter="combos" aria-pressed="false"><i
+                        class="ti ti-tools-kitchen-2"></i><span>Combos<small>Para compartir</small></span></button>
+                <button type="button" class="categoria-filtro" data-filter="dulces" aria-pressed="false"><i
+                        class="ti ti-chart-donut"></i><span>Rosquillas<small>Dulces y glaseadas</small></span></button>
+                <button type="button" class="categoria-filtro" data-filter="bebidas" aria-pressed="false"><i
+                        class="ti ti-cup"></i><span>Bebidas<small>Frías y refrescantes</small></span></button>
+            </div>
+        </aside>
+
+        <section class="productos-menu">
+            <div class="encabezado-menu">
+                <div>
+                    <p class="etiqueta-menu">La carta de Springfield</p>
+                    <h1>Nuestros productos</h1>
+                </div>
+                <label for="orden-menu">Ordenar por:
+                    <select id="orden-menu" name="orden-menu">
+                        <option>Más populares</option>
+                        <option>Precio menor</option>
+                        <option>Precio mayor</option>
+                    </select>
+                </label>
+            </div>
+
+            <div class="productos-grilla" id="productos-grilla"></div>
+        </section>
+    </main>
+
+    <footer>
+        <h2>Krusty Burguer</h2>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="menu.html">Menú</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+        <p>&copy; 2026 Krusty Burguer. Todos los derechos reservados.</p>
+        <img src="assets/cerdo_footer.png" alt="Imagen del cerdo de Krusty Burger">
+    </footer>
+    <script src="js/productos.js" defer></script>
+    <script src="js/carrito.js" defer></script>
+    <script src="js/menu.js" defer></script>
+</body>
+
+</html>

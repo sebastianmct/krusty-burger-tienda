@@ -24,21 +24,55 @@
         </div>
         <div class="formulario-registro">
             <h2 class="formulario-titulo">Crea tu cuenta</h2>
-            <form class="registro-formulario">
+            <form class="registro-formulario" id="registro-form">
                 <div class="formulario-grupo">
-                    <label for="nombre">Nombre completo</label>
-                    <input type="text" required placeholder="Ej. Homero Simpson">
+                    <label for="run">RUN</label>
+                    <input type="text" id="run" name="run" required maxlength="12" inputmode="text" autocomplete="off"
+                        pattern="[0-9]{7,8}[0-9Kk]" placeholder="123456785">
+                </div>
+                <div class="formulario-grupo">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" name="nombre" maxlength="50" autocomplete="given-name" required
+                        placeholder="Ej. Homero">
+                </div>
+                <div class="formulario-grupo">
+                    <label for="apellidos">Apellidos</label>
+                    <input type="text" id="apellidos" name="apellidos" maxlength="100" autocomplete="family-name"
+                        required placeholder="Ej. Simpson">
                 </div>
                 <div class="formulario-grupo">
                     <label for="email">Tu Email de Springfield</label>
-                    <input type="email" required placeholder="Ej. homero_lover@simpson.com">
+                    <input type="email" id="email" name="email" maxlength="100" autocomplete="email" required
+                        placeholder="Ej. homero_lover@simpson.com">
+                </div>
+                <div class="formulario-grupo">
+                    <label for="fecha-nacimiento">Fecha de nacimiento</label>
+                    <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" autocomplete="bday">
+                </div>
+                <div class="formulario-grupo">
+                    <label for="region">Región</label>
+                    <select id="region" name="region" required autocomplete="address-level1">
+                        <option value="">Selecciona una región</option>
+                    </select>
+                </div>
+                <div class="formulario-grupo">
+                    <label for="comuna">Comuna</label>
+                    <select id="comuna" name="comuna" required autocomplete="address-level2" disabled>
+                        <option value="">Primero selecciona una región</option>
+                    </select>
+                </div>
+                <div class="formulario-grupo">
+                    <label for="direccion">Dirección</label>
+                    <input type="text" id="direccion" name="direccion" maxlength="300" autocomplete="street-address"
+                        required placeholder="Ej. Av. Siempreviva 742">
                 </div>
                 <div class="formulario-grupo">
                     <label for="password">Contraseña Secreta</label>
-                    <input type="password" required placeholder="********">
+                    <input type="password" id="password" name="password" autocomplete="new-password" required
+                        placeholder="********">
                 </div>
                 <label class="checkbox" for="terminos">
-                    <input type="checkbox" required>
+                    <input type="checkbox" id="terminos" name="terminos" required>
                     <span>Quiero recibir ofertas que no puedo rechazar</span>
                 </label>
                 <button class="boton-registro" type="submit">¡Registrarme!</button>
@@ -46,6 +80,7 @@
             </form>
         </div>
     </main>
+    <script src="js/validaciones-formularios.js" defer></script>
 </body>
 
 </html>

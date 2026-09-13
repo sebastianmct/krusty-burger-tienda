@@ -20,11 +20,10 @@
             <li><a href="promociones.html">Promociones</a></li>
         </ul>
         <div class="nav-icons">
-            <a href="favoritos.html"><i class="ti ti-heart"></i></a>
             <a href="carrito.html"><i class="ti ti-shopping-cart"></i></a>
             <a href="login.html"><i class="ti ti-user"></i></a>
         </div>
-        <a href="ordenar.html" class="btn-ordenar"><button>Ordenar Ahora</button></a>
+        <a href="menu.html" class="btn-ordenar"><button>Ordenar Ahora</button></a>
     </nav>
     <main>
         <section class="titulo">
@@ -34,23 +33,29 @@
                     saber! Nos importa (un poco).</p>
             </div>
         </section>
+
         <section class="contacto">
+            <div class="mou_container">
+                <img src="assets/mou_escopeta.jpg" alt="Moe sosteniendo escopeta" class="moe-img" />
+            </div>
             <div class="formulario-contenedor">
-                <form>
+                <form id="contacto-form">
                     <div class="formulario-filas">
                         <div class="formulario-grupo">
                             <label for="nombre">NOMBRE COMPLETO</label>
-                            <input type="text" id="nombre" name="nombre" required placeholder="Ej. Homero Simpson">
+                            <input type="text" id="nombre" name="nombre" maxlength="100" autocomplete="name" required
+                                placeholder="Ej. Homero Simpson">
                         </div>
                         <div class="formulario-grupo">
                             <label for="email">EMAIL (Opcional si huyes)</label>
-                            <input type="email" id="email" name="email" placeholder="Ej. homero_lover@simpson.com">
+                            <input type="email" id="email" name="email" maxlength="100" autocomplete="email"
+                                placeholder="Ej. homero_lover@simpson.com">
                         </div>
                     </div>
 
                     <div class="formulario-grupo">
                         <label for="mensaje">¿QUE HIZO KRUSTY ESTA VEZ?</label>
-                        <textarea id="mensaje" required
+                        <textarea id="mensaje" name="comentario" maxlength="500" required
                             placeholder="Ej. Describe tu trauma aquí... ¡No escatimes en detalles grotescos!"></textarea>
                     </div>
                     <button type="submit">Enviar queja <i class="ti ti-send"></i></button>
@@ -61,8 +66,7 @@
                 <p><i class="ti ti-home"></i> Krusty Burger Principal</p>
                 <p>742 Evergreen Terrace, Springfield<br>(o cerca de ahí, pregunta por Ned)</p>
                 <p><i class="ti ti-phone"></i> (555) 123-4567 (no llamen a la policía)</p>
-                <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuCY1g6BoQSr6StNQKIvY7ENHNKj9vcBCsG_bgJXFZZBcL3LV8Ev27DIsaOJXvWh-r8T7O0Z4SZD5W9SNiPe4B9dm7Lqr8St39iVQb_c5iFKL-2u7_yun9JwckoKng2g1tOKeRc4jdUz7K4LJCabzQU4L6ZuaYbeIOz4kW6pNV2Q2MMH3Nw8mb5GovUzmabykcPsKV2rZfDF7GcE3L88EOXmabokTOl4TuavEIdrxMbUVhdIXi3YHB3OUQ"
-                    alt="Mapa de Krusty Burger">
+                <img src="assets/springfield.png" alt="Krusty Burger">
             </aside>
         </section>
     </main>
@@ -74,7 +78,9 @@
             <li><a href="contacto.html">Contacto</a></li>
         </ul>
         <p>&copy; 2026 Krusty Burguer. Todos los derechos reservados.</p>
+        <img src="assets/cerdo_footer.png" alt="Imagen del cerdo de Krusty Burger">
     </footer>
+    <script src="js/validaciones-formularios.js" defer></script>
 </body>
 
 </html>
