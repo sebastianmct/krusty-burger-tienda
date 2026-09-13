@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos | Admin Krusty Burger</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+    <link rel="stylesheet" href="css/style-admin.css">
+</head>
+
+<body class="admin-body">
+    <div class="admin-shell">
+        <div class="overlay-sidebar" data-toggle-sidebar></div>
+
+        <aside class="admin-sidebar">
+            <div class="marca">
+                <div class="logo-payaso">K</div>
+                <div>
+                    <h1>Krusty Burger</h1>
+                    <span>Panel Admin</span>
+                </div>
+            </div>
+            <nav class="admin-nav">
+                <p class="grupo-titulo">General</p>
+                <a class="item" data-pagina="index.html" href="index.html"><i class="ti ti-layout-dashboard"></i>
+                    Dashboard</a>
+                <p class="grupo-titulo">Gestión</p>
+                <a class="item" data-pagina="productos.html" href="productos.html"><i class="ti ti-burger"></i>
+                    Productos <span class="badge-mini" id="badge-productos"></span></a>
+                <a class="item" data-pagina="usuarios.html" href="usuarios.html"><i class="ti ti-users"></i> Usuarios
+                    <span class="badge-mini" id="badge-usuarios"></span></a>
+            </nav>
+            <div class="pie-sidebar">
+                <a class="item" href="../index.html"><i class="ti ti-arrow-back-up"></i> Volver a la tienda</a>
+            </div>
+        </aside>
+
+        <div class="admin-main">
+            <header class="admin-topbar">
+                <button class="btn btn-kb-secundario btn-menu-movil" data-toggle-sidebar type="button"
+                    aria-label="Abrir menú"><i class="ti ti-menu-2"></i></button>
+                <div>
+                    <p class="miga">Panel administrador / Gestión</p>
+                    <h2>Productos</h2>
+                </div>
+                <div class="acciones-topbar">
+                    <a href="producto-nuevo.html" class="btn btn-kb-primario"><i class="ti ti-plus"></i> <span
+                            class="d-none d-sm-inline">Nuevo producto</span></a>
+                </div>
+            </header>
+
+            <main class="admin-content">
+                <div class="alert alert-success d-flex align-items-center gap-2" id="banner-estado" hidden>
+                    <i class="ti ti-circle-check"></i> <span></span>
+                </div>
+
+                <div class="tabla-admin-wrap">
+                    <div class="tabla-admin-header">
+                        <div class="buscador flex-grow-1">
+                            <input type="search" id="buscador-productos" class="form-control"
+                                placeholder="Buscar por nombre o código…" aria-label="Buscar productos">
+                        </div>
+                        <span class="text-muted small" id="contador-productos"></span>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table tabla-admin mb-0">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Categoría</th>
+                                    <th>Precio</th>
+                                    <th>Stock</th>
+                                    <th class="text-end">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="cuerpo-tabla-productos"></tbody>
+                        </table>
+                    </div>
+                    <div class="estado-vacio" id="estado-vacio-productos" hidden>
+                        <i class="ti ti-burger-off"></i>
+                        <p class="mt-2 mb-1">No hay productos que coincidan con la búsqueda.</p>
+                        <p class="text-muted small mb-0">Juan Topo se llevó el resto del inventario.</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Modal confirmación eliminar -->
+    <div class="modal fade" id="modalEliminar" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="ti ti-alert-triangle text-danger"></i> Eliminar producto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-0">¿Seguro que quieres eliminar <strong data-modal-nombre>este producto</strong>?
+                        Esta acción no se puede deshacer (ni Krusty podrá recuperarlo).</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-kb-secundario" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" data-confirmar-eliminar>Sí, eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="toast-admin" class="toast align-items-center text-bg-dark border-0" role="status">
+            <div class="d-flex">
+                <div class="toast-body">Listo.</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                    aria-label="Cerrar"></button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/productos.js"></script>
+    <script src="js/admin-data.js"></script>
+    <script src="js/admin-ui.js"></script>
+    <script src="js/admin-productos.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const banner = document.querySelector("#banner-estado");
+            const params = new URLSearchParams(window.location.search);
+            if (banner && (params.get("guardado") || params.get("eliminado"))) {
+                banner.querySelector("span").textContent = params.get("guardado") ? "Producto guardado correctamente." : "Producto eliminado correctamente.";
+                banner.hidden = false;
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Krusty Burger</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
+    <link rel="stylesheet" href="css/style-home.css">
+</head>
+
+<body>
+    <nav>
+        <h2>Krusty Burger</h2>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="menu.html">Menú</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+            <li><a href="nosotros.html">Nosotros</a></li>
+            <li><a href="promociones.html">Promociones</a></li>
+        </ul>
+        <div class="nav-icons">
+            <a href="carrito.html"><i class="ti ti-shopping-cart"></i></a>
+            <a href="login.html"><i class="ti ti-user"></i></a>
+        </div>
+        <a href="menu.html" class="btn-ordenar"><button>Ordenar Ahora</button></a>
+    </nav>
+    <hero>
+        <div class="hero-text">
+            <h1>!LA BURGEER FAVORITA DE <span>SPRINGFIELD!</span></h1>
+            <p>Hamburguesas, papas y combos preparados para satisfacer hasta al ciudadano más hambriento.</p>
+            <div class="botones">
+                <a href="menu.html"><button>Ordenar Ahora</button></a>
+                <a href="menu.html"><button>Ver Menú</button></a>
+            </div>
+        </div>
+        <img src="assets/rosquilla-homero.png" alt="Dona Homero">
+    </hero>
+    <section class="menu-section">
+        <div class="menu-header">
+            <h2>EL MENÚ DE <span>KRUSTY</span></h2>
+            <div class="filtros">
+                <button class="filtro active" data-filter="hamburguesas"><i
+                        class="ti ti-burger"></i>Hamburguesas</button>
+                <button class="filtro" data-filter="dulces"><i class="ti ti-chart-donut"></i>Rosquillas</button>
+                <button class="filtro" data-filter="papas"><i class="ti ti-tools-kitchen-2"></i>Papas</button>
+                <button class="filtro" data-filter="bebidas"><i class="ti ti-cup"></i>Bebidas</button>
+            </div>
+        </div>
+        <hr />
+        <div class="tarjetas" id="productos-inicio"></div>
+    </section>
+    <section class="club-section">
+        <div class="club-imagen">
+            <img src="assets/krusty-fumando.jpg" alt="Krusty dando la bienvenida">
+        </div>
+        <div class="club-contenido">
+            <h2>ÚNETE AL <span>CLUB KRUSTY</span></h2>
+            <p>Acumula puntos con tus pedidos y recibe promociones especiales para disfrutar tus hamburguesas favoritas.
+            </p>
+            <a href="registrarse.html" class="club-boton">Registrarme</a>
+        </div>
+    </section>
+    <footer>
+        <h2>Krusty Burguer</h2>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="menu.html">Menú</a></li>
+            <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+        <p>&copy; 2026 Krusty Burguer. Todos los derechos reservados.</p>
+        <img src="assets/cerdo_footer.png" alt="Imagen del cerdo de Krusty Burger">
+    </footer>
+    <script src="js/productos.js" defer></script>
+    <script src="js/carrito.js" defer></script>
+    <script src="js/menu.js" defer></script>
+</body>
+
+</html>
