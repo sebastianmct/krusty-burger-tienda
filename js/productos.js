@@ -484,6 +484,83 @@
 
     ];
 
+    /* El panel admin (/admin) es quien administra productos "de verdad" vía localStorage.
+     * Esta fusión hace que la tienda pública siempre refleje lo que el admin gestionó:
+     *   - Productos eliminados en el admin -> se sacan del catálogo público.
+     *   - Productos editados en el admin (nombre, precio, descripción, categoría, imagen)
+     *     -> se actualizan sobre el producto del catálogo.
+     *   - Productos creados directamente en el admin (que no existen en este archivo)
+     *     -> se agregan al catálogo público con valores por defecto para los campos que
+     *        el admin no pide (galería de imágenes, frases de personajes, etc.).
+     */
+    (function aplicarDatosDelAdmin() {
+        let eliminados = [];
+        let productosAdmin = [];
+        try {
+            eliminados = JSON.parse(localStorage.getItem("krustyProductosEliminados") || "[]");
+        } catch (error) {
+            eliminados = [];
+        }
+        try {
+            productosAdmin = JSON.parse(localStorage.getItem("krustyAdminProductos") || "[]");
+        } catch (error) {
+            productosAdmin = [];
+        }
+        if (!Array.isArray(eliminados)) {
+            eliminados = [];
+        }
+        if (!Array.isArray(productosAdmin)) {
+            productosAdmin = [];
+        }
+
+        if (eliminados.length) {
+            window.KrustyProductos = window.KrustyProductos.filter(function (producto) {
+                return eliminados.indexOf(producto.id) === -1;
+            });
+        }
+
+        if (!productosAdmin.length) {
+            return;
+        }
+
+        const porId = {};
+        window.KrustyProductos.forEach(function (producto) { porId[producto.id] = producto; });
+
+        productosAdmin.forEach(function (productoAdmin) {
+            if (eliminados.indexOf(productoAdmin.id) !== -1) {
+                return;
+            }
+            const existente = porId[productoAdmin.id];
+            if (existente) {
+                existente.nombre = productoAdmin.nombre || existente.nombre;
+                existente.descripcion = productoAdmin.descripcion || existente.descripcion;
+                existente.precio = productoAdmin.precio != null ? productoAdmin.precio : existente.precio;
+                existente.categoria = productoAdmin.categoria || existente.categoria;
+                existente.categoriaLabel = productoAdmin.categoriaLabel || existente.categoriaLabel;
+                if (productoAdmin.imagen) {
+                    existente.imagen = productoAdmin.imagen;
+                }
+            } else {
+                const imagenPorDefecto = productoAdmin.imagen || "assets/krusty-burger.webp";
+                window.KrustyProductos.push({
+                    id: productoAdmin.id,
+                    nombre: productoAdmin.nombre,
+                    categoria: productoAdmin.categoria,
+                    categoriaLabel: productoAdmin.categoriaLabel,
+                    descripcion: productoAdmin.descripcion || "",
+                    precio: productoAdmin.precio,
+                    imagen: imagenPorDefecto,
+                    imagenes: [imagenPorDefecto],
+                    alt: productoAdmin.nombre,
+                    tema: "",
+                    nota: productoAdmin.descripcion || "Una creación especial de Krusty Burger.",
+                    millhouse: "¡Se ve increíble!",
+                    burns: "Un producto con buen margen."
+                });
+            }
+        });
+    })();
+
     window.KrustyBuscarProducto = function (id) {
         return window.KrustyProductos.find(function (producto) {
             return producto.id === id;

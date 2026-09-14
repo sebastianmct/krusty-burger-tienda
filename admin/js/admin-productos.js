@@ -156,16 +156,27 @@
             }
         }
 
-        // Vista previa de imagen si el usuario sube un archivo
+        // Vista previa de imagen si el usuario sube un archivo. Se guarda como Data URL
+        // (base64) en vez de un blob: temporal, porque los blob: dejan de funcionar al
+        // recargar la página o al verse desde otra página (menu.html, carrito, etc.).
+        let imagenSeleccionada = null;
         const inputImagen = formulario.querySelector("#imagen");
         if (inputImagen) {
             inputImagen.addEventListener("change", function () {
                 const archivo = inputImagen.files && inputImagen.files[0];
                 const previa = formulario.querySelector("#imagen-previa");
-                if (archivo && previa) {
-                    previa.src = URL.createObjectURL(archivo);
-                    previa.hidden = false;
+                if (!archivo) {
+                    return;
                 }
+                const lector = new FileReader();
+                lector.onload = function () {
+                    imagenSeleccionada = lector.result;
+                    if (previa) {
+                        previa.src = imagenSeleccionada;
+                        previa.hidden = false;
+                    }
+                };
+                lector.readAsDataURL(archivo);
             });
         }
 
@@ -210,7 +221,6 @@
                 return;
             }
 
-            const previa = formulario.querySelector("#imagen-previa");
             const datos = {
                 id: productoActual ? productoActual.id : null,
                 codigo: formulario.querySelector("#codigo").value.trim(),
@@ -221,7 +231,12 @@
                 stockCritico: formulario.querySelector("#stockCritico").value === "" ? null : Number(formulario.querySelector("#stockCritico").value),
                 categoria: selectCategoria.value,
                 categoriaLabel: etiquetaCategoria(selectCategoria.value),
-                imagen: (previa && !previa.hidden) ? previa.src : (productoActual ? productoActual.imagen : "../assets/krusty-burger.jpg")
+                // Prioridad: 1) imagen nueva recién subida (base64), 2) la ruta que el
+                // producto ya tenía guardada (sin tocar), 3) una imagen por defecto.
+                // OJO: nunca se usa el "src" ya resuelto por el navegador de la vista previa,
+                // porque el navegador lo convierte en una URL absoluta (o con "../" de más)
+                // que después se rompe al mostrarse en la tienda pública.
+                imagen: imagenSeleccionada || (productoActual ? productoActual.imagen : "assets/krusty-burger.webp")
             };
             window.KrustyAdmin.Productos.guardar(datos);
             window.location.href = "productos.html?guardado=1";

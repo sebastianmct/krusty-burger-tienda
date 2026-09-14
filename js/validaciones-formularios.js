@@ -153,15 +153,54 @@
             formulario.addEventListener("submit", function (evento) {
                 evento.preventDefault();
                 const validos = campos.map(function (campo) { return validarCampo(campo, formulario); });
-                if (validos.every(Boolean)) {
-                    const mensaje = formulario.id === "login-form" ? "Inicio de sesión simulado correctamente." : formulario.id === "registro-form" ? "Registro simulado correctamente." : "Tu mensaje fue enviado correctamente.";
-                    mostrarExito(formulario, mensaje);
-                } else {
+                if (!validos.every(Boolean)) {
                     const primero = campos.find(function (campo, indice) { return !validos[indice]; });
                     if (primero) {
                         primero.focus();
                     }
+                    return;
                 }
+
+                if (formulario.id === "registro-form" && window.KrustyAuth) {
+                    const campoEmail = formulario.querySelector("#email");
+                    const campoFecha = formulario.querySelector("#fecha-nacimiento");
+                    const resultado = window.KrustyAuth.registrar({
+                        run: formulario.querySelector("#run").value,
+                        nombre: formulario.querySelector("#nombre").value,
+                        apellidos: formulario.querySelector("#apellidos").value,
+                        correo: campoEmail.value,
+                        password: formulario.querySelector("#password").value,
+                        fechaNacimiento: campoFecha ? campoFecha.value : "",
+                        region: formulario.querySelector("#region").value,
+                        comuna: formulario.querySelector("#comuna").value,
+                        direccion: formulario.querySelector("#direccion").value
+                    });
+                    if (!resultado.ok) {
+                        mostrarError(campoEmail, resultado.error);
+                        campoEmail.focus();
+                        return;
+                    }
+                    mostrarExito(formulario, "¡Cuenta creada! Ya puedes iniciar sesión con tu correo y contraseña.");
+                    formulario.reset();
+                    setTimeout(function () { window.location.href = "login.html"; }, 1500);
+                    return;
+                }
+
+                if (formulario.id === "login-form" && window.KrustyAuth) {
+                    const campoPassword = formulario.querySelector("#password");
+                    const resultado = window.KrustyAuth.iniciarSesion(formulario.querySelector("#email").value, campoPassword.value);
+                    if (!resultado.ok) {
+                        mostrarError(campoPassword, resultado.error);
+                        campoPassword.focus();
+                        return;
+                    }
+                    mostrarExito(formulario, "¡Bienvenido, " + resultado.usuario.nombre + "!");
+                    const destino = resultado.usuario.tipoUsuario === "Administrador" ? "admin/index.html" : "index.html";
+                    setTimeout(function () { window.location.href = destino; }, 800);
+                    return;
+                }
+
+                mostrarExito(formulario, "Tu mensaje fue enviado correctamente.");
             });
         });
     }

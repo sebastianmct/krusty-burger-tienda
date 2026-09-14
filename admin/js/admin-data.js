@@ -3,6 +3,27 @@
 
     const CLAVE_PRODUCTOS = "krustyAdminProductos";
     const CLAVE_USUARIOS = "krustyAdminUsuarios";
+    const CLAVE_PRODUCTOS_ELIMINADOS = "krustyProductosEliminados";
+
+    /* ---------- IDs de productos eliminados desde el admin ----------
+     * La tienda (js/productos.js) es un catálogo estático: para que un producto
+     * eliminado en el panel deje de aparecer en menu.html/index.html/detalle,
+     * guardamos su id aquí y la tienda filtra su catálogo contra esta lista.
+     */
+    function marcarProductoEliminado(id) {
+        if (!id) {
+            return;
+        }
+        try {
+            const lista = JSON.parse(localStorage.getItem(CLAVE_PRODUCTOS_ELIMINADOS) || "[]");
+            if (Array.isArray(lista) && lista.indexOf(id) === -1) {
+                lista.push(id);
+                localStorage.setItem(CLAVE_PRODUCTOS_ELIMINADOS, JSON.stringify(lista));
+            }
+        } catch (error) {
+            localStorage.setItem(CLAVE_PRODUCTOS_ELIMINADOS, JSON.stringify([id]));
+        }
+    }
 
     /* ---------- Regiones y comunas (mismo set que la tienda) ---------- */
     const comunasPorRegion = {
@@ -183,43 +204,35 @@
     }
 
     function guardarLista(clave, lista) {
-        localStorage.setItem(clave, JSON.stringify(lista));
+        try {
+            localStorage.setItem(clave, JSON.stringify(lista));
+        } catch (error) {
+            window.alert("No se pudo guardar: el almacenamiento del navegador está lleno (suele pasar con imágenes muy pesadas). Prueba con una imagen más liviana.");
+            throw error;
+        }
         return lista;
     }
 
     /* ---------- Sincroniza el admin con el catálogo de la tienda (js/productos.js) ----------
-     * El admin guarda su propia copia en localStorage (para poder editar stock, código, etc.
-     * sin depender de un backend). El problema es que esa copia se crea una sola vez: si
-     * después se agregan, editan o quitan productos en js/productos.js, el admin se queda
-     * con datos viejos. Esta función corrige eso en cada carga:
-     *   - Si aparece un producto nuevo en el catálogo que el admin no tiene, lo agrega.
-     *   - Si un producto que el admin ya tiene cambió de nombre/precio/categoría/imagen en
-     *     el catálogo, actualiza esos campos (los campos propios del admin como stock,
-     *     stockCritico y código NO se tocan).
-     *   - Los productos creados directamente desde el admin (que no existen en el catálogo)
-     *     se dejan intactos.
+     * Esta función es SOLO ADITIVA: si aparece un producto nuevo en el catálogo estático
+     * (window.KrustyProductos) que el admin todavía no tiene, lo agrega.
+     * A propósito NUNCA sobreescribe campos de un producto que el admin ya tiene, aunque
+     * difieran del catálogo: si lo hiciera, cualquier edición hecha en producto-editar.html
+     * (nombre, precio, descripción, categoría, imagen) se revertiría sola en la siguiente
+     * carga, porque esta función se llama en cada listar()/obtener()/guardar().
      */
     function sincronizarConCatalogo(lista) {
         const catalogo = window.KrustyProductos || [];
         if (!catalogo.length) {
             return lista;
         }
-        const porId = {};
-        lista.forEach(function (producto) { porId[producto.id] = producto; });
+        const idsExistentes = {};
+        lista.forEach(function (producto) { idsExistentes[producto.id] = true; });
 
         let cambio = false;
-        const camposDeCatalogo = ["nombre", "descripcion", "precio", "categoria", "categoriaLabel", "imagen"];
 
         catalogo.forEach(function (fuente, indice) {
-            const existente = porId[fuente.id];
-            if (existente) {
-                camposDeCatalogo.forEach(function (campo) {
-                    if (existente[campo] !== fuente[campo]) {
-                        existente[campo] = fuente[campo];
-                        cambio = true;
-                    }
-                });
-            } else {
+            if (!idsExistentes[fuente.id]) {
                 lista.push({
                     id: fuente.id,
                     codigo: "KB-" + String(indice + 1).padStart(3, "0"),
@@ -275,6 +288,7 @@
         eliminar: function (id) {
             const lista = this.listar().filter(function (p) { return p.id !== id; });
             guardarLista(CLAVE_PRODUCTOS, lista);
+            marcarProductoEliminado(id);
             return lista;
         }
     };
