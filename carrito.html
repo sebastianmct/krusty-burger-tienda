@@ -12,23 +12,32 @@
 </head>
 
 <body>
-    <nav class="navbar bg-white border-bottom border-3 border-dark px-4 px-lg-5 py-3">
-        <div class="container-fluid p-0 d-flex align-items-center justify-content-between flex-wrap gap-3">
+    <nav class="navbar navbar-expand-lg bg-white border-bottom border-3 border-dark px-4 px-lg-5 py-3">
+        <div class="container-fluid p-0 gap-3">
             <h2 class="kb-logo m-0">Krusty Burger</h2>
-            <ul class="nav gap-4 flex-grow-1 justify-content-center mb-0">
-                <li class="nav-item"><a class="nav-link kb-nav-link" href="index.html">Inicio</a></li>
-                <li class="nav-item"><a class="nav-link kb-nav-link" href="menu.html">Menú</a></li>
-                <li class="nav-item"><a class="nav-link kb-nav-link" href="contacto.html">Contacto</a></li>
-                <li class="nav-item"><a class="nav-link kb-nav-link" href="nosotros.html">Nosotros</a></li>
-                <li class="nav-item"><a class="nav-link kb-nav-link" href="promociones.html">Promociones</a></li>
-            </ul>
-            <div class="d-flex align-items-center gap-3">
-                <a href="carrito.html" class="kb-icon-link position-relative" aria-label="Ver carrito"><i
-                        class="ti ti-shopping-cart" aria-hidden="true"></i><span class="contador-carrito"
-                        data-cart-count hidden>0</span></a>
-                <a href="login.html" class="kb-icon-link"><i class="ti ti-user" aria-hidden="true"></i></a>
+
+            <button class="navbar-toggler kb-toggler ms-auto" type="button" data-bs-toggle="collapse"
+                data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false"
+                aria-label="Abrir menú de navegación">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="menuPrincipal">
+                <ul class="navbar-nav flex-grow-1 justify-content-center text-center gap-2 gap-lg-4 mb-0">
+                    <li class="nav-item"><a class="nav-link kb-nav-link" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link kb-nav-link" href="menu.html">Menú</a></li>
+                    <li class="nav-item"><a class="nav-link kb-nav-link" href="contacto.html">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link kb-nav-link" href="nosotros.html">Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link kb-nav-link" href="promociones.html">Promociones</a></li>
+                </ul>
+                <div class="kb-nav-acciones d-flex align-items-center justify-content-center gap-3">
+                    <a href="carrito.html" class="kb-icon-link position-relative" aria-label="Ver carrito"><i
+                            class="ti ti-shopping-cart" aria-hidden="true"></i><span class="contador-carrito"
+                            data-cart-count hidden>0</span></a>
+                    <a href="login.html" class="kb-icon-link"><i class="ti ti-user" aria-hidden="true"></i></a>
+                    <a href="menu.html" class="btn btn-kb-primario rounded-pill">Ordenar Ahora</a>
+                </div>
             </div>
-            <a href="menu.html" class="btn btn-kb-primario rounded-pill">Ordenar Ahora</a>
         </div>
     </nav>
 

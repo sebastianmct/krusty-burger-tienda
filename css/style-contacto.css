@@ -13,6 +13,7 @@ body {
     color: var(--kb-dark);
     background-image: radial-gradient(#bdbdbd 0.8px, transparent 0.8px);
     background-size: 7px 7px;
+    overflow-x: hidden;
 }
 
 a {
@@ -76,6 +77,34 @@ img {
     color: var(--kb-red);
 }
 
+/* ---------- Navbar responsive ---------- */
+.kb-toggler {
+    border: 2px solid var(--kb-dark);
+    border-radius: 10px;
+}
+
+@media (max-width: 991.98px) {
+    .kb-logo {
+        font-size: 1.9rem;
+    }
+
+    .navbar-collapse {
+        margin-top: 14px;
+        padding-top: 14px;
+        border-top: 2px solid var(--kb-dark);
+    }
+
+    .kb-nav-link {
+        padding: 10px 0 !important;
+    }
+
+    .kb-nav-acciones {
+        margin-top: 14px;
+        padding-top: 14px;
+        border-top: 2px solid var(--kb-dark);
+    }
+}
+
 .btn-kb-primario {
     background: var(--kb-red);
     color: #fff9ef;
@@ -99,12 +128,18 @@ img {
 
 .kb-titulo-h1 {
     color: var(--kb-red);
-    font-size: 3.5rem;
+    font-size: 2.4rem;
     font-weight: 900;
     text-transform: uppercase;
     margin-bottom: 20px;
     text-shadow: 3px 3px var(--kb-dark);
     transform: rotate(-2deg);
+}
+
+@media (min-width: 576px) {
+    .kb-titulo-h1 {
+        font-size: 3.5rem;
+    }
 }
 
 .kb-titulo-inner p {

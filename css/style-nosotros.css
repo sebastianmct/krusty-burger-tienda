@@ -12,6 +12,7 @@
 body {
 	background: var(--kb-cream);
 	color: var(--kb-dark);
+	overflow-x: hidden;
 }
 
 a {
@@ -76,6 +77,34 @@ img {
 	color: var(--kb-red);
 }
 
+/* ---------- Navbar responsive ---------- */
+.kb-toggler {
+	border: 2px solid var(--kb-dark);
+	border-radius: 10px;
+}
+
+@media (max-width: 991.98px) {
+	.kb-logo {
+		font-size: 1.9rem;
+	}
+
+	.navbar-collapse {
+		margin-top: 14px;
+		padding-top: 14px;
+		border-top: 2px solid var(--kb-dark);
+	}
+
+	.kb-nav-link {
+		padding: 10px 0 !important;
+	}
+
+	.kb-nav-acciones {
+		margin-top: 14px;
+		padding-top: 14px;
+		border-top: 2px solid var(--kb-dark);
+	}
+}
+
 .btn-kb-primario {
 	background: var(--kb-red);
 	color: #fff9ef;
@@ -114,10 +143,23 @@ img {
 .historia-texto h1 {
 	max-width: 650px;
 	font-family: "Arial Black", Impact, sans-serif;
-	font-size: 4.8rem;
+	font-size: 2.8rem;
 	line-height: 0.9;
 	text-transform: uppercase;
-	margin-bottom: 30px;
+	color: var(--kb-dark);
+	margin-bottom: 24px;
+}
+
+@media (min-width: 576px) {
+	.historia-texto h1 {
+		font-size: 4rem;
+	}
+}
+
+@media (min-width: 992px) {
+	.historia-texto h1 {
+		font-size: 4.8rem;
+	}
 }
 
 .historia-texto h1 span {
@@ -158,12 +200,20 @@ img {
 
 .noticias-nosotros {
 	position: relative;
-	height: 475px;
+	height: auto;
+	min-height: 300px;
 	padding: 20px;
 	background: #fff;
 	border: 3px solid var(--kb-dark);
 	box-shadow: 8px 8px 0 var(--kb-dark);
 	transform: rotate(2deg);
+}
+
+@media (min-width: 992px) {
+	.noticias-nosotros {
+		height: 475px;
+		min-height: auto;
+	}
 }
 
 .historia-imagen img {

@@ -13,7 +13,7 @@ body {
     background: #f2f1ee;
     color: var(--kb-dark);
     background-image: radial-gradient(#d1d1d1 1px, transparent 1px);
-    background-size: 10px 10px;
+    overflow-x: hidden;
 }
 
 a {
@@ -78,6 +78,34 @@ img {
     color: var(--kb-red);
 }
 
+/* ---------- Navbar responsive ---------- */
+.kb-toggler {
+    border: 2px solid var(--kb-dark);
+    border-radius: 10px;
+}
+
+@media (max-width: 991.98px) {
+    .kb-logo {
+        font-size: 1.9rem;
+    }
+
+    .navbar-collapse {
+        margin-top: 14px;
+        padding-top: 14px;
+        border-top: 2px solid var(--kb-dark);
+    }
+
+    .kb-nav-link {
+        padding: 10px 0 !important;
+    }
+
+    .kb-nav-acciones {
+        margin-top: 14px;
+        padding-top: 14px;
+        border-top: 2px solid var(--kb-dark);
+    }
+}
+
 .btn-kb-primario {
     background: var(--kb-red);
     color: #fff9ef;
@@ -96,11 +124,17 @@ img {
 }
 
 .pagina-login {
-    min-height: 750px;
+    min-height: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 60px 20px;
+}
+
+@media (min-width: 576px) {
+    .pagina-login {
+        min-height: 750px;
+    }
 }
 
 .tarjeta-login {
@@ -133,7 +167,7 @@ img {
 
 .titulo-login {
     text-align: center;
-    font-size: 3.1rem;
+    font-size: 2.4rem;
     line-height: 0.9;
     letter-spacing: -0.08em;
     text-transform: uppercase;
@@ -141,6 +175,12 @@ img {
     font-weight: 900;
     margin-top: 52px;
     margin-bottom: 14px;
+}
+
+@media (min-width: 576px) {
+    .titulo-login {
+        font-size: 3.1rem;
+    }
 }
 
 .subtitulo-login {

@@ -10,8 +10,9 @@
 }
 
 body {
-	background: var(--kb-cream);
+	background: #f1f1ee;
 	color: var(--kb-dark);
+	overflow-x: hidden;
 }
 
 a {
@@ -74,6 +75,34 @@ img {
 
 .kb-icon-link:hover {
 	color: var(--kb-red);
+}
+
+/* ---------- Navbar responsive ---------- */
+.kb-toggler {
+	border: 2px solid var(--kb-dark);
+	border-radius: 10px;
+}
+
+@media (max-width: 991.98px) {
+	.kb-logo {
+		font-size: 1.9rem;
+	}
+
+	.navbar-collapse {
+		margin-top: 14px;
+		padding-top: 14px;
+		border-top: 2px solid var(--kb-dark);
+	}
+
+	.kb-nav-link {
+		padding: 10px 0 !important;
+	}
+
+	.kb-nav-acciones {
+		margin-top: 14px;
+		padding-top: 14px;
+		border-top: 2px solid var(--kb-dark);
+	}
 }
 
 .btn-kb-primario {
@@ -152,13 +181,25 @@ img {
 .hero-promo h1 {
 	max-width: 780px;
 	font-family: "Arial Black", Impact, sans-serif;
-	font-size: 4.9rem;
+	font-size: 2.5rem;
 	line-height: 0.92;
 	letter-spacing: -4px;
 	color: var(--kb-dark);
 	text-transform: uppercase;
 	text-shadow: 4px 4px 0 var(--kb-yellow);
 	margin-bottom: 24px;
+}
+
+@media (min-width: 576px) {
+	.hero-promo h1 {
+		font-size: 3.2rem;
+	}
+}
+
+@media (min-width: 992px) {
+	.hero-promo h1 {
+		font-size: 4.9rem;
+	}
 }
 
 .hero-promo p {
@@ -193,13 +234,22 @@ img {
 }
 
 .oferta-combo img {
-	float: right;
-	width: 48%;
-	height: 300px;
+	width: 100%;
+	height: auto;
 	margin-top: -2px;
 	object-fit: cover;
 	background: #fffdf7;
 	border: 2px solid var(--kb-dark);
+	margin-bottom: 1rem;
+}
+
+@media (min-width: 992px) {
+	.oferta-combo img {
+		float: right;
+		width: 48%;
+		height: 300px;
+		margin-bottom: 0;
+	}
 }
 
 .oferta-combo .tag {
@@ -299,21 +349,39 @@ img {
 
 .oferta-kids {
 	min-height: 220px;
-	padding: 36px 38px 26px 340px;
+	padding: 30px;
 	background: #fff;
 	position: relative;
 }
 
+@media (min-width: 992px) {
+	.oferta-kids {
+		padding: 36px 38px 26px 340px;
+		min-height: 220px;
+	}
+}
+
 .oferta-kids img {
-	position: absolute;
-	left: 28px;
-	top: 30px;
-	width: 285px;
-	height: 190px;
+	position: static;
+	width: 100%;
+	max-width: 260px;
+	height: auto;
 	object-fit: cover;
 	background: #d8dcff;
 	border: 2px solid var(--kb-dark);
 	border-radius: 50%;
+	margin-bottom: 1rem;
+}
+
+@media (min-width: 992px) {
+	.oferta-kids img {
+		position: absolute;
+		left: 28px;
+		top: 30px;
+		width: 285px;
+		height: 190px;
+		margin-bottom: 0;
+	}
 }
 
 .oferta-kids h2 {
@@ -410,6 +478,22 @@ img {
 	background: var(--kb-yellow);
 	border: 3px solid var(--kb-dark);
 	transform: rotate(-5deg);
+}
+
+@media (max-width: 991.98px) {
+	.historia::after {
+		display: none;
+	}
+
+	.historia img {
+		position: static;
+		width: 100%;
+		max-width: 320px;
+		height: auto;
+		margin: 1rem auto;
+		display: block;
+		transform: none;
+	}
 }
 
 /* ---------- Footer ---------- */

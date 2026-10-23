@@ -9,6 +9,17 @@
     padding-top: 54px;
 }
 
+@media (max-width: 991.98px) {
+    .kb-menu-lateral {
+        padding-top: 0;
+    }
+
+    .kb-burbuja-menu,
+    .kb-barney-ilustracion {
+        display: none;
+    }
+}
+
 .kb-burbuja-menu {
     position: absolute;
     z-index: 2;
@@ -189,9 +200,21 @@
 
 .productos-grilla {
     display: grid;
-    grid-template-columns: repeat(3, minmax(190px, 1fr));
+    grid-template-columns: 1fr;
     gap: 16px;
     padding-top: 20px;
+}
+
+@media (min-width: 576px) {
+    .productos-grilla {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 992px) {
+    .productos-grilla {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
 }
 
 .producto-menu {

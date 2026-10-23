@@ -33,6 +33,23 @@
 	border: 2px solid var(--kb-dark);
 }
 
+@media (max-width: 575.98px) {
+	.producto {
+		grid-template-columns: 64px 1fr;
+		gap: 12px;
+	}
+
+	.producto > img {
+		width: 64px;
+		height: 64px;
+	}
+
+	.producto-precio {
+		grid-column: 2;
+		justify-self: start;
+	}
+}
+
 .producto-info h2 {
 	font-size: 1.2rem;
 	text-transform: uppercase;
@@ -103,11 +120,17 @@
 }
 
 .krusty-imagen {
-	height: 450px;
+	height: 280px;
 	border: 3px solid var(--kb-dark);
 	background: #fff;
 	text-align: center;
 	overflow: hidden;
+}
+
+@media (min-width: 992px) {
+	.krusty-imagen {
+		height: 450px;
+	}
 }
 
 .krusty-imagen img {

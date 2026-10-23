@@ -12,6 +12,7 @@
 body {
     background: var(--kb-cream);
     color: var(--kb-dark);
+    overflow-x: hidden;
 }
 
 a {
@@ -88,6 +89,34 @@ img {
     text-align: center;
 }
 
+/* ---------- Navbar responsive ---------- */
+.kb-toggler {
+    border: 2px solid var(--kb-dark);
+    border-radius: 10px;
+}
+
+@media (max-width: 991.98px) {
+    .kb-logo {
+        font-size: 1.9rem;
+    }
+
+    .navbar-collapse {
+        margin-top: 14px;
+        padding-top: 14px;
+        border-top: 2px solid var(--kb-dark);
+    }
+
+    .kb-nav-link {
+        padding: 10px 0 !important;
+    }
+
+    .kb-nav-acciones {
+        margin-top: 14px;
+        padding-top: 14px;
+        border-top: 2px solid var(--kb-dark);
+    }
+}
+
 .btn-kb-primario {
     background: var(--kb-red);
     color: #fff9ef;
@@ -107,8 +136,13 @@ img {
 
 .kb-hero {
     background: var(--kb-yellow);
-    min-height: 100vh;
     overflow: hidden;
+}
+
+@media (min-width: 992px) {
+    .kb-hero {
+        min-height: 100vh;
+    }
 }
 
 .hero-text {
@@ -291,11 +325,23 @@ img {
 
 .tarjetas {
     display: grid;
-    grid-template-columns: repeat(4, minmax(200px, 1fr));
+    grid-template-columns: 1fr;
     gap: 22px;
     align-items: stretch;
     width: 100%;
     margin: 0;
+}
+
+@media (min-width: 576px) {
+    .tarjetas {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (min-width: 992px) {
+    .tarjetas {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
 }
 
 .tarjeta {
