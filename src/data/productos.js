@@ -27,7 +27,7 @@ const catalogoBase = [
     categoriaLabel: "Hamburguesas",
     descripcion: "Doble carne, doble queso y todo el sabor de Krusty Burger.",
     precio: 5990,
-    imagen: "assets/doble-krusty-burger.jpg",
+    imagen: "assets/doble-krusty-burger1.jpg",
     imagenes: ["assets/doble-krusty-burger1.jpg", "assets/doble-krusty-burger2.jpg", "assets/doble-krusty-burger.jpg"],
     alt: "Double Krusty Burger",
     tema: "producto-amarillo",
