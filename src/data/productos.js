@@ -460,7 +460,8 @@ export function obtenerCatalogo() {
 }
 
 export function buscarProducto(id) {
-  return obtenerCatalogo().find((producto) => producto.id === id);
+  const idCanonico = id === "krusty-doble" ? "double-krusty-burger" : id;
+  return obtenerCatalogo().find((producto) => producto.id === idCanonico);
 }
 
 // Categorías iniciales de la tienda. El admin puede crear, editar o eliminar categorías;

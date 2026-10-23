@@ -25,6 +25,13 @@ describe("Navegación", () => {
     expect(screen.getByRole("heading", { name: "Hamburguesa Krusty" })).toBeTruthy();
   });
 
+  it("la ruta /producto/krusty-doble muestra el producto con sus tres imágenes", () => {
+    const { container } = renderEnRuta("/producto/krusty-doble");
+
+    expect(screen.getByRole("heading", { name: "Krusty Burger Doble" })).toBeTruthy();
+    expect(container.querySelectorAll(".visor img").length).toBe(3);
+  });
+
   it("un producto que no existe muestra 'Producto no encontrado'", () => {
     renderEnRuta("/producto/no-existe");
 
