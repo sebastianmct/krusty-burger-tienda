@@ -10,9 +10,7 @@
     "preview": "vite preview",
     "test": "karma start karma.conf.cjs",
     "test:watch": "karma start karma.conf.cjs --no-single-run --auto-watch --browsers Chrome",
-    "coverage": "cross-env COBERTURA=1 karma start karma.conf.cjs",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "coverage": "cross-env COBERTURA=1 karma start karma.conf.cjs"
   },
   "dependencies": {
     "@tabler/icons-webfont": "^3.49.0",
