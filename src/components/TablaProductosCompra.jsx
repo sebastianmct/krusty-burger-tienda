@@ -1,7 +1,5 @@
 import { formatoPrecio } from "../utils/formato";
 
-// Tabla con los productos de una compra (se usa en el checkout y en la boleta)
-//   lineas -> [{ id, nombre, imagen, precio, cantidad }]
 function TablaProductosCompra({ lineas }) {
   return (
     <div className="table-responsive">
@@ -24,7 +22,9 @@ function TablaProductosCompra({ lineas }) {
               <td>{linea.nombre}</td>
               <td className="derecha">{formatoPrecio(linea.precio)}</td>
               <td className="derecha">{linea.cantidad}</td>
-              <td className="derecha">{formatoPrecio(linea.precio * linea.cantidad)}</td>
+              <td className="derecha">
+                {formatoPrecio(linea.precio * linea.cantidad)}
+              </td>
             </tr>
           ))}
         </tbody>

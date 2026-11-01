@@ -1,9 +1,7 @@
 import { screen, fireEvent } from "@testing-library/react";
 import TarjetaProducto from "../components/TarjetaProducto";
 import { renderConTienda } from "./ayudas";
-import { obtenerCatalogo } from "../data/productos";
 
-// Producto de ejemplo para no depender del catálogo real
 const producto = {
   id: "krusty-burger",
   nombre: "Hamburguesa Krusty",
@@ -21,15 +19,8 @@ describe("TarjetaProducto", () => {
 
     expect(screen.getByText("Hamburguesa Krusty")).toBeTruthy();
     expect(screen.getByText("$4.990")).toBeTruthy();
-    expect(screen.getByRole("link").getAttribute("href")).toBe("/producto/krusty-burger");
-  });
-
-  it("muestra la foto del producto en la tarjeta de inicio de Krusty Burger Doble", () => {
-    const doble = obtenerCatalogo().find((item) => item.id === "double-krusty-burger");
-    renderConTienda(<TarjetaProducto producto={doble} variante="inicio" />);
-
-    expect(screen.getByRole("img", { name: "Double Krusty Burger" }).getAttribute("src")).toBe(
-      "assets/doble-krusty-burger1.jpg",
+    expect(screen.getByRole("link").getAttribute("href")).toBe(
+      "/producto/krusty-burger",
     );
   });
 

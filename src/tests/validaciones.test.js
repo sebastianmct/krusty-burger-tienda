@@ -51,7 +51,9 @@ describe("validarPassword()", () => {
 
 describe("validarLogin()", () => {
   it("devuelve un objeto vacío cuando los datos son correctos", () => {
-    expect(validarLogin({ email: "homero@gmail.com", password: "ab1!" })).toEqual({});
+    expect(
+      validarLogin({ email: "homero@gmail.com", password: "ab1!" }),
+    ).toEqual({});
   });
 
   it("devuelve un error por cada campo vacío", () => {
@@ -81,7 +83,11 @@ describe("validarRegistro()", () => {
 
 describe("validarContacto()", () => {
   it("el email es opcional: sin email no hay error de email", () => {
-    const errores = validarContacto({ nombre: "Homero", email: "", mensaje: "Hola" });
+    const errores = validarContacto({
+      nombre: "Homero",
+      email: "",
+      mensaje: "Hola",
+    });
 
     expect(errores).toEqual({});
   });
@@ -98,7 +104,9 @@ describe("validarProducto() (admin)", () => {
       categoria: "papas",
     };
 
-    expect(validarProducto(valores).precio).toBe("El precio no puede ser negativo.");
+    expect(validarProducto(valores).precio).toBe(
+      "El precio no puede ser negativo.",
+    );
   });
 
   it("rechaza un código de menos de 3 caracteres", () => {
@@ -111,7 +119,9 @@ describe("validarProducto() (admin)", () => {
       categoria: "papas",
     };
 
-    expect(validarProducto(valores).codigo).toBe("El código debe tener al menos 3 caracteres.");
+    expect(validarProducto(valores).codigo).toBe(
+      "El código debe tener al menos 3 caracteres.",
+    );
   });
 });
 
@@ -127,13 +137,22 @@ describe("validarUsuario() (admin)", () => {
       direccion: "Calle 1",
     };
 
-    expect(validarUsuario(valores).correo).toBe("Solo se aceptan correos @duoc.cl, @profesor.duoc.cl o @gmail.com.");
+    expect(validarUsuario(valores).correo).toBe(
+      "Solo se aceptan correos @duoc.cl, @profesor.duoc.cl o @gmail.com.",
+    );
   });
 });
 
 describe("validarCheckout()", () => {
   it("con el formulario vacío marca los 6 campos obligatorios", () => {
-    const valores = { nombre: "", apellidos: "", correo: "", calle: "", region: "", comuna: "" };
+    const valores = {
+      nombre: "",
+      apellidos: "",
+      correo: "",
+      calle: "",
+      region: "",
+      comuna: "",
+    };
 
     expect(Object.keys(validarCheckout(valores)).length).toBe(6);
   });
@@ -156,7 +175,9 @@ describe("validarCheckout()", () => {
 
 describe("validarCategoria()", () => {
   it("rechaza un nombre de menos de 3 caracteres", () => {
-    expect(validarCategoria({ nombre: "ab" }).nombre).toBe("El nombre debe tener al menos 3 caracteres.");
+    expect(validarCategoria({ nombre: "ab" }).nombre).toBe(
+      "El nombre debe tener al menos 3 caracteres.",
+    );
   });
 
   it("acepta un nombre válido", () => {

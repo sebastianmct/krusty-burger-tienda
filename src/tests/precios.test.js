@@ -1,4 +1,8 @@
-import { precioFinal, obtenerOfertas, obtenerCatalogo } from "../data/productos";
+import {
+  precioFinal,
+  obtenerOfertas,
+  obtenerCatalogo,
+} from "../data/productos";
 
 describe("precioFinal()", () => {
   it("si el producto no tiene descuento devuelve su precio normal", () => {

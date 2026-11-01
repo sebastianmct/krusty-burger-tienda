@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import BurnsExcelente from "../components/BurnsExcelente";
 import DatosCompra from "../components/DatosCompra";
+import EnvioOtto from "../components/EnvioOtto";
 import TablaProductosCompra from "../components/TablaProductosCompra";
 import useEstilos from "../hooks/useEstilos";
 import { obtenerOrden } from "../services/adminData";
@@ -10,7 +12,6 @@ import estiloExtra from "../styles/style-tienda-extra.css?inline";
 
 const estilos = [estiloHome, estiloExtra];
 
-// Pantalla que se muestra cuando el pago fue aprobado: /compra/exitosa/:id
 function CompraExitosa() {
   useEstilos(estilos);
 
@@ -36,10 +37,14 @@ function CompraExitosa() {
       <section className="kb-panel">
         <div className="kb-panel-cabecera">
           <h1 className="kb-estado ok">
-            <i className="ti ti-circle-check"></i> Se ha realizado la compra. nro #{orden.numero}
+            <i className="ti ti-circle-check"></i> Se ha realizado la compra.
+            nro #{orden.numero}
           </h1>
         </div>
         <p className="kb-panel-subtitulo">Código de orden: {orden.id}</p>
+
+        <BurnsExcelente />
+        <EnvioOtto />
 
         <DatosCompra orden={orden} />
         <TablaProductosCompra lineas={orden.lineas} />
@@ -50,17 +55,29 @@ function CompraExitosa() {
         </div>
 
         <div className="kb-acciones">
-          <button type="button" className="kb-boton-rojo" onClick={() => window.print()}>
+          <button
+            type="button"
+            className="kb-boton-rojo"
+            onClick={() => window.print()}
+          >
             Imprimir boleta en PDF
           </button>
-          <button type="button" className="kb-boton-claro" onClick={() => setEmailEnviado(true)}>
+          <button
+            type="button"
+            className="kb-boton-claro"
+            onClick={() => setEmailEnviado(true)}
+          >
             Enviar boleta por email
           </button>
           <Link to="/menu" className="kb-boton-claro">
             Seguir comprando
           </Link>
         </div>
-        {emailEnviado && <p className="kb-aviso-ok">Te enviamos la boleta a {orden.cliente.correo}.</p>}
+        {emailEnviado && (
+          <p className="kb-aviso-ok">
+            Te enviamos la boleta a {orden.cliente.correo}.
+          </p>
+        )}
       </section>
     </main>
   );

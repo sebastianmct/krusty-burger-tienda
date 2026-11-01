@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import AlertaDoh from "../components/AlertaDoh";
+import EntregaDuffman from "../components/EntregaDuffman";
 import MensajeError from "../components/MensajeError";
 import TablaProductosCompra from "../components/TablaProductosCompra";
 import useEstilos from "../hooks/useEstilos";
@@ -9,7 +11,11 @@ import { buscarProducto, precioFinal } from "../data/productos";
 import { comunasPorRegion } from "../data/regiones";
 import { crearOrden, obtenerUsuario } from "../services/adminData";
 import { obtenerSesion } from "../services/auth";
-import { calcularTotales } from "../utils/carrito";
+import {
+  COSTO_ENTREGA_DUFFMAN,
+  calcularTotales,
+  hayBebidas,
+} from "../utils/carrito";
 import { formatoPrecio } from "../utils/formato";
 import { validarCheckout } from "../utils/validaciones";
 import estiloHome from "../styles/style-home.css?inline";
@@ -17,15 +23,21 @@ import estiloExtra from "../styles/style-tienda-extra.css?inline";
 
 const estilos = [estiloHome, estiloExtra];
 
-// Datos con los que parte el formulario:
-//  - si venimos de un pago rechazado, los datos de esa compra
-//  - si el cliente inició sesión, sus datos de usuario
-//  - si no, el formulario vacío
 function datosIniciales(ordenPrevia) {
-  const base = { departamento: "", indicaciones: "", resultadoPago: "aprobado" };
+  const base = {
+    departamento: "",
+    indicaciones: "",
+    resultadoPago: "aprobado",
+    entregaDuffman: false,
+  };
 
   if (ordenPrevia) {
-    return { ...base, ...ordenPrevia.cliente, ...ordenPrevia.entrega };
+    return {
+      ...base,
+      ...ordenPrevia.cliente,
+      ...ordenPrevia.entrega,
+      entregaDuffman: Boolean(ordenPrevia.entregaEspecial),
+    };
   }
 
   const sesion = obtenerSesion();
@@ -48,7 +60,6 @@ function Checkout() {
   const { state } = useLocation();
   const { items, vaciar } = useCarrito();
 
-  // Productos del carrito con su precio final (con descuento si corresponde)
   const lineas = items
     .map((item) => ({ item, producto: buscarProducto(item.id) }))
     .filter((linea) => linea.producto)
@@ -59,10 +70,24 @@ function Checkout() {
       precio: precioFinal(producto),
       cantidad: item.cantidad,
     }));
-  const totales = calcularTotales(lineas);
 
   const [inicial] = useState(() => datosIniciales(state?.orden));
-  const { valores, errorDe, cambiar, cambiarValor, salirDelCampo, enviar } = useFormulario(inicial, validarCheckout);
+  const {
+    valores,
+    resumenErrores,
+    errorDe,
+    cambiar,
+    cambiarValor,
+    salirDelCampo,
+    enviar,
+  } = useFormulario(inicial, validarCheckout);
+
+  const conBebidas = hayBebidas(items);
+  const entregaEspecial = valores.entregaDuffman && conBebidas;
+  const totales = calcularTotales(
+    lineas,
+    entregaEspecial ? COSTO_ENTREGA_DUFFMAN : 0,
+  );
 
   const comunas = comunasPorRegion[valores.region] || [];
 
@@ -71,14 +96,17 @@ function Checkout() {
     cambiarValor("comuna", "");
   }
 
-  // Simula el pago: guarda la orden y lleva a la pantalla de pago correcto o con error
   function pagar(datos) {
     const aprobado = datos.resultadoPago === "aprobado";
     const sesion = obtenerSesion();
 
     const orden = crearOrden({
       usuarioId: sesion ? sesion.id : null,
-      cliente: { nombre: datos.nombre.trim(), apellidos: datos.apellidos.trim(), correo: datos.correo.trim() },
+      cliente: {
+        nombre: datos.nombre.trim(),
+        apellidos: datos.apellidos.trim(),
+        correo: datos.correo.trim(),
+      },
       entrega: {
         calle: datos.calle.trim(),
         departamento: datos.departamento.trim(),
@@ -88,11 +116,12 @@ function Checkout() {
       },
       lineas,
       totales,
+      entregaEspecial,
       estado: aprobado ? "Pagada" : "Pago rechazado",
     });
 
     if (aprobado) {
-      vaciar(); // la compra se hizo: el carrito queda vacío
+      vaciar();
       navigate("/compra/exitosa/" + orden.id);
     } else {
       navigate("/compra/error/" + orden.id);
@@ -112,7 +141,6 @@ function Checkout() {
     );
   }
 
-  // Campo de texto del formulario (para no repetir el mismo bloque muchas veces)
   function campo(nombre, etiqueta, opciones = {}) {
     return (
       <>
@@ -139,30 +167,54 @@ function Checkout() {
 
   return (
     <main className="kb-pagina">
-      <form className="kb-panel" noValidate onSubmit={(evento) => enviar(evento, pagar)}>
+      <form
+        className="kb-panel"
+        noValidate
+        onSubmit={(evento) => enviar(evento, pagar)}
+      >
         <div className="kb-panel-cabecera">
           <div>
             <h1>Carrito de compra</h1>
-            <p className="kb-panel-subtitulo mb-0">Completa la siguiente información</p>
+            <p className="kb-panel-subtitulo mb-0">
+              Completa la siguiente información
+            </p>
           </div>
-          <div className="kb-total-badge">Total a pagar: {formatoPrecio(totales.total)}</div>
+          <div className="kb-total-badge">
+            Total a pagar: {formatoPrecio(totales.total)}
+          </div>
         </div>
 
         <TablaProductosCompra lineas={lineas} />
 
         <h2>Información del cliente</h2>
-        <p className="kb-panel-subtitulo">Si iniciaste sesión, tus datos se completan solos.</p>
+        <p className="kb-panel-subtitulo">
+          Si iniciaste sesión, tus datos se completan solos.
+        </p>
         <div className="row g-3">
-          <div className="col-md-4">{campo("nombre", "Nombre", { obligatorio: true })}</div>
-          <div className="col-md-4">{campo("apellidos", "Apellidos", { obligatorio: true })}</div>
-          <div className="col-md-4">{campo("correo", "Correo", { obligatorio: true, tipo: "email" })}</div>
+          <div className="col-md-4">
+            {campo("nombre", "Nombre", { obligatorio: true })}
+          </div>
+          <div className="col-md-4">
+            {campo("apellidos", "Apellidos", { obligatorio: true })}
+          </div>
+          <div className="col-md-4">
+            {campo("correo", "Correo", { obligatorio: true, tipo: "email" })}
+          </div>
         </div>
 
         <h2>Dirección de entrega de los productos</h2>
-        <p className="kb-panel-subtitulo">Ingresa la dirección de forma detallada.</p>
+        <p className="kb-panel-subtitulo">
+          Ingresa la dirección de forma detallada.
+        </p>
         <div className="row g-3">
-          <div className="col-md-8">{campo("calle", "Calle", { obligatorio: true })}</div>
-          <div className="col-md-4">{campo("departamento", "Departamento (opcional)", { placeholder: "Ej: 603" })}</div>
+          <div className="col-md-8">
+            {campo("calle", "Calle", { obligatorio: true })}
+          </div>
+          <div className="col-md-4">
+            {campo("departamento", "Departamento (opcional)", {
+              placeholder: "Ej: 603",
+            })}
+          </div>
           <div className="col-md-6">
             <label className="kb-checkout-label" htmlFor="region">
               Región *
@@ -200,7 +252,9 @@ function Checkout() {
               aria-invalid={Boolean(errorDe("comuna"))}
             >
               <option value="">
-                {comunas.length === 0 ? "Primero selecciona una región" : "Selecciona una comuna"}
+                {comunas.length === 0
+                  ? "Primero selecciona una región"
+                  : "Selecciona una comuna"}
               </option>
               {comunas.map((comuna) => (
                 <option key={comuna} value={comuna}>
@@ -227,6 +281,31 @@ function Checkout() {
           </div>
         </div>
 
+        <div className="mt-4">
+          <span className="kb-checkout-label">Entrega especial de bebidas</span>
+          <div className="form-check">
+            <input
+              type="checkbox"
+              id="entregaDuffman"
+              name="entregaDuffman"
+              className="form-check-input"
+              disabled={!conBebidas}
+              checked={Boolean(valores.entregaDuffman) && conBebidas}
+              onChange={cambiar}
+            />
+            <label className="form-check-label" htmlFor="entregaDuffman">
+              Quiero que Duffman entregue mis bebidas (+{" "}
+              {formatoPrecio(COSTO_ENTREGA_DUFFMAN)})
+            </label>
+          </div>
+          {!conBebidas && (
+            <p className="kb-panel-subtitulo mb-0">
+              Disponible solo si tu pedido incluye bebidas.
+            </p>
+          )}
+          {entregaEspecial && <EntregaDuffman />}
+        </div>
+
         <div className="kb-simulador">
           <label className="kb-checkout-label" htmlFor="resultadoPago">
             Simulador de pago (solo para demostración)
@@ -242,6 +321,10 @@ function Checkout() {
             <option value="rechazado">El pago es rechazado</option>
           </select>
         </div>
+
+        {resumenErrores && (
+          <AlertaDoh>Revisa los campos marcados en rojo.</AlertaDoh>
+        )}
 
         <div className="kb-acciones">
           <Link to="/carrito" className="kb-boton-claro">

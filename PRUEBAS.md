@@ -40,17 +40,24 @@ $env:CHROME_BIN="C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"; 
 | `MensajeError.test.jsx` | Muestra el error solo si hay texto | Renderizado condicional |
 | `ModalEliminar.test.jsx` | Recibe título y mensaje, y llama a `onConfirmar` / `onCancelar` | Props y eventos |
 | `TarjetaProducto.test.jsx` | Muestra nombre y precio; "Agregar" cambia el texto y guarda en el carrito | Props, estado y eventos |
-| `Menu.test.jsx` | Lista todos los productos, filtra por categoría y ordena por precio | Lista y estado |
+| `Menu.test.jsx` | Lista todos los productos, filtra, ordena, busca por texto y la búsqueda "hamburguesas al vapor" (Skinner) | Lista, estado y eventos |
 | `Ofertas.test.jsx` | Solo se muestran productos en oferta, con su etiqueta | Lista |
 | `Categorias.test.jsx` | Links por categoría, filtro por URL y categoría inexistente | Rutas y filtro |
 | `Blog.test.jsx` | Listado de artículos y detalle según la URL | Lista y rutas |
 | `Carrito.test.jsx` | Carrito vacío, total a pagar, botón +, botón Eliminar | Estado y eventos |
-| `Checkout.test.jsx` | Errores del formulario, pago aprobado y pago rechazado | Flujo completo |
+| `Checkout.test.jsx` | Errores del formulario, pago aprobado (Burns y Otto), pago rechazado (Gordo Tony) y entrega especial de Duffman | Flujo completo |
 | `Contacto.test.jsx` | Escribir en el formulario, errores y envío (con API simulada) | Estado, eventos y mocks |
 | `Login.test.jsx` | Errores del formulario y credenciales incorrectas / correctas | Formulario |
 | `Rutas.test.jsx` | Detalle por URL, link del Navbar y ruta protegida del admin | Navegación |
 | `auth.test.js` | Registrar, iniciar y cerrar sesión | Lógica con localStorage |
 | `ordenes.test.js` | Órdenes (número, historial) y categorías (crear, eliminar) | Lógica con localStorage |
+| `Personaje.test.jsx` | Foto del personaje (API, foto local, insignia), globo de diálogo y alerta D'oh! | Props, eventos y mocks |
+| `busqueda.test.js` | Búsqueda de productos (nombre, ingredientes) y búsqueda especial de Skinner | Lógica |
+| `productos.test.js` | Nombres verificados, ingredientes, hamburguesas pesadas y productos a prueba de tontos | Datos |
+| `ChatAyuda.test.jsx` | Chat de Rafa: saludo, preguntas, respuestas y enlaces | Estado y eventos |
+| `AvisoHibbert.test.jsx` | El Dr. Hibbert aparece con más de 3 hamburguesas pesadas | Renderizado condicional |
+| `Sesion.test.jsx` | Sesión compartida, despedida al cerrar sesión, botón de cuenta y página Mi cuenta | Context, eventos y rutas |
+| `Registro.test.jsx` | Policías en el registro, aviso D'oh! y personajes del inicio | Renderizado |
 | `api.test.js` | GET y POST a las APIs con `fetch` simulado | Mocks |
 | `PersonajeDelDia.test.jsx` | Cargando → datos → error al traer un personaje de la API | Mocks y asincronía |
 

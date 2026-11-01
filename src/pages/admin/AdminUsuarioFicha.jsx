@@ -2,11 +2,14 @@ import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import PaginaAdmin from "../../components/admin/PaginaAdmin";
 import ModalEliminar from "../../components/admin/ModalEliminar";
-import { eliminarUsuario, listarOrdenesDeCorreo, obtenerUsuario } from "../../services/adminData";
+import {
+  eliminarUsuario,
+  listarOrdenesDeCorreo,
+  obtenerUsuario,
+} from "../../services/adminData";
 import { formatoFechaHora, formatoPrecio } from "../../utils/formato";
 import { claseRol, colorAvatar, iniciales } from "../../utils/usuarios";
 
-// Ficha de solo lectura de un usuario: /admin/usuarios/:id
 function AdminUsuarioFicha() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -14,11 +17,15 @@ function AdminUsuarioFicha() {
   const [confirmando, setConfirmando] = useState(false);
 
   const compras = usuario ? listarOrdenesDeCorreo(usuario.correo) : [];
-  const nombreCompleto = usuario ? usuario.nombre + " " + usuario.apellidos : "";
+  const nombreCompleto = usuario
+    ? usuario.nombre + " " + usuario.apellidos
+    : "";
 
   function eliminar() {
     eliminarUsuario(usuario.id);
-    navigate("/admin/usuarios", { state: { mensaje: "Usuario eliminado correctamente." } });
+    navigate("/admin/usuarios", {
+      state: { mensaje: "Usuario eliminado correctamente." },
+    });
   }
 
   return (
@@ -42,18 +49,32 @@ function AdminUsuarioFicha() {
         {!usuario ? (
           <div className="estado-vacio">
             <i className="ti ti-mood-empty"></i>
-            <p className="mt-2">No encontramos ese usuario. Puede que se haya escondido en la taberna de Moe.</p>
+            <p className="mt-2">
+              No encontramos ese usuario. Puede que se haya escondido en la
+              taberna de Moe.
+            </p>
           </div>
         ) : (
           <div className="row g-4">
             <div className="col-md-3 text-center">
               <div
                 className="avatar-iniciales mx-auto"
-                style={{ width: 96, height: 96, fontSize: "1.8rem", background: colorAvatar(nombreCompleto) }}
+                style={{
+                  width: 96,
+                  height: 96,
+                  fontSize: "1.8rem",
+                  background: colorAvatar(nombreCompleto),
+                }}
               >
                 {iniciales(usuario.nombre, usuario.apellidos)}
               </div>
-              <span className={"badge badge-rol mt-3 " + claseRol(usuario.tipoUsuario)}>{usuario.tipoUsuario}</span>
+              <span
+                className={
+                  "badge badge-rol mt-3 " + claseRol(usuario.tipoUsuario)
+                }
+              >
+                {usuario.tipoUsuario}
+              </span>
             </div>
             <div className="col-md-9">
               <dl className="ficha-solo-lectura mb-0">
@@ -66,18 +87,29 @@ function AdminUsuarioFicha() {
                 <dt>Fecha de nacimiento</dt>
                 <dd>{usuario.fechaNacimiento || "No informada"}</dd>
                 <dt>Comuna / Región</dt>
-                <dd>{(usuario.comuna || "") + (usuario.region ? ", " + usuario.region : "")}</dd>
+                <dd>
+                  {(usuario.comuna || "") +
+                    (usuario.region ? ", " + usuario.region : "")}
+                </dd>
                 <dt>Dirección</dt>
                 <dd>{usuario.direccion || "No informada"}</dd>
               </dl>
               <div className="d-flex gap-2 mt-4">
                 <Link
-                  to={"/admin/usuarios/" + encodeURIComponent(usuario.id) + "/editar"}
+                  to={
+                    "/admin/usuarios/" +
+                    encodeURIComponent(usuario.id) +
+                    "/editar"
+                  }
                   className="btn btn-kb-primario"
                 >
                   <i className="ti ti-pencil"></i> Editar
                 </Link>
-                <button type="button" className="btn btn-outline-danger" onClick={() => setConfirmando(true)}>
+                <button
+                  type="button"
+                  className="btn btn-outline-danger"
+                  onClick={() => setConfirmando(true)}
+                >
                   <i className="ti ti-trash"></i> Eliminar
                 </button>
               </div>
@@ -109,12 +141,23 @@ function AdminUsuarioFicha() {
                     <td>{formatoFechaHora(o.fecha)}</td>
                     <td>{formatoPrecio(o.totales.total)}</td>
                     <td>
-                      <span className={"badge " + (o.estado === "Pagada" ? "text-bg-success" : "text-bg-danger")}>
+                      <span
+                        className={
+                          "badge " +
+                          (o.estado === "Pagada"
+                            ? "text-bg-success"
+                            : "text-bg-danger")
+                        }
+                      >
                         {o.estado}
                       </span>
                     </td>
                     <td className="text-end">
-                      <Link className="btn btn-sm btn-kb-secundario" to={"/admin/ordenes/" + o.id} title="Ver boleta">
+                      <Link
+                        className="btn btn-sm btn-kb-secundario"
+                        to={"/admin/ordenes/" + o.id}
+                        title="Ver boleta"
+                      >
                         <i className="ti ti-eye"></i>
                       </Link>
                     </td>
@@ -126,16 +169,23 @@ function AdminUsuarioFicha() {
           {compras.length === 0 && (
             <div className="estado-vacio">
               <i className="ti ti-shopping-cart-off"></i>
-              <p className="mt-2 mb-0">Este usuario todavía no ha hecho compras.</p>
+              <p className="mt-2 mb-0">
+                Este usuario todavía no ha hecho compras.
+              </p>
             </div>
           )}
         </div>
       )}
 
-      <ModalEliminar titulo="Eliminar usuario" onConfirmar={eliminar} onCancelar={() => setConfirmando(false)}>
+      <ModalEliminar
+        titulo="Eliminar usuario"
+        onConfirmar={eliminar}
+        onCancelar={() => setConfirmando(false)}
+      >
         {confirmando && (
           <>
-            ¿Seguro que quieres eliminar a <strong>{nombreCompleto}</strong>? Esta acción no se puede deshacer.
+            ¿Seguro que quieres eliminar a <strong>{nombreCompleto}</strong>?
+            Esta acción no se puede deshacer.
           </>
         )}
       </ModalEliminar>

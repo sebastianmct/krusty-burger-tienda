@@ -1,8 +1,5 @@
 import { useState } from "react";
 
-// Galería de imágenes de la página de detalle.
-//   producto -> producto con sus imágenes (imagenes) y texto alternativo (alt)
-// Se usan radios ocultos + labels: el CSS muestra la foto del radio seleccionado.
 function GaleriaProducto({ producto }) {
   const [fotoActiva, setFotoActiva] = useState(0);
   const galeriaId = "galeria-" + producto.id;
@@ -34,7 +31,10 @@ function GaleriaProducto({ producto }) {
       <div className="miniaturas">
         {producto.imagenes.map((imagen, indice) => (
           <label key={indice} htmlFor={galeriaId + "-" + (indice + 1)}>
-            <img src={imagen} alt={"Ver " + producto.alt + ", vista " + (indice + 1)} />
+            <img
+              src={imagen}
+              alt={"Ver " + producto.alt + ", vista " + (indice + 1)}
+            />
           </label>
         ))}
       </div>

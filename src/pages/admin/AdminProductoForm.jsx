@@ -6,35 +6,33 @@ import { obtenerCategorias, etiquetaCategoria } from "../../data/productos";
 import { guardarProducto, obtenerProducto } from "../../services/adminData";
 import { validarProducto } from "../../utils/validaciones";
 
-// Sirve para crear (/admin/productos/nuevo) y para editar (/admin/productos/:id/editar)
 function AdminProductoForm() {
-  const { id } = useParams(); // si hay id estamos editando
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [productoActual] = useState(() => (id ? obtenerProducto(id) : null));
-  const [imagenNueva, setImagenNueva] = useState(null); // imagen subida (en base64)
+  const [imagenNueva, setImagenNueva] = useState(null);
   const p = productoActual;
 
-  const { valores, errorDe, claseValidacion, cambiar, salirDelCampo, enviar } = useFormulario(
-    {
-      codigo: p ? p.codigo : "",
-      nombre: p ? p.nombre : "",
-      descripcion: p ? p.descripcion || "" : "",
-      precio: p ? String(p.precio) : "",
-      stock: p ? String(p.stock) : "",
-      stockCritico: p && p.stockCritico != null ? String(p.stockCritico) : "",
-      categoria: p ? p.categoria : "",
-    },
-    validarProducto,
-  );
+  const { valores, errorDe, claseValidacion, cambiar, salirDelCampo, enviar } =
+    useFormulario(
+      {
+        codigo: p ? p.codigo : "",
+        nombre: p ? p.nombre : "",
+        descripcion: p ? p.descripcion || "" : "",
+        precio: p ? String(p.precio) : "",
+        stock: p ? String(p.stock) : "",
+        stockCritico: p && p.stockCritico != null ? String(p.stockCritico) : "",
+        categoria: p ? p.categoria : "",
+      },
+      validarProducto,
+    );
 
-  // Si el producto tiene una categoría que ya no existe, igual se muestra para no perder el dato
   const categorias = obtenerCategorias();
   if (p && p.categoria && !categorias.some((c) => c.valor === p.categoria)) {
     categorias.push({ valor: p.categoria, etiqueta: p.categoria });
   }
 
-  // Se guarda como Data URL (base64) para que la imagen siga funcionando al recargar la página
   function elegirImagen(evento) {
     const archivo = evento.target.files[0];
     if (!archivo) return;
@@ -51,13 +49,16 @@ function AdminProductoForm() {
       descripcion: datos.descripcion.trim(),
       precio: Number(datos.precio),
       stock: Number(datos.stock),
-      stockCritico: datos.stockCritico === "" ? null : Number(datos.stockCritico),
+      stockCritico:
+        datos.stockCritico === "" ? null : Number(datos.stockCritico),
       categoria: datos.categoria,
       categoriaLabel: etiquetaCategoria(datos.categoria),
-      // imagen nueva > imagen que ya tenía > imagen por defecto
+
       imagen: imagenNueva || (p ? p.imagen : "assets/krusty-burger.webp"),
     });
-    navigate("/admin/productos", { state: { mensaje: "Producto guardado correctamente." } });
+    navigate("/admin/productos", {
+      state: { mensaje: "Producto guardado correctamente." },
+    });
   }
 
   const imagenPrevia = imagenNueva || (p ? p.imagen : "");
@@ -98,7 +99,9 @@ function AdminProductoForm() {
               onBlur={salirDelCampo}
             />
             <div className="invalid-feedback">{errorDe("codigo")}</div>
-            <div className="form-text">Mínimo 3 caracteres, sin límite máximo.</div>
+            <div className="form-text">
+              Mínimo 3 caracteres, sin límite máximo.
+            </div>
           </div>
           <div className="col-md-8">
             <label className="form-label" htmlFor="nombre">
@@ -120,7 +123,8 @@ function AdminProductoForm() {
           </div>
           <div className="col-12">
             <label className="form-label" htmlFor="descripcion">
-              Descripción <span className="text-muted fw-normal">(opcional)</span>
+              Descripción{" "}
+              <span className="text-muted fw-normal">(opcional)</span>
             </label>
             <textarea
               className="form-control"
@@ -177,7 +181,8 @@ function AdminProductoForm() {
           </div>
           <div className="col-md-4">
             <label className="form-label" htmlFor="stockCritico">
-              Stock crítico <span className="text-muted fw-normal">(opcional)</span>
+              Stock crítico{" "}
+              <span className="text-muted fw-normal">(opcional)</span>
             </label>
             <input
               type="number"
@@ -192,7 +197,9 @@ function AdminProductoForm() {
               onBlur={salirDelCampo}
             />
             <div className="invalid-feedback">{errorDe("stockCritico")}</div>
-            <div className="form-text">Se muestra una alerta cuando el stock llega a este valor.</div>
+            <div className="form-text">
+              Se muestra una alerta cuando el stock llega a este valor.
+            </div>
           </div>
           <div className="col-md-6">
             <label className="form-label" htmlFor="categoria">
@@ -229,7 +236,12 @@ function AdminProductoForm() {
               onChange={elegirImagen}
             />
             {imagenPrevia && (
-              <img className="mt-2 imagen-ficha" style={{ maxWidth: 120 }} src={imagenPrevia} alt="Vista previa" />
+              <img
+                className="mt-2 imagen-ficha"
+                style={{ maxWidth: 120 }}
+                src={imagenPrevia}
+                alt="Vista previa"
+              />
             )}
           </div>
         </div>

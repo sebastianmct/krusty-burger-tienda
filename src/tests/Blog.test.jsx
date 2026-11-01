@@ -26,4 +26,15 @@ describe("Blog", () => {
 
     expect(screen.getByRole("heading", { name: blogs[0].titulo })).toBeTruthy();
   });
+
+  it("Lisa toca el saxofón en el encabezado", () => {
+    render(
+      <MemoryRouter>
+        <Blog />
+      </MemoryRouter>,
+    );
+
+    expect(screen.getByText("Lisa toca jazz mientras lees.")).toBeTruthy();
+    expect(screen.getByLabelText("Saxofón")).toBeTruthy();
+  });
 });

@@ -8,12 +8,22 @@ import {
   listarCategorias,
 } from "../services/adminData";
 
-// Orden de ejemplo
 function ordenDe(correo) {
   return {
     cliente: { nombre: "Homero", apellidos: "Simpson", correo },
-    entrega: { calle: "Av. Siempreviva 742", region: "Metropolitana de Santiago", comuna: "Maipu" },
-    lineas: [{ id: "krusty-burger", nombre: "Hamburguesa Krusty", precio: 4990, cantidad: 1 }],
+    entrega: {
+      calle: "Av. Siempreviva 742",
+      region: "Metropolitana de Santiago",
+      comuna: "Maipu",
+    },
+    lineas: [
+      {
+        id: "krusty-burger",
+        nombre: "Hamburguesa Krusty",
+        precio: 4990,
+        cantidad: 1,
+      },
+    ],
     totales: { subtotal: 4990, impuestos: 948, despacho: 2100, total: 8038 },
     estado: "Pagada",
   };
@@ -51,7 +61,11 @@ describe("Categorías", () => {
   it("guardarCategoria() agrega una categoría nueva", () => {
     const antes = listarCategorias().length;
 
-    guardarCategoria({ valor: "combos", etiqueta: "Combos", descripcion: "Para compartir" });
+    guardarCategoria({
+      valor: "snacks",
+      etiqueta: "Snacks",
+      descripcion: "Para picar",
+    });
 
     expect(listarCategorias().length).toBe(antes + 1);
   });
@@ -63,8 +77,8 @@ describe("Categorías", () => {
   });
 
   it("deja eliminar una categoría sin productos", () => {
-    guardarCategoria({ valor: "combos", etiqueta: "Combos" });
+    guardarCategoria({ valor: "snacks", etiqueta: "Snacks" });
 
-    expect(eliminarCategoria("combos").ok).toBe(true);
+    expect(eliminarCategoria("snacks").ok).toBe(true);
   });
 });

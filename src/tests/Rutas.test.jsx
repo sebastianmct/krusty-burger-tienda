@@ -1,11 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "../context/AuthContext";
 import { CarritoProvider } from "../context/CarritoContext";
 import Navbar from "../components/Navbar";
 import DetalleProducto from "../pages/DetalleProducto";
 import RutaAdmin from "../components/RutaAdmin";
 
-// Simula que el usuario entró directamente a una ruta de la tienda
 function renderEnRuta(ruta) {
   return render(
     <MemoryRouter initialEntries={[ruta]}>
@@ -18,18 +18,29 @@ function renderEnRuta(ruta) {
   );
 }
 
+describe("Detalle de producto (ingredientes)", () => {
+  it("muestra los ingredientes y el nombre original", () => {
+    renderEnRuta("/producto/the-clogger");
+
+    expect(screen.getByText("Tocino ahumado")).toBeTruthy();
+    expect(screen.getByText("Nombre original")).toBeTruthy();
+    expect(screen.getByText("Hamburguesa pesada")).toBeTruthy();
+  });
+
+  it("un producto que no existe muestra un aviso D'oh!", () => {
+    renderEnRuta("/producto/no-existe");
+
+    expect(screen.getByRole("alert").textContent).toContain("¡D'OH!");
+  });
+});
+
 describe("Navegación", () => {
   it("la ruta /producto/krusty-burger muestra el detalle de ese producto", () => {
     renderEnRuta("/producto/krusty-burger");
 
-    expect(screen.getByRole("heading", { name: "Hamburguesa Krusty" })).toBeTruthy();
-  });
-
-  it("la ruta /producto/krusty-doble muestra el producto con sus tres imágenes", () => {
-    const { container } = renderEnRuta("/producto/krusty-doble");
-
-    expect(screen.getByRole("heading", { name: "Krusty Burger Doble" })).toBeTruthy();
-    expect(container.querySelectorAll(".visor img").length).toBe(3);
+    expect(
+      screen.getByRole("heading", { name: "Hamburguesa Krusty" }),
+    ).toBeTruthy();
   });
 
   it("un producto que no existe muestra 'Producto no encontrado'", () => {
@@ -41,15 +52,18 @@ describe("Navegación", () => {
   it("el Navbar tiene un link al menú", () => {
     render(
       <MemoryRouter>
-        <Navbar />
+        <AuthProvider>
+          <Navbar />
+        </AuthProvider>
       </MemoryRouter>,
     );
 
-    expect(screen.getByRole("link", { name: "Menú" }).getAttribute("href")).toBe("/menu");
+    expect(
+      screen.getByRole("link", { name: "Menú" }).getAttribute("href"),
+    ).toBe("/menu");
   });
 });
 
-// Una ruta protegida: solo entra un Administrador con sesión iniciada
 function renderPanelAdmin() {
   return render(
     <MemoryRouter initialEntries={["/admin"]}>
@@ -71,14 +85,20 @@ describe("Ruta protegida del admin", () => {
   });
 
   it("con sesión de Administrador muestra el panel", () => {
-    sessionStorage.setItem("krustySesion", JSON.stringify({ nombre: "Ned", tipoUsuario: "Administrador" }));
+    sessionStorage.setItem(
+      "krustySesion",
+      JSON.stringify({ nombre: "Ned", tipoUsuario: "Administrador" }),
+    );
     renderPanelAdmin();
 
     expect(screen.getByText("Panel secreto")).toBeTruthy();
   });
 
   it("con sesión de Cliente redirige al login", () => {
-    sessionStorage.setItem("krustySesion", JSON.stringify({ nombre: "Ned", tipoUsuario: "Cliente" }));
+    sessionStorage.setItem(
+      "krustySesion",
+      JSON.stringify({ nombre: "Ned", tipoUsuario: "Cliente" }),
+    );
     renderPanelAdmin();
 
     expect(screen.getByText("Página de login")).toBeTruthy();

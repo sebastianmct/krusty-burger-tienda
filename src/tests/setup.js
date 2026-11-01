@@ -1,9 +1,15 @@
-// Se ejecuta antes de las pruebas (está listado primero en karma.conf.cjs).
-// Después de cada prueba dejamos todo limpio para que una prueba no afecte a la siguiente.
 import { cleanup } from "@testing-library/react";
+import { reiniciarCachePersonajes } from "../services/personajesApi";
+
+beforeEach(() => {
+  spyOn(window, "fetch").and.callFake(() =>
+    Promise.reject(new Error("sin internet en las pruebas")),
+  );
+});
 
 afterEach(() => {
-  cleanup(); // desmonta los componentes renderizados
-  localStorage.clear(); // borra carrito, usuarios, órdenes, etc.
-  sessionStorage.clear(); // borra la sesión
+  cleanup();
+  localStorage.clear();
+  sessionStorage.clear();
+  reiniciarCachePersonajes();
 });

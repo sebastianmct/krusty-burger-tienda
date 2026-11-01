@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import AlertaDoh from "../components/AlertaDoh";
 import DatosCompra from "../components/DatosCompra";
+import Dialogo from "../components/Dialogo";
 import TablaProductosCompra from "../components/TablaProductosCompra";
 import useEstilos from "../hooks/useEstilos";
 import { obtenerOrden } from "../services/adminData";
@@ -10,7 +12,6 @@ import estiloExtra from "../styles/style-tienda-extra.css?inline";
 
 const estilos = [estiloHome, estiloExtra];
 
-// Pantalla que se muestra cuando el pago fue rechazado: /compra/error/:id
 function PagoError() {
   useEstilos(estilos);
 
@@ -36,15 +37,30 @@ function PagoError() {
       <section className="kb-panel">
         <div className="kb-panel-cabecera">
           <h1 className="kb-estado error">
-            <i className="ti ti-circle-x"></i> No se pudo realizar el pago. nro #{orden.numero}
+            <i className="ti ti-circle-x"></i> No se pudo realizar el pago. nro
+            #{orden.numero}
           </h1>
         </div>
         <p className="kb-panel-subtitulo">
-          Detalle de la compra. Tu carrito sigue guardado: puedes intentarlo de nuevo.
+          Detalle de la compra. Tu carrito sigue guardado: puedes intentarlo de
+          nuevo.
         </p>
 
+        <AlertaDoh>
+          Tu pago fue rechazado. Revisa tus datos e inténtalo otra vez.
+        </AlertaDoh>
+        <Dialogo
+          quien="tony"
+          frase="¡Tu pago no pasó, amigo! Tony no perdona las deudas... pero te deja intentarlo de nuevo."
+          tam="lg"
+        />
+
         <div className="kb-acciones">
-          <button type="button" className="kb-boton-rojo" onClick={() => navigate("/checkout", { state: { orden } })}>
+          <button
+            type="button"
+            className="kb-boton-rojo"
+            onClick={() => navigate("/checkout", { state: { orden } })}
+          >
             Volver a realizar el pago
           </button>
         </div>

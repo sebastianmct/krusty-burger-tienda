@@ -4,19 +4,27 @@ import { etiquetaCategoria } from "../../data/productos";
 import { listarProductos } from "../../services/adminData";
 import { formatoPrecio } from "../../utils/formato";
 
-// Reporte de inventario por categoría: /admin/productos/reportes
 function AdminReportesProductos() {
   const productos = listarProductos();
 
   const stockTotal = productos.reduce((total, p) => total + p.stock, 0);
-  const valorTotal = productos.reduce((total, p) => total + p.precio * p.stock, 0);
-  const criticos = productos.filter((p) => p.stockCritico != null && p.stock <= p.stockCritico).length;
+  const valorTotal = productos.reduce(
+    (total, p) => total + p.precio * p.stock,
+    0,
+  );
+  const criticos = productos.filter(
+    (p) => p.stockCritico != null && p.stock <= p.stockCritico,
+  ).length;
 
-  // Agrupa los productos por categoría y suma su stock y su valor
   const porCategoria = {};
   productos.forEach((p) => {
     if (!porCategoria[p.categoria])
-      porCategoria[p.categoria] = { categoria: p.categoria, productos: 0, stock: 0, valor: 0 };
+      porCategoria[p.categoria] = {
+        categoria: p.categoria,
+        productos: 0,
+        stock: 0,
+        valor: 0,
+      };
     porCategoria[p.categoria].productos += 1;
     porCategoria[p.categoria].stock += p.stock;
     porCategoria[p.categoria].valor += p.precio * p.stock;
@@ -90,10 +98,15 @@ function AdminReportesProductos() {
             </thead>
             <tbody>
               {filas.map((fila) => {
-                const porcentaje = valorTotal > 0 ? Math.round((fila.valor / valorTotal) * 100) : 0;
+                const porcentaje =
+                  valorTotal > 0
+                    ? Math.round((fila.valor / valorTotal) * 100)
+                    : 0;
                 return (
                   <tr key={fila.categoria}>
-                    <td className="fw-semibold">{etiquetaCategoria(fila.categoria)}</td>
+                    <td className="fw-semibold">
+                      {etiquetaCategoria(fila.categoria)}
+                    </td>
                     <td>{fila.productos}</td>
                     <td>{fila.stock}</td>
                     <td>{formatoPrecio(fila.valor)}</td>

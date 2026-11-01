@@ -2,33 +2,48 @@ import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import PaginaAdmin from "../../components/admin/PaginaAdmin";
 import useFormulario from "../../hooks/useFormulario";
-import { crearIdCategoria, guardarCategoria, listarCategorias, obtenerCategoria } from "../../services/adminData";
+import {
+  crearIdCategoria,
+  guardarCategoria,
+  listarCategorias,
+  obtenerCategoria,
+} from "../../services/adminData";
 import { validarCategoria } from "../../utils/validaciones";
 
-// Sirve para crear (/admin/categorias/nueva) y para editar (/admin/categorias/:valor/editar)
 function AdminCategoriaForm() {
-  const { valor } = useParams(); // si hay valor estamos editando
+  const { valor } = useParams();
   const navigate = useNavigate();
 
-  const [categoriaActual] = useState(() => (valor ? obtenerCategoria(valor) : null));
+  const [categoriaActual] = useState(() =>
+    valor ? obtenerCategoria(valor) : null,
+  );
   const c = categoriaActual;
   const [errorDuplicada, setErrorDuplicada] = useState("");
 
-  const { valores, errorDe, claseValidacion, cambiar, salirDelCampo, enviar } = useFormulario(
-    { nombre: c ? c.etiqueta : "", descripcion: c ? c.descripcion || "" : "" },
-    validarCategoria,
-  );
+  const { valores, errorDe, claseValidacion, cambiar, salirDelCampo, enviar } =
+    useFormulario(
+      {
+        nombre: c ? c.etiqueta : "",
+        descripcion: c ? c.descripcion || "" : "",
+      },
+      validarCategoria,
+    );
 
   function guardar(datos) {
-    // Al crear, el identificador sale del nombre ("Papas Fritas" -> "papas-fritas")
     const id = c ? c.valor : crearIdCategoria(datos.nombre);
     if (!c && listarCategorias().some((categoria) => categoria.valor === id)) {
       setErrorDuplicada("Ya existe una categoría con ese nombre.");
       return;
     }
 
-    guardarCategoria({ valor: id, etiqueta: datos.nombre.trim(), descripcion: datos.descripcion.trim() });
-    navigate("/admin/categorias", { state: { mensaje: "Categoría guardada correctamente." } });
+    guardarCategoria({
+      valor: id,
+      etiqueta: datos.nombre.trim(),
+      descripcion: datos.descripcion.trim(),
+    });
+    navigate("/admin/categorias", {
+      state: { mensaje: "Categoría guardada correctamente." },
+    });
   }
 
   return (
@@ -56,7 +71,11 @@ function AdminCategoriaForm() {
             </label>
             <input
               type="text"
-              className={"form-control" + claseValidacion("nombre") + (errorDuplicada ? " is-invalid" : "")}
+              className={
+                "form-control" +
+                claseValidacion("nombre") +
+                (errorDuplicada ? " is-invalid" : "")
+              }
               id="nombre"
               name="nombre"
               maxLength="40"
@@ -69,11 +88,14 @@ function AdminCategoriaForm() {
               }}
               onBlur={salirDelCampo}
             />
-            <div className="invalid-feedback">{errorDe("nombre") || errorDuplicada}</div>
+            <div className="invalid-feedback">
+              {errorDe("nombre") || errorDuplicada}
+            </div>
           </div>
           <div className="col-12">
             <label className="form-label" htmlFor="descripcion">
-              Descripción <span className="text-muted fw-normal">(opcional)</span>
+              Descripción{" "}
+              <span className="text-muted fw-normal">(opcional)</span>
             </label>
             <input
               type="text"

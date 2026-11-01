@@ -1,6 +1,3 @@
-// "Backend" simulado: guarda productos y usuarios del panel admin en localStorage.
-// Cada función lee la lista guardada, la modifica y la vuelve a guardar.
-
 import { CATEGORIAS_BASE, obtenerCatalogo } from "../data/productos";
 
 const CLAVE_PRODUCTOS = "krustyAdminProductos";
@@ -9,9 +6,6 @@ const CLAVE_ELIMINADOS = "krustyProductosEliminados";
 const CLAVE_CATEGORIAS = "krustyAdminCategorias";
 const CLAVE_ORDENES = "krustyOrdenes";
 
-// ---------- Datos iniciales ----------
-
-// Productos iniciales: salen del catálogo de la tienda
 function productosIniciales() {
   return obtenerCatalogo().map((producto, indice) => ({
     id: producto.id,
@@ -27,7 +21,6 @@ function productosIniciales() {
   }));
 }
 
-// Usuarios iniciales: la familia y vecinos de Springfield
 function usuariosIniciales() {
   return [
     {
@@ -129,16 +122,11 @@ function usuariosIniciales() {
   ];
 }
 
-// ---------- Funciones de apoyo ----------
-
-// Lee una lista de localStorage; si no hay nada guardado, guarda y devuelve los datos iniciales
 function cargarLista(clave, datosIniciales) {
   try {
     const guardada = JSON.parse(localStorage.getItem(clave) || "null");
     if (Array.isArray(guardada) && guardada.length) return guardada;
-  } catch {
-    // si el JSON está dañado, seguimos con los datos iniciales
-  }
+  } catch {}
   const inicial = datosIniciales();
   localStorage.setItem(clave, JSON.stringify(inicial));
   return inicial;
@@ -156,11 +144,14 @@ function guardarLista(clave, lista) {
 }
 
 function generarId(prefijo) {
-  return prefijo + "-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  return (
+    prefijo +
+    "-" +
+    Date.now().toString(36) +
+    Math.random().toString(36).slice(2, 6)
+  );
 }
 
-// Si aparece un producto nuevo en el catálogo de la tienda que el admin aún no tiene, lo agrega.
-// Nunca pisa los productos que el admin ya editó.
 function sincronizarConCatalogo(lista) {
   let hayCambios = false;
 
@@ -186,8 +177,6 @@ function sincronizarConCatalogo(lista) {
   return lista;
 }
 
-// La tienda usa un catálogo fijo; para que un producto eliminado en el admin
-// deje de aparecer en la tienda, guardamos su id en esta lista.
 function marcarProductoEliminado(id) {
   try {
     const lista = JSON.parse(localStorage.getItem(CLAVE_ELIMINADOS) || "[]");
@@ -200,20 +189,21 @@ function marcarProductoEliminado(id) {
   }
 }
 
-// ---------- Productos ----------
-
 export function listarProductos() {
-  return sincronizarConCatalogo(cargarLista(CLAVE_PRODUCTOS, productosIniciales));
+  return sincronizarConCatalogo(
+    cargarLista(CLAVE_PRODUCTOS, productosIniciales),
+  );
 }
 
 export function obtenerProducto(id) {
   return listarProductos().find((producto) => producto.id === id) || null;
 }
 
-// Si el producto trae id lo actualiza; si no, lo crea
 export function guardarProducto(producto) {
   const lista = listarProductos();
-  const indice = producto.id ? lista.findIndex((p) => p.id === producto.id) : -1;
+  const indice = producto.id
+    ? lista.findIndex((p) => p.id === producto.id)
+    : -1;
 
   if (indice >= 0) {
     lista[indice] = { ...lista[indice], ...producto };
@@ -232,8 +222,6 @@ export function eliminarProducto(id) {
   guardarLista(CLAVE_PRODUCTOS, lista);
   marcarProductoEliminado(id);
 }
-
-// ---------- Usuarios ----------
 
 export function listarUsuarios() {
   return cargarLista(CLAVE_USUARIOS, usuariosIniciales);
@@ -264,17 +252,16 @@ export function eliminarUsuario(id) {
   guardarLista(CLAVE_USUARIOS, lista);
 }
 
-// ---------- Categorías ----------
-
 export function listarCategorias() {
   return cargarLista(CLAVE_CATEGORIAS, () => CATEGORIAS_BASE);
 }
 
 export function obtenerCategoria(valor) {
-  return listarCategorias().find((categoria) => categoria.valor === valor) || null;
+  return (
+    listarCategorias().find((categoria) => categoria.valor === valor) || null
+  );
 }
 
-// "Papas Fritas" -> "papas-fritas" (identificador de la categoría)
 export function crearIdCategoria(nombre) {
   return nombre
     .toLowerCase()
@@ -284,7 +271,6 @@ export function crearIdCategoria(nombre) {
     .replace(/^-|-$/g, "");
 }
 
-// Si la categoría ya existe (mismo valor) la actualiza; si no, la crea
 export function guardarCategoria(categoria) {
   const lista = listarCategorias();
   const indice = lista.findIndex((c) => c.valor === categoria.valor);
@@ -298,11 +284,18 @@ export function guardarCategoria(categoria) {
   return categoria;
 }
 
-// No se puede eliminar una categoría que todavía tiene productos
 export function eliminarCategoria(valor) {
-  const productos = listarProductos().filter((producto) => producto.categoria === valor);
+  const productos = listarProductos().filter(
+    (producto) => producto.categoria === valor,
+  );
   if (productos.length > 0) {
-    return { ok: false, error: "No se puede eliminar: tiene " + productos.length + " producto(s) asociados." };
+    return {
+      ok: false,
+      error:
+        "No se puede eliminar: tiene " +
+        productos.length +
+        " producto(s) asociados.",
+    };
   }
   guardarLista(
     CLAVE_CATEGORIAS,
@@ -310,8 +303,6 @@ export function eliminarCategoria(valor) {
   );
   return { ok: true };
 }
-
-// ---------- Órdenes de compra ----------
 
 function leerOrdenes() {
   try {
@@ -322,7 +313,6 @@ function leerOrdenes() {
   }
 }
 
-// Las más nuevas primero
 export function listarOrdenes() {
   return leerOrdenes().reverse();
 }
@@ -331,13 +321,13 @@ export function obtenerOrden(id) {
   return leerOrdenes().find((orden) => orden.id === id) || null;
 }
 
-// Historial de compras de un cliente (por su correo)
 export function listarOrdenesDeCorreo(correo) {
   const buscado = (correo || "").trim().toLowerCase();
-  return listarOrdenes().filter((orden) => orden.cliente.correo.trim().toLowerCase() === buscado);
+  return listarOrdenes().filter(
+    (orden) => orden.cliente.correo.trim().toLowerCase() === buscado,
+  );
 }
 
-// Guarda una orden nueva. Le agrega id, fecha y número (ej: 20261021-003)
 export function crearOrden(orden) {
   const lista = leerOrdenes();
   const fecha = new Date();

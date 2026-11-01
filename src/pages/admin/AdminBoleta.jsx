@@ -4,7 +4,6 @@ import PaginaAdmin from "../../components/admin/PaginaAdmin";
 import { obtenerOrden } from "../../services/adminData";
 import { formatoFechaHora, formatoPrecio } from "../../utils/formato";
 
-// Boleta de una orden: /admin/ordenes/:id
 function AdminBoleta() {
   const { id } = useParams();
   const [orden] = useState(() => obtenerOrden(id));
@@ -37,9 +36,18 @@ function AdminBoleta() {
             <div className="d-flex flex-wrap justify-content-between align-items-center gap-2 mb-3">
               <div>
                 <p className="seccion-titulo mb-0">Orden #{orden.numero}</p>
-                <p className="text-muted small mb-0">{formatoFechaHora(orden.fecha)}</p>
+                <p className="text-muted small mb-0">
+                  {formatoFechaHora(orden.fecha)}
+                </p>
               </div>
-              <span className={"badge fs-6 " + (orden.estado === "Pagada" ? "text-bg-success" : "text-bg-danger")}>
+              <span
+                className={
+                  "badge fs-6 " +
+                  (orden.estado === "Pagada"
+                    ? "text-bg-success"
+                    : "text-bg-danger")
+                }
+              >
                 {orden.estado}
               </span>
             </div>
@@ -62,7 +70,8 @@ function AdminBoleta() {
                   <dt>Dirección</dt>
                   <dd>
                     {orden.entrega.calle}
-                    {orden.entrega.departamento && ", depto " + orden.entrega.departamento}
+                    {orden.entrega.departamento &&
+                      ", depto " + orden.entrega.departamento}
                   </dd>
                   <dt>Comuna / Región</dt>
                   <dd>
@@ -91,9 +100,13 @@ function AdminBoleta() {
                         <img src={linea.imagen} alt="" />
                         <div className="fw-semibold">{linea.nombre}</div>
                       </td>
-                      <td className="text-end">{formatoPrecio(linea.precio)}</td>
+                      <td className="text-end">
+                        {formatoPrecio(linea.precio)}
+                      </td>
                       <td className="text-end">{linea.cantidad}</td>
-                      <td className="text-end">{formatoPrecio(linea.precio * linea.cantidad)}</td>
+                      <td className="text-end">
+                        {formatoPrecio(linea.precio * linea.cantidad)}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -107,11 +120,21 @@ function AdminBoleta() {
               <dd>{formatoPrecio(orden.totales.impuestos)}</dd>
               <dt>Despacho</dt>
               <dd>{formatoPrecio(orden.totales.despacho)}</dd>
+              {orden.totales.extra > 0 && (
+                <>
+                  <dt>Entrega especial Duffman</dt>
+                  <dd>{formatoPrecio(orden.totales.extra)}</dd>
+                </>
+              )}
               <dt>Total</dt>
               <dd className="fw-bold">{formatoPrecio(orden.totales.total)}</dd>
             </dl>
 
-            <button type="button" className="btn btn-kb-primario mt-4" onClick={() => window.print()}>
+            <button
+              type="button"
+              className="btn btn-kb-primario mt-4"
+              onClick={() => window.print()}
+            >
               <i className="ti ti-printer"></i> Imprimir boleta
             </button>
           </>

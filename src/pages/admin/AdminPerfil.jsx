@@ -1,22 +1,17 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PaginaAdmin from "../../components/admin/PaginaAdmin";
 import { obtenerUsuario } from "../../services/adminData";
-import { cerrarSesion, obtenerSesion } from "../../services/auth";
+import { useAuth } from "../../context/AuthContext";
+import { obtenerSesion } from "../../services/auth";
 import { claseRol, colorAvatar, iniciales } from "../../utils/usuarios";
 
-// Perfil del administrador que inició sesión: /admin/perfil
 function AdminPerfil() {
-  const navigate = useNavigate();
+  const { cerrar } = useAuth();
   const [usuario] = useState(() => {
     const sesion = obtenerSesion();
     return sesion ? obtenerUsuario(sesion.id) : null;
   });
-
-  function salir() {
-    cerrarSesion();
-    navigate("/login");
-  }
 
   return (
     <PaginaAdmin miga="Panel administrador / Cuenta" titulo="Mi perfil">
@@ -35,12 +30,20 @@ function AdminPerfil() {
                   width: 96,
                   height: 96,
                   fontSize: "1.8rem",
-                  background: colorAvatar(usuario.nombre + " " + usuario.apellidos),
+                  background: colorAvatar(
+                    usuario.nombre + " " + usuario.apellidos,
+                  ),
                 }}
               >
                 {iniciales(usuario.nombre, usuario.apellidos)}
               </div>
-              <span className={"badge badge-rol mt-3 " + claseRol(usuario.tipoUsuario)}>{usuario.tipoUsuario}</span>
+              <span
+                className={
+                  "badge badge-rol mt-3 " + claseRol(usuario.tipoUsuario)
+                }
+              >
+                {usuario.tipoUsuario}
+              </span>
             </div>
             <div className="col-md-8">
               <dl className="ficha-solo-lectura mb-0">
@@ -57,12 +60,20 @@ function AdminPerfil() {
               </dl>
               <div className="d-flex gap-2 mt-4">
                 <Link
-                  to={"/admin/usuarios/" + encodeURIComponent(usuario.id) + "/editar"}
+                  to={
+                    "/admin/usuarios/" +
+                    encodeURIComponent(usuario.id) +
+                    "/editar"
+                  }
                   className="btn btn-kb-primario"
                 >
                   <i className="ti ti-pencil"></i> Editar mis datos
                 </Link>
-                <button type="button" className="btn btn-kb-secundario" onClick={salir}>
+                <button
+                  type="button"
+                  className="btn btn-kb-secundario"
+                  onClick={cerrar}
+                >
                   <i className="ti ti-logout"></i> Cerrar sesión
                 </button>
               </div>

@@ -4,7 +4,11 @@ import ModalEliminar from "../components/admin/ModalEliminar";
 describe("ModalEliminar (props y eventos)", () => {
   it("muestra el título y el mensaje que recibe por props", () => {
     render(
-      <ModalEliminar titulo="Eliminar producto" onConfirmar={() => {}} onCancelar={() => {}}>
+      <ModalEliminar
+        titulo="Eliminar producto"
+        onConfirmar={() => {}}
+        onCancelar={() => {}}
+      >
         ¿Seguro que quieres eliminarlo?
       </ModalEliminar>,
     );
@@ -14,15 +18,25 @@ describe("ModalEliminar (props y eventos)", () => {
   });
 
   it("no se muestra si no recibe mensaje", () => {
-    const { container } = render(<ModalEliminar titulo="Eliminar" onConfirmar={() => {}} onCancelar={() => {}} />);
+    const { container } = render(
+      <ModalEliminar
+        titulo="Eliminar"
+        onConfirmar={() => {}}
+        onCancelar={() => {}}
+      />,
+    );
 
     expect(container.firstChild).toBeNull();
   });
 
   it("llama a onConfirmar al presionar 'Sí, eliminar'", () => {
-    const onConfirmar = jasmine.createSpy(); // función falsa (mock) para saber si fue llamada
+    const onConfirmar = jasmine.createSpy();
     render(
-      <ModalEliminar titulo="Eliminar" onConfirmar={onConfirmar} onCancelar={() => {}}>
+      <ModalEliminar
+        titulo="Eliminar"
+        onConfirmar={onConfirmar}
+        onCancelar={() => {}}
+      >
         Mensaje
       </ModalEliminar>,
     );
@@ -35,7 +49,11 @@ describe("ModalEliminar (props y eventos)", () => {
   it("llama a onCancelar al presionar 'Cancelar'", () => {
     const onCancelar = jasmine.createSpy();
     render(
-      <ModalEliminar titulo="Eliminar" onConfirmar={() => {}} onCancelar={onCancelar}>
+      <ModalEliminar
+        titulo="Eliminar"
+        onConfirmar={() => {}}
+        onCancelar={onCancelar}
+      >
         Mensaje
       </ModalEliminar>,
     );

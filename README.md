@@ -16,7 +16,7 @@
 
 Tienda virtual de Krusty Burger con estilo cartoon y temática de Los Simpsons. Tiene una **tienda pública** y un **panel administrador**.
 
-**Tienda:** inicio, menú, categorías, ofertas, detalle de producto, carrito, checkout (con pago correcto y pago con error), blog (con detalle), nosotros, promociones, contacto, registro y login.
+**Tienda:** inicio, menú (con buscador), categorías, ofertas, detalle de producto, carrito, checkout (con pago correcto y pago con error), blog (con detalle), nosotros, promociones, contacto, registro, login y cuenta de usuario.
 
 **Panel admin:** dashboard, órdenes y boletas, productos (con stock crítico e inventario), categorías, usuarios (con historial de compras), reportes y perfil.
 
@@ -83,3 +83,17 @@ Creado por **Sebastián Caamaño** y **Vicente Ordenes**
 
 *I am Groot.*
 </div>
+
+---
+
+## Ambientación de Springfield
+
+La tienda está llena de personajes de Los Simpson (los diálogos están en `src/data/frases.js` y las fotos en `src/data/personajes.js`):
+
+- **Fotos:** vienen de The Simpsons API. Si una foto no carga se usa la foto local y, si tampoco hay, una insignia con las iniciales. Para usar tus propias imágenes pon la ruta en el campo `foto` del personaje (carpeta `public/assets`).
+- **Cuenta de usuario:** el navbar muestra el nombre del usuario con un menú (Mi cuenta, Panel admin, Cerrar sesión). Al cerrar sesión se despide Homero o Krusty.
+- **Chat de ayuda:** Rafa responde preguntas frecuentes.
+- **Avisos:** el Dr. Hibbert avisa si hay más de 3 hamburguesas pesadas en el carrito; las alertas de error usan el "¡D'OH!".
+- **Compra:** entrega especial de bebidas con Duffman, Otto "va en camino" y el Sr. Burns en el pago exitoso; el Gordo Tony en el pago rechazado.
+- **Otras vistas:** policías en el registro, Snake en el login, Bart en las ofertas, Cletus en los productos a prueba de tontos, Lisa en el blog y Apu como personaje del día.
+- **Búsqueda especial:** al buscar "hamburguesas al vapor" aparece el combo tradicional con el sticker del Director Skinner.

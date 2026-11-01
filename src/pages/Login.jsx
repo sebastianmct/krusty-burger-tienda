@@ -1,9 +1,11 @@
 import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import AlertaDoh from "../components/AlertaDoh";
+import Dialogo from "../components/Dialogo";
 import MensajeError from "../components/MensajeError";
+import { useAuth } from "../context/AuthContext";
 import useEstilos from "../hooks/useEstilos";
 import useFormulario from "../hooks/useFormulario";
-import { iniciarSesion } from "../services/auth";
 import { validarLogin } from "../utils/validaciones";
 import estiloLogin from "../styles/style-login.css?inline";
 
@@ -13,11 +15,12 @@ function Login() {
   useEstilos(estilos);
 
   const navigate = useNavigate();
-  const { valores, errorDe, cambiar, salirDelCampo, enviar } = useFormulario({ email: "", password: "" }, validarLogin);
+  const { iniciar: iniciarSesion } = useAuth();
+  const { valores, resumenErrores, errorDe, cambiar, salirDelCampo, enviar } =
+    useFormulario({ email: "", password: "" }, validarLogin);
   const [errorCredenciales, setErrorCredenciales] = useState("");
   const [mensajeExito, setMensajeExito] = useState("");
 
-  // Easter egg: al hacer clic en "Olvidé mi contraseña" aparece Nelson riéndose
   const [mostrarNelson, setMostrarNelson] = useState(false);
   const audioNelson = useRef(null);
 
@@ -28,7 +31,8 @@ function Login() {
       return;
     }
     setMensajeExito("Bienvenido, " + resultado.usuario.nombre + "!");
-    const destino = resultado.usuario.tipoUsuario === "Administrador" ? "/admin" : "/";
+    const destino =
+      resultado.usuario.tipoUsuario === "Administrador" ? "/admin" : "/";
     setTimeout(() => navigate(destino), 800);
   }
 
@@ -36,25 +40,23 @@ function Login() {
     evento.preventDefault();
     setMostrarNelson(true);
     audioNelson.current.currentTime = 0;
-    audioNelson.current.play().catch(() => {
-      // el navegador puede bloquear el audio si no hubo interacción previa
-    });
+    audioNelson.current.play().catch(() => {});
     setTimeout(() => setMostrarNelson(false), 2000);
   }
 
   return (
     <main className="pagina-login">
       <div className="tarjeta-login">
+        <img src="assets/krusty-krusty-the-clown-show.gif" alt="Show Krusty" className="gif-krusty" />
         <div className="icono-hamburguesa">
           <i className="ti ti-menu-2"></i>
         </div>
-
         <h1 className="titulo-login">
-          ¡HOLA DE
-          <br /> NUEVO, VIEJO
-          <br /> PINTO!
+          ¡Hola hola, niños!
         </h1>
-        <p className="subtitulo-login">Ingresa tus credenciales para ordenar.</p>
+        <p className="subtitulo-login">
+          Ingresa tus credenciales para ordenar.
+        </p>
 
         <form
           className="formulario-login d-flex flex-column"
@@ -101,13 +103,23 @@ function Login() {
             onBlur={salirDelCampo}
             aria-invalid={Boolean(errorDe("password") || errorCredenciales)}
           />
-          <MensajeError texto={errorDe("password") || errorCredenciales} />
+          <MensajeError texto={errorDe("password")} />
+
+          {errorCredenciales && <AlertaDoh>{errorCredenciales}</AlertaDoh>}
+          {resumenErrores && (
+            <AlertaDoh>Revisa los campos marcados en rojo.</AlertaDoh>
+          )}
 
           <button type="submit" className="boton-login btn">
             ENTRAR A COMER
           </button>
 
-          <a href="#" className="enlace-pequeno" id="link-olvido" onClick={mostrarNelsonRiendose}>
+          <a
+            href="#"
+            className="enlace-pequeno"
+            id="link-olvido"
+            onClick={mostrarNelsonRiendose}
+          >
             Olvidé mi contraseña
           </a>
 
@@ -115,10 +127,16 @@ function Login() {
             <img src="assets/nelson-haha.jpg" alt="Nelson Haha" />
           </div>
 
-          <audio ref={audioNelson} src="assets/nelson-haha-audio.mp3" preload="auto"></audio>
+          <audio
+            ref={audioNelson}
+            src="assets/nelson-haha-audio.mp3"
+            preload="auto"
+          ></audio>
 
           <Link to="/registro">
-            <p className="registro-login">No tengo cuenta, quiero registrarme</p>
+            <p className="registro-login">
+              No tengo cuenta, quiero registrarme
+            </p>
           </Link>
           <Link to="/admin" className="enlace-pequeno">
             ¿Eres administrador o vendedor? Entra al panel
@@ -130,6 +148,13 @@ function Login() {
             </p>
           )}
         </form>
+
+        <Dialogo
+          className="kb-snake"
+          quien="snake"
+          frase="¿Olvidaste tu contraseña? Yo no me la robé... esta vez."
+          tam="md"
+        />
       </div>
     </main>
   );

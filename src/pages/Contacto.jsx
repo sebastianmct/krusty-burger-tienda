@@ -1,4 +1,5 @@
 import { useState } from "react";
+import AlertaDoh from "../components/AlertaDoh";
 import MensajeError from "../components/MensajeError";
 import useEstilos from "../hooks/useEstilos";
 import useFormulario from "../hooks/useFormulario";
@@ -11,22 +12,25 @@ const estilos = [estiloContacto];
 function Contacto() {
   useEstilos(estilos);
 
-  const { valores, errorDe, cambiar, salirDelCampo, enviar } = useFormulario(
-    { nombre: "", email: "", mensaje: "" },
-    validarContacto,
-  );
+  const { valores, resumenErrores, errorDe, cambiar, salirDelCampo, enviar } =
+    useFormulario({ nombre: "", email: "", mensaje: "" }, validarContacto);
   const [mensajeExito, setMensajeExito] = useState("");
   const [errorEnvio, setErrorEnvio] = useState("");
   const [enviando, setEnviando] = useState(false);
 
-  // Envía la queja a la API (POST) y avisa si salió bien o mal
   async function enviarMensaje(datos) {
     setEnviando(true);
     setMensajeExito("");
     setErrorEnvio("");
     try {
-      const respuesta = await enviarQueja({ title: datos.nombre, body: datos.mensaje, email: datos.email });
-      setMensajeExito("Tu mensaje fue enviado correctamente. N° de queja: " + respuesta.id);
+      const respuesta = await enviarQueja({
+        title: datos.nombre,
+        body: datos.mensaje,
+        email: datos.email,
+      });
+      setMensajeExito(
+        "Tu mensaje fue enviado correctamente. N° de queja: " + respuesta.id,
+      );
     } catch {
       setErrorEnvio("No pudimos enviar tu mensaje. Intenta nuevamente.");
     }
@@ -39,8 +43,8 @@ function Contacto() {
         <div className="mx-auto kb-titulo-inner">
           <h1 className="kb-titulo-h1">¡Grita tus quejas aquí!</h1>
           <p className="mb-0">
-            ¿Krusty te dio una hamburguesa cruda? ¿El Ribwich te dio alucinaciones? ¡Dejanos saber! Nos importa (un
-            poco).
+            ¿Krusty te dio una hamburguesa cruda? ¿El Ribwich te dio
+            alucinaciones? ¡Dejanos saber! Nos importa (un poco).
           </p>
         </div>
       </section>
@@ -49,7 +53,11 @@ function Contacto() {
         <div className="row g-4 justify-content-center align-items-start">
           <div className="col-lg-2 d-flex justify-content-center">
             <div className="kb-mou-container">
-              <img src="assets/mou_escopeta.jpg" alt="Moe sosteniendo escopeta" className="moe-img" />
+              <img
+                src="assets/mou-escopeta.jpg"
+                alt="Moe sosteniendo escopeta"
+                className="moe-img"
+              />
             </div>
           </div>
 
@@ -121,14 +129,18 @@ function Contacto() {
                   ></textarea>
                   <MensajeError texto={errorDe("mensaje")} />
                 </div>
-                <button type="submit" className="btn btn-kb-enviar" disabled={enviando}>
-                  {enviando ? "Enviando..." : "Enviar queja"} <i className="ti ti-send"></i>
+                <button
+                  type="submit"
+                  className="btn btn-kb-enviar"
+                  disabled={enviando}
+                >
+                  {enviando ? "Enviando..." : "Enviar queja"}{" "}
+                  <i className="ti ti-send"></i>
                 </button>
 
-                {errorEnvio && (
-                  <p className="campo-error" role="alert">
-                    {errorEnvio}
-                  </p>
+                {errorEnvio && <AlertaDoh>{errorEnvio}</AlertaDoh>}
+                {resumenErrores && (
+                  <AlertaDoh>Revisa los campos marcados en rojo.</AlertaDoh>
                 )}
 
                 {mensajeExito && (
@@ -154,7 +166,8 @@ function Contacto() {
                 (o cerca de ahí, pregunta por Ned)
               </p>
               <p>
-                <i className="ti ti-phone"></i> (555) 123-4567 (no llamen a la policía)
+                <i className="ti ti-phone"></i> (555) 123-4567 (no llamen a la
+                policía)
               </p>
               <img src="assets/springfield.png" alt="Krusty Burger" />
             </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import PersonajeDelDia from "../components/PersonajeDelDia";
+import VecinosSpringfield from "../components/VecinosSpringfield";
 import TarjetaProducto from "../components/TarjetaProducto";
 import useEstilos from "../hooks/useEstilos";
 import { obtenerCatalogo } from "../data/productos";
@@ -8,12 +9,12 @@ import estiloHome from "../styles/style-home.css?inline";
 
 const estilos = [estiloHome];
 
-// Botones de categoría que se muestran en el inicio
 const categorias = [
   { valor: "hamburguesas", icono: "ti-burger", nombre: "Hamburguesas" },
   { valor: "dulces", icono: "ti-chart-donut", nombre: "Rosquillas" },
   { valor: "papas", icono: "ti-tools-kitchen-2", nombre: "Papas" },
   { valor: "bebidas", icono: "ti-cup", nombre: "Bebidas" },
+  { valor: "combos", icono: "ti-tools-kitchen-2", nombre: "Combos" },
 ];
 
 function Inicio() {
@@ -22,7 +23,9 @@ function Inicio() {
   const [productos] = useState(obtenerCatalogo);
   const [categoriaActiva, setCategoriaActiva] = useState("hamburguesas");
 
-  const productosVisibles = productos.filter((producto) => producto.categoria === categoriaActiva);
+  const productosVisibles = productos.filter(
+    (producto) => producto.categoria === categoriaActiva,
+  );
 
   return (
     <>
@@ -32,7 +35,8 @@ function Inicio() {
             !LA BURGEER FAVORITA DE <span>SPRINGFIELD!</span>
           </h1>
           <p className="kb-hero-text">
-            Hamburguesas, papas y combos preparados para satisfacer hasta al ciudadano más hambriento.
+            Hamburguesas, papas y combos preparados para satisfacer hasta al
+            ciudadano más hambriento.
           </p>
           <div className="d-flex flex-wrap gap-3">
             <Link to="/menu" className="btn btn-kb-hero btn-kb-hero-primario">
@@ -43,7 +47,11 @@ function Inicio() {
             </Link>
           </div>
         </div>
-        <img src="assets/rosquilla-homero.png" alt="Dona Homero" className="kb-hero-img" />
+        <img
+          src="assets/rosquilla-homero.png"
+          alt="Dona Homero"
+          className="kb-hero-img"
+        />
       </header>
 
       <section className="kb-menu-section px-3 px-lg-5 py-5">
@@ -56,7 +64,10 @@ function Inicio() {
               <button
                 key={categoria.valor}
                 type="button"
-                className={"btn kb-filtro" + (categoriaActiva === categoria.valor ? " active" : "")}
+                className={
+                  "btn kb-filtro" +
+                  (categoriaActiva === categoria.valor ? " active" : "")
+                }
                 onClick={() => setCategoriaActiva(categoria.valor)}
               >
                 <i className={"ti " + categoria.icono}></i>
@@ -68,18 +79,27 @@ function Inicio() {
         <hr className="kb-hr" />
         <div className="tarjetas" id="productos-inicio">
           {productosVisibles.map((producto) => (
-            <TarjetaProducto key={producto.id} producto={producto} variante="inicio" />
+            <TarjetaProducto
+              key={producto.id}
+              producto={producto}
+              variante="inicio"
+            />
           ))}
         </div>
       </section>
 
       <PersonajeDelDia />
 
+      <VecinosSpringfield />
+
       <section className="kb-club-section py-5 px-4 px-lg-5">
         <div className="row g-4 align-items-center">
           <div className="col-lg-6">
             <div className="kb-club-imagen d-flex justify-content-center">
-              <img src="assets/krusty-fumando.jpg" alt="Krusty dando la bienvenida" />
+              <img
+                src="assets/krusty-fumando.jpg"
+                alt="Krusty dando la bienvenida"
+              />
             </div>
           </div>
           <div className="col-lg-6">
@@ -88,8 +108,8 @@ function Inicio() {
                 ÚNETE AL <span>CLUB KRUSTY</span>
               </h2>
               <p>
-                Acumula puntos con tus pedidos y recibe promociones especiales para disfrutar tus hamburguesas
-                favoritas.
+                Acumula puntos con tus pedidos y recibe promociones especiales
+                para disfrutar tus hamburguesas favoritas.
               </p>
               <Link to="/registro" className="btn btn-kb-club">
                 Registrarme

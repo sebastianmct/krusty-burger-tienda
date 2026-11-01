@@ -21,7 +21,9 @@ describe("Página Categorías", () => {
   it("muestra un link por cada categoría", () => {
     renderEnRuta("/categorias");
 
-    expect(screen.getAllByRole("link", { name: /productos/ }).length).toBe(obtenerCategorias().length);
+    expect(screen.getAllByRole("link", { name: /productos/ }).length).toBe(
+      obtenerCategorias().length,
+    );
   });
 
   it("sin categoría elegida no muestra productos", () => {
@@ -33,7 +35,9 @@ describe("Página Categorías", () => {
   it("al entrar a /categorias/bebidas muestra solo las bebidas", () => {
     renderEnRuta("/categorias/bebidas");
 
-    const bebidas = obtenerCatalogo().filter((producto) => producto.categoria === "bebidas");
+    const bebidas = obtenerCatalogo().filter(
+      (producto) => producto.categoria === "bebidas",
+    );
     expect(screen.getAllByRole("article").length).toBe(bebidas.length);
   });
 

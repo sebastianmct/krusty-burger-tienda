@@ -2,19 +2,19 @@ import PaginaAdmin from "../../components/admin/PaginaAdmin";
 import { listarOrdenes, listarUsuarios } from "../../services/adminData";
 import { formatoPrecio } from "../../utils/formato";
 
-// Reporte general de ventas y usuarios: /admin/reportes
 function AdminReportes() {
   const ordenes = listarOrdenes();
   const pagadas = ordenes.filter((o) => o.estado === "Pagada");
   const rechazadas = ordenes.length - pagadas.length;
   const ingresos = pagadas.reduce((total, o) => total + o.totales.total, 0);
-  const ticketPromedio = pagadas.length > 0 ? Math.round(ingresos / pagadas.length) : 0;
+  const ticketPromedio =
+    pagadas.length > 0 ? Math.round(ingresos / pagadas.length) : 0;
 
-  // Suma las unidades vendidas de cada producto (solo órdenes pagadas)
   const vendidos = {};
   pagadas.forEach((orden) => {
     orden.lineas.forEach((linea) => {
-      if (!vendidos[linea.id]) vendidos[linea.id] = { nombre: linea.nombre, unidades: 0, ingresos: 0 };
+      if (!vendidos[linea.id])
+        vendidos[linea.id] = { nombre: linea.nombre, unidades: 0, ingresos: 0 };
       vendidos[linea.id].unidades += linea.cantidad;
       vendidos[linea.id].ingresos += linea.precio * linea.cantidad;
     });
@@ -23,7 +23,6 @@ function AdminReportes() {
     .sort((a, b) => b.unidades - a.unidades)
     .slice(0, 5);
 
-  // Cantidad de usuarios por tipo
   const usuarios = listarUsuarios();
   const tipos = ["Administrador", "Vendedor", "Cliente"].map((tipo) => ({
     tipo,
@@ -115,7 +114,13 @@ function AdminReportes() {
                   {tipos.map((t) => (
                     <tr key={t.tipo}>
                       <td>
-                        <span className={"badge badge-rol rol-" + t.tipo.toLowerCase()}>{t.tipo}</span>
+                        <span
+                          className={
+                            "badge badge-rol rol-" + t.tipo.toLowerCase()
+                          }
+                        >
+                          {t.tipo}
+                        </span>
                       </td>
                       <td>{t.cantidad}</td>
                     </tr>

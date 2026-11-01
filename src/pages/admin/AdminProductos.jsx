@@ -10,16 +10,17 @@ import { formatoPrecio } from "../../utils/formato";
 function AdminProductos() {
   const [productos, setProductos] = useState(listarProductos);
   const [busqueda, setBusqueda] = useState("");
-  const [productoAEliminar, setProductoAEliminar] = useState(null); // producto que se va a confirmar
+  const [productoAEliminar, setProductoAEliminar] = useState(null);
   const [toast, setToast] = useState("");
 
-  // Mensaje que llega desde el formulario o la ficha (ej: "Producto guardado correctamente.")
   const { state } = useLocation();
   const banner = state?.mensaje;
 
   const texto = busqueda.toLowerCase();
   const filtrados = productos.filter(
-    (p) => p.nombre.toLowerCase().includes(texto) || p.codigo.toLowerCase().includes(texto),
+    (p) =>
+      p.nombre.toLowerCase().includes(texto) ||
+      p.codigo.toLowerCase().includes(texto),
   );
 
   function confirmarEliminar() {
@@ -35,14 +36,23 @@ function AdminProductos() {
       titulo="Productos"
       acciones={
         <>
-          <Link to="/admin/productos/criticos" className="btn btn-kb-secundario">
-            <i className="ti ti-alert-triangle"></i> <span className="d-none d-md-inline">Stock crítico</span>
+          <Link
+            to="/admin/productos/criticos"
+            className="btn btn-kb-secundario"
+          >
+            <i className="ti ti-alert-triangle"></i>{" "}
+            <span className="d-none d-md-inline">Stock crítico</span>
           </Link>
-          <Link to="/admin/productos/reportes" className="btn btn-kb-secundario">
-            <i className="ti ti-chart-bar"></i> <span className="d-none d-md-inline">Reportes</span>
+          <Link
+            to="/admin/productos/reportes"
+            className="btn btn-kb-secundario"
+          >
+            <i className="ti ti-chart-bar"></i>{" "}
+            <span className="d-none d-md-inline">Reportes</span>
           </Link>
           <Link to="/admin/productos/nuevo" className="btn btn-kb-primario">
-            <i className="ti ti-plus"></i> <span className="d-none d-sm-inline">Nuevo producto</span>
+            <i className="ti ti-plus"></i>{" "}
+            <span className="d-none d-sm-inline">Nuevo producto</span>
           </Link>
         </>
       }
@@ -67,7 +77,8 @@ function AdminProductos() {
             />
           </div>
           <span className="text-muted small">
-            {filtrados.length + (filtrados.length === 1 ? " producto" : " productos")}
+            {filtrados.length +
+              (filtrados.length === 1 ? " producto" : " productos")}
           </span>
         </div>
         <div className="table-responsive">
@@ -83,7 +94,8 @@ function AdminProductos() {
             </thead>
             <tbody>
               {filtrados.map((p) => {
-                const stockBajo = p.stockCritico != null && p.stock <= p.stockCritico;
+                const stockBajo =
+                  p.stockCritico != null && p.stock <= p.stockCritico;
                 return (
                   <tr key={p.id}>
                     <td className="celda-producto">
@@ -97,7 +109,11 @@ function AdminProductos() {
                     <td>{formatoPrecio(p.precio)}</td>
                     <td>
                       {p.stock}
-                      {stockBajo && <span className="badge rounded-pill badge-stock-critico ms-1">Stock crítico</span>}
+                      {stockBajo && (
+                        <span className="badge rounded-pill badge-stock-critico ms-1">
+                          Stock crítico
+                        </span>
+                      )}
                     </td>
                     <td className="text-end">
                       <div className="fila-acciones">
@@ -110,7 +126,11 @@ function AdminProductos() {
                         </Link>
                         <Link
                           className="btn btn-sm btn-kb-secundario"
-                          to={"/admin/productos/" + encodeURIComponent(p.id) + "/editar"}
+                          to={
+                            "/admin/productos/" +
+                            encodeURIComponent(p.id) +
+                            "/editar"
+                          }
                           title="Editar"
                         >
                           <i className="ti ti-pencil"></i>
@@ -134,8 +154,12 @@ function AdminProductos() {
         {filtrados.length === 0 && (
           <div className="estado-vacio">
             <i className="ti ti-burger-off"></i>
-            <p className="mt-2 mb-1">No hay productos que coincidan con la búsqueda.</p>
-            <p className="text-muted small mb-0">Juan Topo se llevó el resto del inventario.</p>
+            <p className="mt-2 mb-1">
+              No hay productos que coincidan con la búsqueda.
+            </p>
+            <p className="text-muted small mb-0">
+              Juan Topo se llevó el resto del inventario.
+            </p>
           </div>
         )}
       </div>
@@ -147,8 +171,9 @@ function AdminProductos() {
       >
         {productoAEliminar && (
           <>
-            ¿Seguro que quieres eliminar <strong>{productoAEliminar.nombre}</strong>? Esta acción no se puede deshacer
-            (ni Krusty podrá recuperarlo).
+            ¿Seguro que quieres eliminar{" "}
+            <strong>{productoAEliminar.nombre}</strong>? Esta acción no se puede
+            deshacer (ni Krusty podrá recuperarlo).
           </>
         )}
       </ModalEliminar>

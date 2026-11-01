@@ -3,7 +3,11 @@ import { Link, useLocation } from "react-router-dom";
 import PaginaAdmin from "../../components/admin/PaginaAdmin";
 import ModalEliminar from "../../components/admin/ModalEliminar";
 import ToastAdmin from "../../components/admin/ToastAdmin";
-import { eliminarCategoria, listarCategorias, listarProductos } from "../../services/adminData";
+import {
+  eliminarCategoria,
+  listarCategorias,
+  listarProductos,
+} from "../../services/adminData";
 
 function AdminCategorias() {
   const [categorias, setCategorias] = useState(listarCategorias);
@@ -17,7 +21,9 @@ function AdminCategorias() {
 
   function confirmarEliminar() {
     const resultado = eliminarCategoria(categoriaAEliminar.valor);
-    setToast(resultado.ok ? "Categoría eliminada correctamente." : resultado.error);
+    setToast(
+      resultado.ok ? "Categoría eliminada correctamente." : resultado.error,
+    );
     setCategorias(listarCategorias());
     setCategoriaAEliminar(null);
   }
@@ -28,7 +34,8 @@ function AdminCategorias() {
       titulo="Categorías"
       acciones={
         <Link to="/admin/categorias/nueva" className="btn btn-kb-primario">
-          <i className="ti ti-plus"></i> <span className="d-none d-sm-inline">Nueva categoría</span>
+          <i className="ti ti-plus"></i>{" "}
+          <span className="d-none d-sm-inline">Nueva categoría</span>
         </Link>
       }
     >
@@ -59,7 +66,9 @@ function AdminCategorias() {
                     <div className="subtexto">{c.valor}</div>
                   </td>
                   <td>{c.descripcion || "-"}</td>
-                  <td>{productos.filter((p) => p.categoria === c.valor).length}</td>
+                  <td>
+                    {productos.filter((p) => p.categoria === c.valor).length}
+                  </td>
                   <td className="text-end">
                     <div className="fila-acciones">
                       <Link
@@ -93,12 +102,17 @@ function AdminCategorias() {
       >
         {categoriaAEliminar && (
           <>
-            ¿Seguro que quieres eliminar la categoría <strong>{categoriaAEliminar.etiqueta}</strong>? Solo se puede
+            ¿Seguro que quieres eliminar la categoría{" "}
+            <strong>{categoriaAEliminar.etiqueta}</strong>? Solo se puede
             eliminar si no tiene productos.
           </>
         )}
       </ModalEliminar>
-      <ToastAdmin mensaje={toast} onCerrar={() => setToast("")} />
+      <ToastAdmin
+        mensaje={toast}
+        error={toast.startsWith("No se puede")}
+        onCerrar={() => setToast("")}
+      />
     </PaginaAdmin>
   );
 }

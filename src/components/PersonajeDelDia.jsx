@@ -1,19 +1,12 @@
 import { useEffect, useState } from "react";
+import { urlFotoDeRuta, urlFotoPorId } from "../data/personajes";
 import { obtenerPersonaje } from "../services/api";
+import AlertaDoh from "./AlertaDoh";
 
-// Personajes que pueden aparecer (ids de The Simpsons API): Homero, Bart, Burns, Krusty, Moe
-const IDS_PERSONAJES = [1, 3, 13, 15, 16];
-
-// Cada día del mes toca un personaje distinto
-function personajeDeHoy() {
-  return IDS_PERSONAJES[new Date().getDate() % IDS_PERSONAJES.length];
-}
-
-// Muestra un personaje de Springfield con una de sus frases, traído desde una API.
-//   id -> (opcional) id del personaje; si no se entrega se usa el "del día"
-function PersonajeDelDia({ id = personajeDeHoy() }) {
+function PersonajeDelDia({ id = 17 }) {
   const [personaje, setPersonaje] = useState(null);
   const [error, setError] = useState(false);
+  const [fotoRota, setFotoRota] = useState(false);
 
   useEffect(() => {
     obtenerPersonaje(id)
@@ -21,19 +14,41 @@ function PersonajeDelDia({ id = personajeDeHoy() }) {
       .catch(() => setError(true));
   }, [id]);
 
+  const foto = personaje
+    ? personaje.portrait_path
+      ? urlFotoDeRuta(personaje.portrait_path)
+      : urlFotoPorId(personaje.id)
+    : null;
+
   return (
     <section className="kb-personaje px-4 px-lg-5 py-4">
       <p className="kb-personaje-etiqueta">Personaje del día</p>
 
-      {error && <p className="kb-personaje-estado">No pudimos contactar a Springfield. Intenta más tarde.</p>}
-      {!error && !personaje && <p className="kb-personaje-estado">Cargando...</p>}
+      {error && (
+        <AlertaDoh>
+          No pudimos contactar a Springfield. Intenta más tarde.
+        </AlertaDoh>
+      )}
+      {!error && !personaje && (
+        <p className="kb-personaje-estado">Cargando...</p>
+      )}
 
       {personaje && (
         <>
+          {foto && !fotoRota && (
+            <img
+              className="kb-pj kb-pj-xl kb-personaje-foto"
+              src={foto}
+              alt={personaje.name}
+              onError={() => setFotoRota(true)}
+            />
+          )}
           <h2 className="kb-personaje-nombre">{personaje.name}</h2>
           <p className="kb-personaje-ocupacion">{personaje.occupation}</p>
           {personaje.phrases?.length > 0 && (
-            <blockquote className="kb-personaje-frase">“{personaje.phrases[0]}”</blockquote>
+            <blockquote className="kb-personaje-frase">
+              “{personaje.phrases[0]}”
+            </blockquote>
           )}
         </>
       )}

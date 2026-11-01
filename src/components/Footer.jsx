@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
+import LogoKrusty from "./LogoKrusty";
 
 function Footer() {
   return (
     <footer className="kb-footer px-4 px-lg-5 pt-5 pb-3">
-      <h2 className="kb-footer-title">Krusty Burguer</h2>
+      <h2 className="kb-footer-title">
+        <LogoKrusty className="kb-logo-img kb-logo-img-footer" />
+      </h2>
       <ul className="nav gap-4 mb-3">
         <li className="nav-item">
           <Link className="nav-link p-0 kb-footer-link" to="/">
@@ -26,8 +29,13 @@ function Footer() {
           </Link>
         </li>
       </ul>
-      <p className="kb-footer-copy">&copy; 2026 Krusty Burguer. Todos los derechos reservados.</p>
-      <img src="assets/cerdo_footer.png" alt="Imagen del cerdo de Krusty Burger" />
+      <p className="kb-footer-copy">
+        &copy; 2026 Krusty Burguer. Todos los derechos reservados.
+      </p>
+      <img
+        src="assets/cerdo-footer.png"
+        alt="Imagen del cerdo de Krusty Burger"
+      />
 
       <div className="krusty-homero-caminando">
         <img src="assets/krusty-homero.jpg" alt="Krusty y Homero caminando" />

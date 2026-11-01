@@ -1,7 +1,14 @@
-// Regiones de Chile y sus comunas (se usa en el registro y en el admin de usuarios)
 export const comunasPorRegion = {
   "Arica y Parinacota": ["Arica", "Camarones", "Putre", "General Lagos"],
-  Tarapaca: ["Iquique", "Alto Hospicio", "Pozo Almonte", "Pica", "Huara", "Camina", "Colchane"],
+  Tarapaca: [
+    "Iquique",
+    "Alto Hospicio",
+    "Pozo Almonte",
+    "Pica",
+    "Huara",
+    "Camina",
+    "Colchane",
+  ],
   Antofagasta: [
     "Antofagasta",
     "Calama",

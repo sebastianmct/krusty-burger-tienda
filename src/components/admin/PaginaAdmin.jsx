@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useEstilos from "../../hooks/useEstilos";
-import { listarCategorias, listarOrdenes, listarProductos, listarUsuarios } from "../../services/adminData";
-import { cerrarSesion } from "../../services/auth";
+import {
+  listarCategorias,
+  listarOrdenes,
+  listarProductos,
+  listarUsuarios,
+} from "../../services/adminData";
+import { useAuth } from "../../context/AuthContext";
 import estiloAdmin from "../../styles/admin/style-admin.css?inline";
 
 const estilos = [estiloAdmin];
 
-// Estructura común de todas las páginas del admin: menú lateral + barra superior + contenido.
-//   miga     -> texto (o enlaces) de la ruta, ej: "Panel administrador / Gestión"
-//   titulo   -> título de la página
-//   acciones -> (opcional) botones que van a la derecha de la barra superior
-//   children -> contenido de la página
 function PaginaAdmin({ miga, titulo, acciones, children }) {
   useEstilos(estilos, "admin-body");
 
   const [sidebarAbierto, setSidebarAbierto] = useState(false);
   const { pathname } = useLocation();
-  const navigate = useNavigate();
+  const { cerrar } = useAuth();
 
   useEffect(() => {
     document.title = titulo + " | Admin Krusty Burger";
@@ -25,11 +25,9 @@ function PaginaAdmin({ miga, titulo, acciones, children }) {
 
   function salir(evento) {
     evento.preventDefault();
-    cerrarSesion();
-    navigate("/login");
+    cerrar();
   }
 
-  // Marca como activo el enlace de la página actual
   function claseItem(ruta) {
     return "item" + (pathname === ruta ? " activo" : "");
   }
@@ -56,16 +54,23 @@ function PaginaAdmin({ miga, titulo, acciones, children }) {
           </Link>
           <p className="grupo-titulo">Gestión</p>
           <Link className={claseItem("/admin/ordenes")} to="/admin/ordenes">
-            <i className="ti ti-receipt"></i> Órdenes <span className="badge-mini">{listarOrdenes().length}</span>
+            <i className="ti ti-receipt"></i> Órdenes{" "}
+            <span className="badge-mini">{listarOrdenes().length}</span>
           </Link>
           <Link className={claseItem("/admin/productos")} to="/admin/productos">
-            <i className="ti ti-burger"></i> Productos <span className="badge-mini">{listarProductos().length}</span>
+            <i className="ti ti-burger"></i> Productos{" "}
+            <span className="badge-mini">{listarProductos().length}</span>
           </Link>
-          <Link className={claseItem("/admin/categorias")} to="/admin/categorias">
-            <i className="ti ti-tags"></i> Categorías <span className="badge-mini">{listarCategorias().length}</span>
+          <Link
+            className={claseItem("/admin/categorias")}
+            to="/admin/categorias"
+          >
+            <i className="ti ti-tags"></i> Categorías{" "}
+            <span className="badge-mini">{listarCategorias().length}</span>
           </Link>
           <Link className={claseItem("/admin/usuarios")} to="/admin/usuarios">
-            <i className="ti ti-users"></i> Usuarios <span className="badge-mini">{listarUsuarios().length}</span>
+            <i className="ti ti-users"></i> Usuarios{" "}
+            <span className="badge-mini">{listarUsuarios().length}</span>
           </Link>
           <p className="grupo-titulo">Análisis</p>
           <Link className={claseItem("/admin/reportes")} to="/admin/reportes">

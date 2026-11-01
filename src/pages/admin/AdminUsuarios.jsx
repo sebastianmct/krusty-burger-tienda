@@ -36,7 +36,8 @@ function AdminUsuarios() {
       titulo="Usuarios"
       acciones={
         <Link to="/admin/usuarios/nuevo" className="btn btn-kb-primario">
-          <i className="ti ti-user-plus"></i> <span className="d-none d-sm-inline">Nuevo usuario</span>
+          <i className="ti ti-user-plus"></i>{" "}
+          <span className="d-none d-sm-inline">Nuevo usuario</span>
         </Link>
       }
     >
@@ -60,7 +61,8 @@ function AdminUsuarios() {
             />
           </div>
           <span className="text-muted small">
-            {filtrados.length + (filtrados.length === 1 ? " usuario" : " usuarios")}
+            {filtrados.length +
+              (filtrados.length === 1 ? " usuario" : " usuarios")}
           </span>
         </div>
         <div className="table-responsive">
@@ -80,7 +82,10 @@ function AdminUsuarios() {
                 return (
                   <tr key={u.id}>
                     <td className="celda-producto">
-                      <div className="avatar-iniciales" style={{ background: colorAvatar(nombreCompleto) }}>
+                      <div
+                        className="avatar-iniciales"
+                        style={{ background: colorAvatar(nombreCompleto) }}
+                      >
                         {iniciales(u.nombre, u.apellidos)}
                       </div>
                       <div>
@@ -89,9 +94,15 @@ function AdminUsuarios() {
                       </div>
                     </td>
                     <td>{u.run}</td>
-                    <td>{(u.comuna || "") + (u.region ? ", " + u.region : "")}</td>
                     <td>
-                      <span className={"badge badge-rol " + claseRol(u.tipoUsuario)}>{u.tipoUsuario}</span>
+                      {(u.comuna || "") + (u.region ? ", " + u.region : "")}
+                    </td>
+                    <td>
+                      <span
+                        className={"badge badge-rol " + claseRol(u.tipoUsuario)}
+                      >
+                        {u.tipoUsuario}
+                      </span>
                     </td>
                     <td className="text-end">
                       <div className="fila-acciones">
@@ -104,7 +115,11 @@ function AdminUsuarios() {
                         </Link>
                         <Link
                           className="btn btn-sm btn-kb-secundario"
-                          to={"/admin/usuarios/" + encodeURIComponent(u.id) + "/editar"}
+                          to={
+                            "/admin/usuarios/" +
+                            encodeURIComponent(u.id) +
+                            "/editar"
+                          }
                           title="Editar"
                         >
                           <i className="ti ti-pencil"></i>
@@ -128,8 +143,12 @@ function AdminUsuarios() {
         {filtrados.length === 0 && (
           <div className="estado-vacio">
             <i className="ti ti-users-group"></i>
-            <p className="mt-2 mb-1">No hay usuarios que coincidan con la búsqueda.</p>
-            <p className="text-muted small mb-0">Ni el jefe Wiggum encontró a nadie con esos datos.</p>
+            <p className="mt-2 mb-1">
+              No hay usuarios que coincidan con la búsqueda.
+            </p>
+            <p className="text-muted small mb-0">
+              Ni el jefe Wiggum encontró a nadie con esos datos.
+            </p>
           </div>
         )}
       </div>

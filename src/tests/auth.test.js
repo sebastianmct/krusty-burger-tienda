@@ -1,6 +1,10 @@
-import { registrar, iniciarSesion, obtenerSesion, cerrarSesion } from "../services/auth";
+import {
+  registrar,
+  iniciarSesion,
+  obtenerSesion,
+  cerrarSesion,
+} from "../services/auth";
 
-// Datos de un usuario de ejemplo
 const datos = {
   run: "190110222",
   nombre: "Ned",
@@ -31,7 +35,9 @@ describe("registrar()", () => {
     const segundo = registrar(datos);
 
     expect(segundo.ok).toBe(false);
-    expect(segundo.error).toBe("Ya existe una cuenta registrada con ese correo.");
+    expect(segundo.error).toBe(
+      "Ya existe una cuenta registrada con ese correo.",
+    );
   });
 });
 

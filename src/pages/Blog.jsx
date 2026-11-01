@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import LisaSaxofon from "../components/LisaSaxofon";
 import useEstilos from "../hooks/useEstilos";
 import { blogs, formatoFecha } from "../data/blogs";
 import estiloHome from "../styles/style-home.css?inline";
@@ -11,12 +12,17 @@ function Blog() {
 
   return (
     <main className="kb-pagina">
-      <div className="kb-pagina-cabecera">
-        <span className="kb-etiqueta">Noticias de Springfield</span>
-        <h1 className="kb-pagina-titulo">
-          El blog de <span>Krusty</span>
-        </h1>
-        <p className="kb-pagina-texto">Historias, consejos y secretos (casi todos) de nuestra cocina.</p>
+      <div className="kb-pagina-cabecera d-flex flex-wrap align-items-center justify-content-between gap-4">
+        <div>
+          <span className="kb-etiqueta">Noticias de Springfield</span>
+          <h1 className="kb-pagina-titulo">
+            El blog de <span>Krusty</span>
+          </h1>
+          <p className="kb-pagina-texto">
+            Historias, consejos y secretos (casi todos) de nuestra cocina.
+          </p>
+        </div>
+        <LisaSaxofon />
       </div>
 
       <div className="kb-blog-grid">

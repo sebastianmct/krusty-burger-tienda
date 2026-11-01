@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import AlertaDoh from "../components/AlertaDoh";
 import MensajeError from "../components/MensajeError";
 import useEstilos from "../hooks/useEstilos";
 import useFormulario from "../hooks/useFormulario";
@@ -27,19 +28,24 @@ function Registro() {
   useEstilos(estilos);
 
   const navigate = useNavigate();
-  const { valores, errorDe, cambiar, cambiarValor, salirDelCampo, enviar, reiniciar } = useFormulario(
-    valoresIniciales,
-    validarRegistro,
-  );
-  const [errorCorreo, setErrorCorreo] = useState(""); // por ejemplo: "ya existe una cuenta con ese correo"
+  const {
+    valores,
+    resumenErrores,
+    errorDe,
+    cambiar,
+    cambiarValor,
+    salirDelCampo,
+    enviar,
+    reiniciar,
+  } = useFormulario(valoresIniciales, validarRegistro);
+  const [errorCorreo, setErrorCorreo] = useState("");
   const [mensajeExito, setMensajeExito] = useState("");
 
-  // Las comunas disponibles dependen de la región elegida
   const comunas = comunasPorRegion[valores.region] || [];
 
   function cambiarRegion(evento) {
     cambiar(evento);
-    cambiarValor("comuna", ""); // al cambiar de región se borra la comuna elegida
+    cambiarValor("comuna", "");
   }
 
   function crearCuenta(datos) {
@@ -48,7 +54,9 @@ function Registro() {
       setErrorCorreo(resultado.error);
       return;
     }
-    setMensajeExito("Cuenta creada! Ya puedes iniciar sesión con tu correo y contraseña.");
+    setMensajeExito(
+      "Cuenta creada! Ya puedes iniciar sesión con tu correo y contraseña.",
+    );
     reiniciar();
     setTimeout(() => navigate("/login"), 1500);
   }
@@ -58,13 +66,16 @@ function Registro() {
       <div className="container-fluid px-4 px-lg-5">
         <div className="row align-items-center min-vh-100">
           <div className="col-lg-6 columna-izquierda order-lg-1 order-2">
-            <h1 className="titulo">¡ÚNETE AL CLUB DE LOS HAMBRIENTOS!</h1>
+            <h1 className="titulo">El jefe Gorgory no tiene tiempo para perseguirte.<br></br><span className="span">¡Regístrate!</span></h1>
             <p className="texto">
-              Regístrate para obtener acceso exclusivo a las mejores hamburguesas de Springfield y promociones que harán
-              que te babees.
+              ¡Regístrate y consigue tu placa de miembro oficial de Krusty Burger! Accede a ofertas exclusivas antes de que el Jefe Gorgory se las coma todas.»
             </p>
-            <div className="imagen-izquierda">
-              <img src="assets/krusty-burger-local.webp" alt="Krusty Burger en el local" />
+            <div className="kb-policia">
+              <img
+                src="assets/policia-springfield.jpg"
+                alt="Policías de Springfield: Jefe Gorgory, Lou y Eddie"
+              />
+              <div className="d-flex align-items-center gap-2 mt-3"></div>
             </div>
           </div>
 
@@ -153,7 +164,7 @@ function Registro() {
                     onBlur={salirDelCampo}
                     aria-invalid={Boolean(errorDe("email") || errorCorreo)}
                   />
-                  <MensajeError texto={errorDe("email") || errorCorreo} />
+                  <MensajeError texto={errorDe("email")} />
                 </div>
 
                 <div className="formulario-grupo">
@@ -207,7 +218,9 @@ function Registro() {
                     aria-invalid={Boolean(errorDe("comuna"))}
                   >
                     <option value="">
-                      {comunas.length === 0 ? "Primero selecciona una región" : "Selecciona una comuna"}
+                      {comunas.length === 0
+                        ? "Primero selecciona una región"
+                        : "Selecciona una comuna"}
                     </option>
                     {comunas.map((comuna) => (
                       <option key={comuna} value={comuna}>
@@ -268,9 +281,16 @@ function Registro() {
                     onBlur={salirDelCampo}
                     aria-invalid={Boolean(errorDe("terminos"))}
                   />
-                  <span className="form-check-label">Quiero recibir ofertas que no puedo rechazar</span>
+                  <span className="form-check-label">
+                    Quiero recibir ofertas que no puedo rechazar
+                  </span>
                 </label>
                 <MensajeError texto={errorDe("terminos")} />
+
+                {errorCorreo && <AlertaDoh>{errorCorreo}</AlertaDoh>}
+                {resumenErrores && (
+                  <AlertaDoh>Revisa los campos marcados en rojo.</AlertaDoh>
+                )}
 
                 <button className="boton-registro btn" type="submit">
                   ¡Registrarme!

@@ -7,15 +7,22 @@ import { guardarUsuario, obtenerUsuario } from "../../services/adminData";
 import { normalizarRun, validarUsuario } from "../../utils/validaciones";
 import { TIPOS_USUARIO } from "../../utils/usuarios";
 
-// Sirve para crear (/admin/usuarios/nuevo) y para editar (/admin/usuarios/:id/editar)
 function AdminUsuarioForm() {
-  const { id } = useParams(); // si hay id estamos editando
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [usuarioActual] = useState(() => (id ? obtenerUsuario(id) : null));
   const u = usuarioActual;
 
-  const { valores, errorDe, claseValidacion, cambiar, cambiarValor, salirDelCampo, enviar } = useFormulario(
+  const {
+    valores,
+    errorDe,
+    claseValidacion,
+    cambiar,
+    cambiarValor,
+    salirDelCampo,
+    enviar,
+  } = useFormulario(
     {
       run: u ? u.run : "",
       nombre: u ? u.nombre : "",
@@ -30,12 +37,11 @@ function AdminUsuarioForm() {
     validarUsuario,
   );
 
-  // Las comunas disponibles dependen de la región elegida
   const comunas = comunasPorRegion[valores.region] || [];
 
   function cambiarRegion(evento) {
     cambiar(evento);
-    cambiarValor("comuna", ""); // al cambiar de región se borra la comuna elegida
+    cambiarValor("comuna", "");
   }
 
   function guardar(datos) {
@@ -51,7 +57,9 @@ function AdminUsuarioForm() {
       comuna: datos.comuna,
       direccion: datos.direccion.trim(),
     });
-    navigate("/admin/usuarios", { state: { mensaje: "Usuario guardado correctamente." } });
+    navigate("/admin/usuarios", {
+      state: { mensaje: "Usuario guardado correctamente." },
+    });
   }
 
   return (
@@ -91,7 +99,9 @@ function AdminUsuarioForm() {
               onBlur={salirDelCampo}
             />
             <div className="invalid-feedback">{errorDe("run")}</div>
-            <div className="form-text">Sin puntos ni guión, con dígito verificador. Ej: 19011022K</div>
+            <div className="form-text">
+              Sin puntos ni guión, con dígito verificador. Ej: 19011022K
+            </div>
           </div>
           <div className="col-md-4">
             <label className="form-label" htmlFor="nombre">
@@ -149,7 +159,8 @@ function AdminUsuarioForm() {
           </div>
           <div className="col-md-5">
             <label className="form-label" htmlFor="fechaNacimiento">
-              Fecha de nacimiento <span className="text-muted fw-normal">(opcional)</span>
+              Fecha de nacimiento{" "}
+              <span className="text-muted fw-normal">(opcional)</span>
             </label>
             <input
               type="date"
@@ -217,7 +228,9 @@ function AdminUsuarioForm() {
               onBlur={salirDelCampo}
             >
               <option value="">
-                {comunas.length === 0 ? "Primero selecciona una región" : "Selecciona una comuna"}
+                {comunas.length === 0
+                  ? "Primero selecciona una región"
+                  : "Selecciona una comuna"}
               </option>
               {comunas.map((comuna) => (
                 <option key={comuna} value={comuna}>

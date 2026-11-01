@@ -3,9 +3,10 @@ import Login from "../pages/Login";
 import { registrar } from "../services/auth";
 import { renderConTienda } from "./ayudas";
 
-// Escribe en un campo del formulario como lo haría un usuario
 function escribir(etiqueta, valor) {
-  fireEvent.change(screen.getByLabelText(etiqueta), { target: { value: valor } });
+  fireEvent.change(screen.getByLabelText(etiqueta), {
+    target: { value: valor },
+  });
 }
 
 describe("Página Login", () => {

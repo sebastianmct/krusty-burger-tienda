@@ -3,11 +3,10 @@ import PaginaAdmin from "../../components/admin/PaginaAdmin";
 import { etiquetaCategoria } from "../../data/productos";
 import { listarProductos } from "../../services/adminData";
 
-// Productos cuyo stock llegó (o bajó de) su stock crítico: /admin/productos/criticos
 function AdminProductosCriticos() {
   const criticos = listarProductos()
     .filter((p) => p.stockCritico != null && p.stock <= p.stockCritico)
-    .sort((a, b) => a.stock - a.stockCritico - (b.stock - b.stockCritico)); // primero los más urgentes
+    .sort((a, b) => a.stock - a.stockCritico - (b.stock - b.stockCritico));
 
   return (
     <PaginaAdmin
@@ -30,9 +29,13 @@ function AdminProductosCriticos() {
         <div className="tabla-admin-header">
           <div>
             <p className="seccion-titulo mb-0">Productos por reponer</p>
-            <p className="text-muted small mb-0">Su stock es igual o menor al stock crítico definido.</p>
+            <p className="text-muted small mb-0">
+              Su stock es igual o menor al stock crítico definido.
+            </p>
           </div>
-          <span className="text-muted small ms-auto">{criticos.length} productos</span>
+          <span className="text-muted small ms-auto">
+            {criticos.length} productos
+          </span>
         </div>
         <div className="table-responsive">
           <table className="table tabla-admin mb-0">
@@ -57,14 +60,20 @@ function AdminProductosCriticos() {
                   </td>
                   <td>{etiquetaCategoria(p.categoria)}</td>
                   <td>
-                    <span className="badge rounded-pill badge-stock-critico">{p.stock}</span>
+                    <span className="badge rounded-pill badge-stock-critico">
+                      {p.stock}
+                    </span>
                   </td>
                   <td>{p.stockCritico}</td>
                   <td className="text-end">
                     <div className="fila-acciones">
                       <Link
                         className="btn btn-sm btn-kb-secundario"
-                        to={"/admin/productos/" + encodeURIComponent(p.id) + "/editar"}
+                        to={
+                          "/admin/productos/" +
+                          encodeURIComponent(p.id) +
+                          "/editar"
+                        }
                         title="Reponer stock"
                       >
                         <i className="ti ti-pencil"></i>
@@ -79,7 +88,9 @@ function AdminProductosCriticos() {
         {criticos.length === 0 && (
           <div className="estado-vacio">
             <i className="ti ti-mood-smile"></i>
-            <p className="mt-2 mb-0">Todo en orden: ningún producto está en stock crítico.</p>
+            <p className="mt-2 mb-0">
+              Todo en orden: ningún producto está en stock crítico.
+            </p>
           </div>
         )}
       </div>

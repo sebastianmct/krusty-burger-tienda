@@ -2,9 +2,11 @@ import { screen, fireEvent } from "@testing-library/react";
 import Carrito from "../pages/Carrito";
 import { renderConTienda } from "./ayudas";
 
-// Deja 2 hamburguesas Krusty ($4.990 c/u) guardadas en el carrito antes de renderizar
 function carritoConDosHamburguesas() {
-  localStorage.setItem("krustyBurgerCart", JSON.stringify([{ id: "krusty-burger", cantidad: 2 }]));
+  localStorage.setItem(
+    "krustyBurgerCart",
+    JSON.stringify([{ id: "krusty-burger", cantidad: 2 }]),
+  );
 }
 
 describe("Página Carrito", () => {
@@ -19,7 +21,7 @@ describe("Página Carrito", () => {
     renderConTienda(<Carrito />);
 
     expect(screen.getByText("Hamburguesa Krusty")).toBeTruthy();
-    // 9.980 de subtotal + 1.896 de impuestos + 2.100 de despacho
+
     expect(screen.getByText("$13.976")).toBeTruthy();
   });
 
@@ -27,7 +29,9 @@ describe("Página Carrito", () => {
     carritoConDosHamburguesas();
     renderConTienda(<Carrito />);
 
-    fireEvent.click(screen.getByLabelText("Aumentar cantidad de Hamburguesa Krusty"));
+    fireEvent.click(
+      screen.getByLabelText("Aumentar cantidad de Hamburguesa Krusty"),
+    );
 
     expect(screen.getByText("3")).toBeTruthy();
   });

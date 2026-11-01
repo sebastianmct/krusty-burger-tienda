@@ -14,14 +14,15 @@ function Carrito() {
 
   const { items, actualizar, eliminar } = useCarrito();
 
-  // Unimos cada item del carrito (id y cantidad) con los datos de su producto.
-  // Si un producto ya no existe (lo eliminaron en el admin) no se muestra.
   const lineas = items
     .map((item) => ({ ...item, producto: buscarProducto(item.id) }))
     .filter((linea) => linea.producto);
 
   const totales = calcularTotales(
-    lineas.map((linea) => ({ precio: precioFinal(linea.producto), cantidad: linea.cantidad })),
+    lineas.map((linea) => ({
+      precio: precioFinal(linea.producto),
+      cantidad: linea.cantidad,
+    })),
   );
 
   return (
@@ -38,66 +39,84 @@ function Carrito() {
                 <Link to="/menu">Ver el menú</Link>
               </div>
             ) : (
-              lineas.map(({ id, cantidad, producto }) => (
-                <article className="producto" key={id}>
-                  <img src={producto.imagen} alt={producto.alt} />
-                  <div className="producto-info">
-                    <h2>{producto.nombre}</h2>
-                    <p>{producto.descripcion}</p>
-                    <div className="cantidad">
+              <div className="lista-productos">
+                {lineas.map(({ id, cantidad, producto }) => (
+                  <article className="producto" key={id}>
+                    <img src={producto.imagen} alt={producto.alt} />
+                    <div className="producto-info">
+                      <h2>{producto.nombre}</h2>
+                      <p>{producto.descripcion}</p>
+                      <div className="cantidad">
+                        <button
+                          type="button"
+                          className="cantidad-control"
+                          aria-label={"Disminuir cantidad de " + producto.nombre}
+                          onClick={() => actualizar(id, cantidad - 1)}
+                        >
+                          −
+                        </button>
+                        <span>{cantidad}</span>
+                        <button
+                          type="button"
+                          className="cantidad-control"
+                          aria-label={"Aumentar cantidad de " + producto.nombre}
+                          onClick={() => actualizar(id, cantidad + 1)}
+                        >
+                          +
+                        </button>
+                      </div>
                       <button
+                        className="eliminar"
                         type="button"
-                        className="cantidad-control"
-                        aria-label={"Disminuir cantidad de " + producto.nombre}
-                        onClick={() => actualizar(id, cantidad - 1)}
+                        onClick={() => eliminar(id)}
                       >
-                        −
-                      </button>
-                      <span>{cantidad}</span>
-                      <button
-                        type="button"
-                        className="cantidad-control"
-                        aria-label={"Aumentar cantidad de " + producto.nombre}
-                        onClick={() => actualizar(id, cantidad + 1)}
-                      >
-                        +
+                        Eliminar
                       </button>
                     </div>
-                    <button className="eliminar" type="button" onClick={() => eliminar(id)}>
-                      Eliminar
-                    </button>
-                  </div>
-                  <strong className="producto-precio">{formatoPrecio(precioFinal(producto) * cantidad)}</strong>
-                </article>
-              ))
+                    <strong className="producto-precio">
+                      {formatoPrecio(precioFinal(producto) * cantidad)}
+                    </strong>
+                  </article>
+                ))}
+              </div>
             )}
           </div>
         </section>
 
         <aside className="col-lg-5 carrito-lateral">
-          <div className="frase">“La mejor burger de la historia... me llevaré tres.”</div>
           <div className="krusty-imagen">
-            <img src="assets/krusty-payaso1.jpg" alt="Krusty sosteniendo una hamburguesa" />
+            <img
+              src="assets/krusty-pidiendo-propina.gif"
+              alt="Krusty sosteniendo una hamburguesa"
+            />
           </div>
           <div className="resumen">
             <h2>Resumen del pedido</h2>
             <p>
               <span>Subtotal</span>
-              <strong id="subtotal-carrito">{formatoPrecio(totales.subtotal)}</strong>
+              <strong id="subtotal-carrito">
+                {formatoPrecio(totales.subtotal)}
+              </strong>
             </p>
             <p>
               <span>Impuestos</span>
-              <strong id="impuestos-carrito">{formatoPrecio(totales.impuestos)}</strong>
+              <strong id="impuestos-carrito">
+                {formatoPrecio(totales.impuestos)}
+              </strong>
             </p>
             <p>
               <span>Despacho</span>
-              <strong id="despacho-carrito">{formatoPrecio(totales.despacho)}</strong>
+              <strong id="despacho-carrito">
+                {formatoPrecio(totales.despacho)}
+              </strong>
             </p>
             <div className="total">
               <span>Total</span>
               <strong id="total-carrito">{formatoPrecio(totales.total)}</strong>
             </div>
-            <Link to={lineas.length > 0 ? "/checkout" : "/menu"}>Continuar con el pago</Link>
+            <Link to={lineas.length > 0 ? "/checkout" : "/menu"}>
+              Continuar con el pago
+            </Link>
           </div>
         </aside>
       </div>

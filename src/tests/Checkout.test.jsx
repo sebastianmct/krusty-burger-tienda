@@ -5,8 +5,11 @@ import Checkout from "../pages/Checkout";
 import CompraExitosa from "../pages/CompraExitosa";
 import PagoError from "../pages/PagoError";
 import { listarOrdenes } from "../services/adminData";
+import { buscarProducto, precioFinal } from "../data/productos";
+import { FRASE_BURNS, FRASE_DUFFMAN, FRASE_OTTO } from "../data/frases";
+import { calcularTotales } from "../utils/carrito";
+import { formatoPrecio } from "../utils/formato";
 
-// Renderiza el checkout con las pantallas de resultado como rutas
 function renderCheckout() {
   return render(
     <MemoryRouter initialEntries={["/checkout"]}>
@@ -21,9 +24,10 @@ function renderCheckout() {
   );
 }
 
-// Escribe en un campo como lo haría un usuario
 function escribir(etiqueta, valor) {
-  fireEvent.change(screen.getByLabelText(etiqueta), { target: { value: valor } });
+  fireEvent.change(screen.getByLabelText(etiqueta), {
+    target: { value: valor },
+  });
 }
 
 function llenarFormulario() {
@@ -37,8 +41,10 @@ function llenarFormulario() {
 
 describe("Checkout", () => {
   beforeEach(() => {
-    // Una Hamburguesa Krusty en el carrito: 4.990 + 948 de impuestos + 2.100 de despacho = 8.038
-    localStorage.setItem("krustyBurgerCart", JSON.stringify([{ id: "krusty-burger", cantidad: 1 }]));
+    localStorage.setItem(
+      "krustyBurgerCart",
+      JSON.stringify([{ id: "krusty-burger", cantidad: 1 }]),
+    );
   });
 
   it("con el carrito vacío avisa que no hay nada que pagar", () => {
@@ -92,8 +98,69 @@ describe("Checkout", () => {
     escribir(/Simulador de pago/, "rechazado");
     fireEvent.click(screen.getByRole("button", { name: /Pagar ahora/ }));
 
-    fireEvent.click(screen.getByRole("button", { name: "Volver a realizar el pago" }));
+    fireEvent.click(
+      screen.getByRole("button", { name: "Volver a realizar el pago" }),
+    );
 
     expect(screen.getByLabelText("Nombre *").value).toBe("Homero");
+  });
+
+  it("sin bebidas la entrega especial de Duffman no se puede elegir", () => {
+    renderCheckout();
+
+    expect(screen.getByLabelText(/Quiero que Duffman/).disabled).toBe(true);
+  });
+
+  it("con una bebida se puede elegir la entrega de Duffman: aparece bailando y suma $1.990", () => {
+    localStorage.setItem(
+      "krustyBurgerCart",
+      JSON.stringify([{ id: "buzz-cola", cantidad: 1 }]),
+    );
+    renderCheckout();
+    const precio = precioFinal(buscarProducto("buzz-cola"));
+    const sinExtra = calcularTotales([{ precio, cantidad: 1 }], 0).total;
+
+    expect(screen.queryByText(FRASE_DUFFMAN)).toBeNull();
+    expect(
+      screen.getByText("Total a pagar: " + formatoPrecio(sinExtra)),
+    ).toBeTruthy();
+
+    fireEvent.click(screen.getByLabelText(/Quiero que Duffman/));
+
+    expect(screen.getByText(FRASE_DUFFMAN)).toBeTruthy();
+    expect(
+      screen.getByText("Total a pagar: " + formatoPrecio(sinExtra + 1990)),
+    ).toBeTruthy();
+  });
+
+  it("si el formulario tiene errores muestra un aviso D'oh!", () => {
+    renderCheckout();
+
+    fireEvent.click(screen.getByRole("button", { name: /Pagar ahora/ }));
+
+    expect(
+      screen.getByText("Revisa los campos marcados en rojo."),
+    ).toBeTruthy();
+  });
+
+  it("en la compra exitosa aparecen el Sr. Burns y Otto con su bus", () => {
+    renderCheckout();
+    llenarFormulario();
+
+    fireEvent.click(screen.getByRole("button", { name: /Pagar ahora/ }));
+
+    expect(screen.getByText(FRASE_BURNS)).toBeTruthy();
+    expect(screen.getByText(FRASE_OTTO)).toBeTruthy();
+  });
+
+  it("en el pago rechazado aparece el Gordo Tony", () => {
+    renderCheckout();
+    llenarFormulario();
+    escribir(/Simulador de pago/, "rechazado");
+
+    fireEvent.click(screen.getByRole("button", { name: /Pagar ahora/ }));
+
+    expect(screen.getByText("Gordo Tony")).toBeTruthy();
+    expect(screen.getByText(/Tony no perdona las deudas/)).toBeTruthy();
   });
 });
