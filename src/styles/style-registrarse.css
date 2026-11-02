@@ -140,7 +140,7 @@ img {
   background: var(--kb-cream);
   background-image:
     radial-gradient(#d1d1d1 1px, transparent 1px),
-    url("/assets/fondo-nubes.jpg");
+    url("assets/fondo-nubes.jpg");
   background-size: auto, cover;
   background-position:
     0 0,

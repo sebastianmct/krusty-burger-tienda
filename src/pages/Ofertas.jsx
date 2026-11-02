@@ -30,7 +30,7 @@ function Ofertas() {
         </div>
         <img
           className="kb-banner-ofertas-imagen"
-          src="/assets/bart-mesa.png"
+          src={`${import.meta.env.BASE_URL}assets/bart-mesa.png`}
           alt="Bart sorprende a los vecinos mientras comparten hamburguesas"
         />
       </div>
@@ -54,7 +54,7 @@ function Ofertas() {
         <aside className="kb-ofertas-gif">
           <img
             className="gif-krusty"
-            src="/assets/ay-caramba.gif"
+            src={`${import.meta.env.BASE_URL}assets/ay-caramba.gif`}
             alt="Krusty aparece detrás de las cortinas"
           />
         </aside>

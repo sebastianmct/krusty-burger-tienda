@@ -11,7 +11,12 @@ function EnvioOtto() {
       </Dialogo>
       <div className="kb-calle" aria-hidden="true">
         <span className="kb-bus">
-          <img src="/assets/ottobus.png" alt="Bus" width="140" height="50" />
+          <img
+            src={`${import.meta.env.BASE_URL}assets/ottobus.png`}
+            alt="Bus"
+            width="140"
+            height="50"
+          />
         </span>
       </div>
     </section>
