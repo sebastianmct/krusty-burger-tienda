@@ -2,45 +2,16 @@ import { useState } from "react";
 import AlertaDoh from "../components/AlertaDoh";
 import TarjetaProducto from "../components/TarjetaProducto";
 import useEstilos from "../hooks/useEstilos";
-import { obtenerCatalogo, precioFinal } from "../data/productos";
+import {
+  obtenerCatalogo,
+  obtenerCategorias,
+  precioFinal,
+} from "../data/productos";
 import { buscarProductos } from "../utils/busqueda";
 import estiloHome from "../styles/style-home.css?inline";
 import estiloMenu from "../styles/style-menu.css?inline";
 
 const estilos = [estiloHome, estiloMenu];
-
-const categorias = [
-  {
-    valor: "todos",
-    icono: "ti-layout-grid",
-    nombre: "Todos",
-    detalle: "Ver el menú completo",
-  },
-  {
-    valor: "hamburguesas",
-    icono: "ti-burger",
-    nombre: "Hamburguesas",
-    detalle: "Las favoritas",
-  },
-  {
-    valor: "combos",
-    icono: "ti-tools-kitchen-2",
-    nombre: "Combos",
-    detalle: "Para compartir",
-  },
-  {
-    valor: "dulces",
-    icono: "ti-chart-donut",
-    nombre: "Rosquillas",
-    detalle: "Dulces y glaseadas",
-  },
-  {
-    valor: "bebidas",
-    icono: "ti-cup",
-    nombre: "Bebidas",
-    detalle: "Frías y refrescantes",
-  },
-];
 
 function ordenar(productos, criterio) {
   const copia = [...productos];
@@ -54,6 +25,15 @@ function ordenar(productos, criterio) {
 function Menu() {
   useEstilos(estilos);
 
+  const categorias = [
+    {
+      valor: "todos",
+      icono: "ti-layout-grid",
+      etiqueta: "Todos",
+      descripcion: "Ver el menú completo",
+    },
+    ...obtenerCategorias(),
+  ];
   const [productos] = useState(obtenerCatalogo);
   const [categoriaActiva, setCategoriaActiva] = useState("todos");
   const [orden, setOrden] = useState("popularidad");
@@ -109,8 +89,10 @@ function Menu() {
               >
                 <i className={"ti " + categoria.icono}></i>
                 <span>
-                  {categoria.nombre}
-                  <small>{categoria.detalle}</small>
+                  {categoria.etiqueta}
+                  <small>
+                    {categoria.descripcion || "Explora esta categoría"}
+                  </small>
                 </span>
               </button>
             ))}

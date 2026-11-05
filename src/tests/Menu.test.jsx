@@ -1,6 +1,7 @@
 import { screen, fireEvent } from "@testing-library/react";
 import Menu from "../pages/Menu";
 import { obtenerCatalogo, precioFinal } from "../data/productos";
+import { guardarCategoria, guardarProducto } from "../services/adminData";
 import { renderConTienda } from "./ayudas";
 
 describe("Página Menú", () => {
@@ -91,5 +92,30 @@ describe("Página Menú", () => {
     expect(screen.getAllByRole("article").length).toBe(
       obtenerCatalogo().length,
     );
+  });
+
+  it("muestra y filtra productos de una categoría creada desde administración", () => {
+    guardarCategoria({
+      valor: "postres-especiales",
+      etiqueta: "Postres especiales",
+      descripcion: "Dulces para compartir",
+    });
+    guardarProducto({
+      nombre: "Pastel de prueba",
+      descripcion: "Postre especial",
+      precio: 3500,
+      stock: 10,
+      categoria: "postres-especiales",
+      categoriaLabel: "Postres especiales",
+      imagen: "assets/krusty-burger.webp",
+    });
+
+    renderConTienda(<Menu />);
+    fireEvent.click(
+      screen.getByRole("button", { name: /Postres especiales/ }),
+    );
+
+    expect(screen.getAllByRole("article").length).toBe(1);
+    expect(screen.getByText("Pastel de prueba")).toBeTruthy();
   });
 });

@@ -4,22 +4,15 @@ import PersonajeDelDia from "../components/PersonajeDelDia";
 import VecinosSpringfield from "../components/VecinosSpringfield";
 import TarjetaProducto from "../components/TarjetaProducto";
 import useEstilos from "../hooks/useEstilos";
-import { obtenerCatalogo } from "../data/productos";
+import { obtenerCatalogo, obtenerCategorias } from "../data/productos";
 import estiloHome from "../styles/style-home.css?inline";
 
 const estilos = [estiloHome];
 
-const categorias = [
-  { valor: "hamburguesas", icono: "ti-burger", nombre: "Hamburguesas" },
-  { valor: "dulces", icono: "ti-chart-donut", nombre: "Rosquillas" },
-  { valor: "papas", icono: "ti-tools-kitchen-2", nombre: "Papas" },
-  { valor: "bebidas", icono: "ti-cup", nombre: "Bebidas" },
-  { valor: "combos", icono: "ti-tools-kitchen-2", nombre: "Combos" },
-];
-
 function Inicio() {
   useEstilos(estilos);
 
+  const categorias = obtenerCategorias();
   const [productos] = useState(obtenerCatalogo);
   const [categoriaActiva, setCategoriaActiva] = useState("hamburguesas");
 
@@ -72,7 +65,7 @@ function Inicio() {
                 onClick={() => setCategoriaActiva(categoria.valor)}
               >
                 <i className={"ti " + categoria.icono}></i>
-                {categoria.nombre}
+                {categoria.etiqueta}
               </button>
             ))}
           </div>

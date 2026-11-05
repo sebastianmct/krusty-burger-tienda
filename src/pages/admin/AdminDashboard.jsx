@@ -80,10 +80,6 @@ function AdminDashboard() {
       titulo="¡Hola, Administrador!"
       acciones={
         <>
-          <button className="campana" type="button" aria-label="Notificaciones">
-            <i className="ti ti-bell"></i>
-            <span className="punto"></span>
-          </button>
           <div className="avatar-iniciales" style={{ background: "#d9121d" }}>
             KP
           </div>
@@ -175,7 +171,7 @@ function AdminDashboard() {
             </div>
             {stockCritico.length === 0 && (
               <div className="estado-vacio">
-                <i className="ti ti-mood-smile"></i>
+                <img src="assets/flanders-simpsons.gif" alt="Ned Flanders" />
                 <p className="mt-2 mb-0">
                   Sin alertas por ahora. Hasta Ned Flanders estaría orgulloso.
                 </p>
@@ -191,7 +187,7 @@ function AdminDashboard() {
                 className="avatar-iniciales"
                 style={{ background: "#1A1A1A" }}
               >
-                JQ
+                <img src="assets/alcalde-quimby.webp" alt="Alcalde Quimby" />
               </div>
               <div>
                 <p className="nombre mb-0">Alcalde Quimby</p>
@@ -207,10 +203,10 @@ function AdminDashboard() {
                 className="avatar-iniciales"
                 style={{ background: "#c77b00" }}
               >
-                CW
+                <img src="assets/jefe-gorgory.png" alt="Jefe Gorgory" />
               </div>
               <div>
-                <p className="nombre mb-0">Jefe Wiggum</p>
+                <p className="nombre mb-0">Jefe Gorgory</p>
                 <p className="cargo mb-0">Seguridad del panel</p>
                 <p className="frase mb-0">
                   "Todo bajo control por aquí... ¿alguien vio dónde dejé la
