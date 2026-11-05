@@ -73,7 +73,7 @@ describe("Página Menú", () => {
     });
 
     expect(screen.getAllByRole("article").length).toBe(1);
-    expect(screen.getByText("Combo Tradicional Krusty")).toBeTruthy();
+    expect(screen.getByText("Combo clásico Krusty")).toBeTruthy();
     expect(
       screen.getByText("Una receta típica de Utica, Aurora Boreal incluida"),
     ).toBeTruthy();

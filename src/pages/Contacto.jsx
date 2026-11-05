@@ -43,7 +43,7 @@ function Contacto() {
         <div className="mx-auto kb-titulo-inner">
           <h1 className="kb-titulo-h1">¡Grita tus quejas aquí!</h1>
           <p className="mb-0">
-            ¿Krusty te dio una hamburguesa cruda? ¿El Ribwich te dio
+            ¿Krusty te dio una hamburguesa cruda? ¿El sándwich Ribwich te dio
             alucinaciones? ¡Dejanos saber! Nos importa (un poco).
           </p>
         </div>
@@ -66,6 +66,8 @@ function Contacto() {
               <form
                 id="contacto-form"
                 className="d-flex flex-column gap-3"
+                aria-busy={enviando}
+                data-uisfx-loop="processing"
                 noValidate
                 onSubmit={(evento) => enviar(evento, enviarMensaje)}
               >
@@ -144,7 +146,11 @@ function Contacto() {
                 )}
 
                 {mensajeExito && (
-                  <p className="mensaje-exito" role="status">
+                  <p
+                    className="mensaje-exito"
+                    role="status"
+                    data-uisfx="success"
+                  >
                     {mensajeExito}
                   </p>
                 )}

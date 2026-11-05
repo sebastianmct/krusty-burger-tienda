@@ -77,7 +77,9 @@ describe("Botón de cuenta en el Navbar", () => {
     return render(
       <MemoryRouter>
         <AuthProvider>
-          <Navbar />
+          <CarritoProvider>
+            <Navbar />
+          </CarritoProvider>
         </AuthProvider>
       </MemoryRouter>,
     );

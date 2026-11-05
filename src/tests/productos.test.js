@@ -7,20 +7,36 @@ import {
 describe("Catálogo (nombres y detalle de la comida)", () => {
   const catalogo = obtenerCatalogo();
 
-  it("los productos tienen los nombres verificados de la serie", () => {
+  it("muestra en español latino los nombres de todo el catálogo", () => {
     const nombres = catalogo.map((producto) => producto.nombre);
 
-    [
-      "The Clogger",
-      "Ribwich",
-      "Donut Burger",
+    expect(nombres).toEqual([
+      "Hamburguesa Krusty",
+      "Doble Krustyhamburguesa",
+      "Taparteria",
+      "Costillita",
+      "Hamburguesa de rosquilla",
+      "Papas fritas Krusty",
+      "Papas en espiral Krusty",
+      "Nuggets de pollo Krusty",
+      "Bolitas de tocino",
+      "Alitas de pollo estilo búfalo",
+      "Buzz Cola",
+      "Buzz Cola sin azúcar",
+      "Refresco de naranja Krusty",
+      "Malteada de Krusty",
       "Squishee",
-      "Balde de flan",
-      "Khlav Kalash",
+      "Rosquilla rosa de Homero",
+      "Helado de Krusty",
+      "Galletas Krusty",
+      "Balde de flan de Ned Flanders",
+      "Cereales Krusty-O's",
       "Tomacco",
-    ].forEach((nombre) => {
-      expect(nombres).toContain(nombre);
-    });
+      "Khlav Kalash",
+      "Cerveza Duff",
+      "Hot dog de Bob Patiño",
+      "Combo clásico Krusty",
+    ]);
   });
 
   it("todos los productos tienen ingredientes y calorías", () => {

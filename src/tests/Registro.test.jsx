@@ -44,6 +44,6 @@ describe("Página Inicio (más personajes)", () => {
 
     fireEvent.click(screen.getByRole("button", { name: /Combos/ }));
 
-    expect(screen.getByText("Combo Tradicional Krusty")).toBeTruthy();
+    expect(screen.getByText("Combo clásico Krusty")).toBeTruthy();
   });
 });

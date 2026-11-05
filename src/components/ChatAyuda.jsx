@@ -19,14 +19,14 @@ const PREGUNTAS = [
   {
     pregunta: "¿Hay ofertas?",
     claves: ["oferta", "descuento", "barato"],
-    respuesta: "¡Sí! Hay productos con hasta 30% de descuento.",
+    respuesta: "¡Sí, Hay productos con hasta 30% de descuento! ",
     enlace: { texto: "Ver ofertas", a: "/ofertas" },
   },
   {
     pregunta: "¿Cómo me registro?",
     claves: ["registr", "cuenta", "crear"],
     respuesta:
-      "Entra a Registrarme y llena el formulario. El Jefe Gorgory vigila que no falte ningún dato.",
+      "Entra a Registrarme y llena el formulario. Mi Papá vigila que no falte ningún dato.",
     enlace: { texto: "Ir al registro", a: "/registro" },
   },
   {

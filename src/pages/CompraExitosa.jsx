@@ -33,7 +33,7 @@ function CompraExitosa() {
   }
 
   return (
-    <main className="kb-pagina">
+    <main className="kb-pagina" data-uisfx-on-mount="reward">
       <section className="kb-panel">
         <div className="kb-panel-cabecera">
           <h1 className="kb-estado ok">

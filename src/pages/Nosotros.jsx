@@ -32,7 +32,7 @@ const equipo = [
     nombre: "Millhouse",
     cargo: "Promociones",
     texto: "Asistente de promociones y amigo de confianza.",
-    img: "assets/millhouse1.webp",
+    img: "assets/millhouse.gif",
     alt: "Millhouse Van Houten",
     color: "azul",
   },

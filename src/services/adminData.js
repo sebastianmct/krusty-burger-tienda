@@ -156,7 +156,8 @@ function sincronizarConCatalogo(lista) {
   let hayCambios = false;
 
   obtenerCatalogo().forEach((fuente, indice) => {
-    if (!lista.some((producto) => producto.id === fuente.id)) {
+    const existente = lista.find((producto) => producto.id === fuente.id);
+    if (!existente) {
       lista.push({
         id: fuente.id,
         codigo: "KB-" + String(indice + 1).padStart(3, "0"),

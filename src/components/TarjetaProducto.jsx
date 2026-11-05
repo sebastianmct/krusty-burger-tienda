@@ -77,6 +77,7 @@ function TarjetaProducto({ producto, variante, sticker }) {
       <button
         className="boton-producto"
         type="button"
+        data-uisfx="add-to-cart"
         onClick={agregarAlCarrito}
       >
         {textoBoton}

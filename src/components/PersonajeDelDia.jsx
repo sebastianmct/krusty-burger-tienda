@@ -21,7 +21,11 @@ function PersonajeDelDia({ id = 17 }) {
     : null;
 
   return (
-    <section className="kb-personaje px-4 px-lg-5 py-4">
+    <section
+      className="kb-personaje px-4 px-lg-5 py-4"
+      aria-busy={!error && !personaje}
+      data-uisfx-loop="loading"
+    >
       <p className="kb-personaje-etiqueta">Personaje del día</p>
 
       {error && (

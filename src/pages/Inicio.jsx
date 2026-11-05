@@ -32,12 +32,13 @@ function Inicio() {
       <header className="kb-hero d-flex flex-column flex-lg-row align-items-center justify-content-between gap-4 gap-lg-5 px-4 px-lg-5 py-5">
         <div className="hero-text">
           <h1 className="kb-hero-title">
-            !LA BURGEER FAVORITA DE <span>SPRINGFIELD!</span>
+            !LA BURGER FAVORITA DE <span>SPRINGFIELD!</span>
           </h1>
           <p className="kb-hero-text">
             Hamburguesas, papas y combos preparados para satisfacer hasta al
             ciudadano más hambriento.
           </p>
+          <br />
           <div className="d-flex flex-wrap gap-3">
             <Link to="/menu" className="btn btn-kb-hero btn-kb-hero-primario">
               Ordenar Ahora
@@ -97,19 +98,23 @@ function Inicio() {
           <div className="col-lg-6">
             <div className="kb-club-imagen d-flex justify-content-center">
               <img
-                src="assets/krusty-fumando.jpg"
-                alt="Krusty dando la bienvenida"
+                src="assets/gordo-tony.webp"
+                alt="Gordo Tony"
+              /><img
+                src="assets/gordo-tony.jpg"
+                alt="Gordo Tony"
               />
             </div>
           </div>
           <div className="col-lg-6">
             <div className="kb-club-contenido">
               <h2 className="kb-club-title">
-                ÚNETE AL <span>CLUB KRUSTY</span>
+                ÚNETE A LA <span>FAMILIA KRUSTY</span>
               </h2>
-              <p>
+              <p className="kb-club-text">
                 Acumula puntos con tus pedidos y recibe promociones especiales
                 para disfrutar tus hamburguesas favoritas.
+                <br></br><span>Tienes 24 horas. Y para que veas que vamos en serio, 12 horas.</span>
               </p>
               <Link to="/registro" className="btn btn-kb-club">
                 Registrarme

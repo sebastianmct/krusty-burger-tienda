@@ -1,0 +1,29 @@
+.kb-controles-sonido {
+  position: relative;
+  line-height: 1;
+}
+
+.kb-sonido-disparador {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+}
+
+.kb-sonido-panel {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  z-index: 1080;
+  width: min(17rem, calc(100vw - 2rem));
+  padding: 1rem;
+  color: #242424;
+  background: #fff;
+  border: 2px solid #242424;
+  border-radius: 0.5rem;
+  box-shadow: 0 0.25rem 0.75rem rgb(0 0 0 / 18%);
+  line-height: 1.4;
+}
+
+.kb-sonido-panel :focus-visible {
+  outline: 2px solid #242424;
+  outline-offset: 2px;
+}

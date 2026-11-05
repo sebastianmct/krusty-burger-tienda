@@ -1,6 +1,7 @@
 import { HashRouter, Navigate, Route, Routes } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import { CarritoProvider } from "./context/CarritoContext";
+import { SonidoProvider } from "./context/SonidoContext.jsx";
 import LayoutTienda from "./components/LayoutTienda";
 import RutaAdmin from "./components/RutaAdmin";
 import Inicio from "./pages/Inicio";
@@ -39,9 +40,10 @@ import AdminPerfil from "./pages/admin/AdminPerfil";
 function App() {
   return (
     <HashRouter>
-      <AuthProvider>
-        <CarritoProvider>
-          <Routes>
+      <SonidoProvider>
+        <AuthProvider>
+          <CarritoProvider>
+            <Routes>
             {}
             <Route element={<LayoutTienda />}>
               <Route path="/" element={<Inicio />} />
@@ -103,9 +105,10 @@ function App() {
 
             {}
             <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </CarritoProvider>
-      </AuthProvider>
+            </Routes>
+          </CarritoProvider>
+        </AuthProvider>
+      </SonidoProvider>
     </HashRouter>
   );
 }

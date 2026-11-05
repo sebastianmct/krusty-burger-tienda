@@ -68,6 +68,7 @@ function Carrito() {
                       <button
                         className="eliminar"
                         type="button"
+                        data-uisfx="remove-from-cart"
                         onClick={() => eliminar(id)}
                       >
                         Eliminar

@@ -90,7 +90,7 @@ function Menu() {
           </div>
           <div className="kb-barney-ilustracion">
             <img
-              src="assets/barney-cerveza1.png"
+              src="assets/barney-menu.png"
               alt="Barney sosteniendo una cerveza"
             />
           </div>

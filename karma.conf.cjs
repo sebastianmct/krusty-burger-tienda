@@ -1,3 +1,4 @@
+const webpack = require("webpack");
 const conCobertura = process.env.COBERTURA === "1";
 
 module.exports = function (config) {
@@ -29,6 +30,11 @@ module.exports = function (config) {
     webpack: {
       mode: "development",
       devtool: "inline-source-map",
+      plugins: [
+        new webpack.DefinePlugin({
+          "import.meta.env.BASE_URL": JSON.stringify("/krusty-burger-tienda/"),
+        }),
+      ],
       resolve: { extensions: [".js", ".jsx"] },
       module: {
         rules: [

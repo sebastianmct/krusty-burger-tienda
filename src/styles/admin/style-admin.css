@@ -465,6 +465,8 @@ table.tabla-admin td .subtexto {
 
 .btn-kb-secundario:hover {
   background: var(--kb-cream);
+  border-color: var(--kb-border);
+  color: var(--kb-dark);
 }
 
 .ficha-solo-lectura dt {

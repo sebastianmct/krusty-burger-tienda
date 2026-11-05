@@ -169,6 +169,7 @@ function Checkout() {
     <main className="kb-pagina">
       <form
         className="kb-panel"
+        data-uisfx-submit="start"
         noValidate
         onSubmit={(evento) => enviar(evento, pagar)}
       >

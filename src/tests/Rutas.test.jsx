@@ -1,7 +1,7 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "../context/AuthContext";
-import { CarritoProvider } from "../context/CarritoContext";
+import { CarritoProvider, useCarrito } from "../context/CarritoContext";
 import Navbar from "../components/Navbar";
 import DetalleProducto from "../pages/DetalleProducto";
 import RutaAdmin from "../components/RutaAdmin";
@@ -14,6 +14,29 @@ function renderEnRuta(ruta) {
           <Route path="/producto/:id" element={<DetalleProducto />} />
         </Routes>
       </CarritoProvider>
+    </MemoryRouter>,
+  );
+}
+
+function AgregarAlCarritoDePrueba() {
+  const { agregar } = useCarrito();
+
+  return (
+    <button type="button" onClick={() => agregar("krusty-burger", 2)}>
+      Agregar dos productos
+    </button>
+  );
+}
+
+function renderNavbar() {
+  return render(
+    <MemoryRouter>
+      <AuthProvider>
+        <CarritoProvider>
+          <Navbar />
+          <AgregarAlCarritoDePrueba />
+        </CarritoProvider>
+      </AuthProvider>
     </MemoryRouter>,
   );
 }
@@ -50,17 +73,40 @@ describe("Navegación", () => {
   });
 
   it("el Navbar tiene un link al menú", () => {
-    render(
-      <MemoryRouter>
-        <AuthProvider>
-          <Navbar />
-        </AuthProvider>
-      </MemoryRouter>,
-    );
+    renderNavbar();
 
     expect(
       screen.getByRole("link", { name: "Menú" }).getAttribute("href"),
     ).toBe("/menu");
+  });
+
+  it("muestra la cantidad total del carrito y la actualiza al agregar productos", () => {
+    renderNavbar();
+
+    expect(
+      screen.getByRole("link", { name: "Carrito, sin productos" }),
+    ).toBeTruthy();
+    expect(screen.queryByText("2")).toBeNull();
+
+    fireEvent.click(
+      screen.getByRole("button", { name: "Agregar dos productos" }),
+    );
+
+    expect(screen.getByText("2")).toBeTruthy();
+    expect(screen.getByRole("link", { name: "Carrito, 2 productos" })).toBeTruthy();
+  });
+
+  it("muestra el contador abreviado sin perder la cantidad accesible", () => {
+    localStorage.setItem(
+      "krustyBurgerCart",
+      JSON.stringify([{ id: "krusty-burger", cantidad: 120 }]),
+    );
+    renderNavbar();
+
+    expect(screen.getByText("99+")).toBeTruthy();
+    expect(
+      screen.getByRole("link", { name: "Carrito, 120 productos" }),
+    ).toBeTruthy();
   });
 });
 

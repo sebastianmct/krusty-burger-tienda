@@ -2,15 +2,27 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import LogoKrusty from "./LogoKrusty";
 import MenuCuenta from "./MenuCuenta";
+import ControlesSonido from "./ControlesSonido";
+import { useCarrito } from "../context/CarritoContext";
 
 function Navbar() {
   const [abierto, setAbierto] = useState(false);
+  const { items } = useCarrito();
+  const cantidadCarrito = items.reduce((total, item) => total + item.cantidad, 0);
+  const etiquetaCarrito =
+    cantidadCarrito === 0
+      ? "Carrito, sin productos"
+      : `Carrito, ${cantidadCarrito} ${
+          cantidadCarrito === 1 ? "producto" : "productos"
+        }`;
 
   return (
     <nav className="navbar navbar-expand-lg bg-white border-bottom border-3 border-dark px-4 px-lg-5 py-3">
       <div className="container-fluid p-0 gap-3">
         <h2 className="kb-logo m-0">
-          <LogoKrusty className="kb-logo-img kb-logo-img-nav" />
+          <Link to="/">
+            <LogoKrusty className="kb-logo-img kb-logo-img-nav" />
+          </Link>
         </h2>
 
         <button
@@ -94,12 +106,19 @@ function Navbar() {
             </li>
           </ul>
           <div className="kb-nav-acciones d-flex align-items-center justify-content-center gap-3">
+            <ControlesSonido />
             <Link
               to="/carrito"
               className="kb-icon-link"
+              aria-label={etiquetaCarrito}
               onClick={() => setAbierto(false)}
             >
-              <i className="ti ti-shopping-cart"></i>
+              <i className="ti ti-shopping-cart" aria-hidden="true"></i>
+              {cantidadCarrito > 0 && (
+                <span className="contador-carrito" aria-hidden="true">
+                  {cantidadCarrito > 99 ? "99+" : cantidadCarrito}
+                </span>
+              )}
             </Link>
             <MenuCuenta alNavegar={() => setAbierto(false)} />
             <Link

@@ -8,6 +8,7 @@ import {
   listarUsuarios,
 } from "../../services/adminData";
 import { useAuth } from "../../context/AuthContext";
+import ControlesSonido from "../ControlesSonido";
 import estiloAdmin from "../../styles/admin/style-admin.css?inline";
 
 const estilos = [estiloAdmin];
@@ -106,6 +107,7 @@ function PaginaAdmin({ miga, titulo, acciones, children }) {
             <h2>{titulo}</h2>
           </div>
           {acciones && <div className="acciones-topbar">{acciones}</div>}
+          <ControlesSonido />
         </header>
 
         <main className="admin-content">{children}</main>

@@ -55,7 +55,7 @@ function Ofertas() {
           <img
             className="gif-krusty"
             src={`${import.meta.env.BASE_URL}assets/ay-caramba.gif`}
-            alt="Krusty aparece detrás de las cortinas"
+            alt="Bart Simpson grita '¡Ay, caramba!'"
           />
         </aside>
       </div>

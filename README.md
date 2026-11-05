@@ -77,15 +77,6 @@ Todas las reglas de validación están en `src/utils/validaciones.js`. Cada form
 
 ---
 
-<div align="center">
-
-Creado por **Sebastián Caamaño** y **Vicente Ordenes**
-
-*I am Groot.*
-</div>
-
----
-
 ## Ambientación de Springfield
 
 La tienda está llena de personajes de Los Simpson (los diálogos están en `src/data/frases.js` y las fotos en `src/data/personajes.js`):
@@ -97,3 +88,12 @@ La tienda está llena de personajes de Los Simpson (los diálogos están en `src
 - **Compra:** entrega especial de bebidas con Duffman, Otto "va en camino" y el Sr. Burns en el pago exitoso; el Gordo Tony en el pago rechazado.
 - **Otras vistas:** policías en el registro, Snake en el login, Bart en las ofertas, Cletus en los productos a prueba de tontos, Lisa en el blog y Apu como personaje del día.
 - **Búsqueda especial:** al buscar "hamburguesas al vapor" aparece el combo tradicional con el sticker del Director Skinner.
+
+---
+
+<div align="center">
+
+Creado por **Sebastián Caamaño** y **Vicente Ordenes**
+
+*I am Groot.*
+</div>

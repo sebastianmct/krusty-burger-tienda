@@ -21,11 +21,13 @@ describe("Página Ofertas", () => {
   it("muestra a Bart en el banner de ofertas", () => {
     renderConTienda(<Ofertas />);
 
-    expect(
-      screen.getByAltText(
-        "Bart sorprende a los vecinos mientras comparten hamburguesas",
-      ),
-    ).toBeTruthy();
+    const imagen = screen.getByAltText(
+      "Bart sorprende a los vecinos mientras comparten hamburguesas",
+    );
+
+    expect(imagen.getAttribute("src")).toBe(
+      "/krusty-burger-tienda/assets/bart-mesa.png",
+    );
   });
 
   it("muestra el GIF de Krusty junto a las ofertas", () => {

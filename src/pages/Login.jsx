@@ -40,7 +40,7 @@ function Login() {
     evento.preventDefault();
     setMostrarNelson(true);
     audioNelson.current.currentTime = 0;
-    audioNelson.current.play().catch(() => {});
+    audioNelson.current.play().catch(() => { });
     setTimeout(() => setMostrarNelson(false), 2000);
   }
 
@@ -61,6 +61,7 @@ function Login() {
         <form
           className="formulario-login d-flex flex-column"
           id="login-form"
+          data-uisfx-submit="unlock"
           noValidate
           onSubmit={(evento) => enviar(evento, iniciar)}
         >
@@ -124,7 +125,7 @@ function Login() {
           </a>
 
           <div id="nelson-container" className={mostrarNelson ? "" : "oculto"}>
-            <img src="assets/nelson-haha.jpg" alt="Nelson Haha" />
+            <img src="assets/nelson-haha.gif" alt="Nelson Haha" />
           </div>
 
           <audio
