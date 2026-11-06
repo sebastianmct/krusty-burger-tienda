@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import ChatAyuda from "./ChatAyuda";
 import AvisoHibbert from "./AvisoHibbert";
 import PreferenciasCookies from "./PreferenciasCookies";
+import KrustyShowIntro from "./KrustyShowIntro";
 import useEstilos from "../hooks/useEstilos";
 import estiloPersonajes from "../styles/style-personajes.css?inline";
 
@@ -26,6 +27,7 @@ function LayoutTienda() {
       <ChatAyuda />
       <AvisoHibbert />
       <PreferenciasCookies />
+      <KrustyShowIntro />
     </>
   );
 }
