@@ -4,6 +4,7 @@ import Navbar from "./Navbar";
 import Footer from "./Footer";
 import ChatAyuda from "./ChatAyuda";
 import AvisoHibbert from "./AvisoHibbert";
+import PreferenciasCookies from "./PreferenciasCookies";
 import useEstilos from "../hooks/useEstilos";
 import estiloPersonajes from "../styles/style-personajes.css?inline";
 
@@ -24,6 +25,7 @@ function LayoutTienda() {
       <Footer />
       <ChatAyuda />
       <AvisoHibbert />
+      <PreferenciasCookies />
     </>
   );
 }

@@ -22,6 +22,7 @@ export const PERSONAJES = {
     apiId: 15,
     foto: "assets/krusty-el-payaso.webp",
   },
+  cookieKwan: { nombre: "Cookie Kwan", buscar: /cookie kwan/i },
   moe: { nombre: "Moe", apiId: 16, foto: "assets/moe.jpg" },
   apu: { nombre: "Apu", apiId: 17 },
   skinner: { nombre: "Director Skinner", apiId: 18 },
