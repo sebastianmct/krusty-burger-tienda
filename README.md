@@ -10,6 +10,9 @@
 
 **Demo:** https://sebastianmct.github.io/krusty-burger-tienda/
 
+**[Read in english](README.en.md)**
+
+
 ---
 
 ## ¿Qué es esto?
@@ -90,6 +93,8 @@ La tienda está llena de personajes de Los Simpson (los diálogos están en `src
 - **Búsqueda especial:** al buscar "hamburguesas al vapor" aparece el combo tradicional con el sticker del Director Skinner.
 
 ---
+
+![Simpsons](./public/assets/nuestro-equipo.png)
 
 <div align="center">
 
