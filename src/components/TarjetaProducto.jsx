@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCarrito } from "../context/CarritoContext";
+import BotonCarrito from "./BotonCarrito";
 import Personaje from "./Personaje";
+import { inclinarImagen, reponerImagen } from "../animaciones/efectos";
 import { precioFinal } from "../data/productos";
 import { formatoPrecio } from "../utils/formato";
 
@@ -42,6 +44,8 @@ function TarjetaProducto({ producto, variante, sticker }) {
   return (
     <article
       className={(esInicio ? "tarjeta " : "producto-menu ") + producto.tema}
+      onPointerMove={inclinarImagen}
+      onPointerLeave={reponerImagen}
     >
       {sticker && (
         <span className="kb-sticker">
@@ -74,14 +78,14 @@ function TarjetaProducto({ producto, variante, sticker }) {
 
       {sticker && <p className="kb-sticker-frase">{sticker.frase}</p>}
 
-      <button
+      <BotonCarrito
         className="boton-producto"
         type="button"
         data-uisfx="add-to-cart"
         onClick={agregarAlCarrito}
       >
         {textoBoton}
-      </button>
+      </BotonCarrito>
     </article>
   );
 }

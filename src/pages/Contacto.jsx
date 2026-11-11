@@ -2,6 +2,7 @@ import { useState } from "react";
 import AlertaDoh from "../components/AlertaDoh";
 import MensajeError from "../components/MensajeError";
 import useEstilos from "../hooks/useEstilos";
+import { useAnimacionesContacto } from "../animaciones/paginas";
 import useFormulario from "../hooks/useFormulario";
 import { enviarQueja } from "../services/api";
 import { validarContacto } from "../utils/validaciones";
@@ -11,6 +12,7 @@ const estilos = [estiloContacto];
 
 function Contacto() {
   useEstilos(estilos);
+  useAnimacionesContacto();
 
   const { valores, resumenErrores, errorDe, cambiar, salirDelCampo, enviar } =
     useFormulario({ nombre: "", email: "", mensaje: "" }, validarContacto);
@@ -54,7 +56,7 @@ function Contacto() {
           <div className="col-lg-2 d-flex justify-content-center">
             <div className="kb-mou-container">
               <img
-                src="assets/mou-escopeta.jpg"
+                src="assets/moe-escopeta.png"
                 alt="Moe sosteniendo escopeta"
                 className="moe-img"
               />

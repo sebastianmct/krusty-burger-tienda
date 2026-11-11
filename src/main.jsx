@@ -6,6 +6,7 @@ import "./styles/style-tipografia-global.css";
 import "./styles/style-sonidos.css";
 import "./styles/style-footer.css";
 import "./styles/style-navbar.css";
+import "./styles/style-animaciones.css";
 import App from "./App.jsx";
 
 createRoot(document.getElementById("root")).render(

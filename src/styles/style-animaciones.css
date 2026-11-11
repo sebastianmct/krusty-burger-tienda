@@ -1,0 +1,249 @@
+.kb-add-to-cart.kb-add-to-cart.kb-add-to-cart {
+  --background-default: var(--kb-dark, #1a1a1a);
+  --background-hover: var(--kb-red, #ed1c24);
+  --background-scale: 1;
+  --text-color: #fff;
+  --text-o: 1;
+  --text-x: 14px;
+  --cart: var(--text-color);
+  --cart-x: var(--cart-rest-x, -48px);
+  --cart-y: 0px;
+  --cart-rotate: 0deg;
+  --cart-scale: 0.75;
+  --cart-clip: 0px;
+  --cart-clip-x: 0px;
+  --cart-tick-offset: 10px;
+  --cart-tick-color: var(--background, var(--background-default));
+  --shirt-y: -16px;
+  --shirt-scale: 0;
+  --shirt-color: var(--background, var(--background-default));
+  --shirt-logo: var(--text-color);
+  --shirt-second-y: 24px;
+  --shirt-second-color: var(--text-color);
+  --shirt-second-logo: var(--background, var(--background-default));
+  --radio: 999px;
+
+  -webkit-tap-highlight-color: transparent;
+  appearance: none;
+  background: none;
+  border: 0;
+  border-radius: var(--radio);
+  box-shadow: none;
+  color: var(--text-color);
+  padding: 12px 0;
+  cursor: pointer;
+  position: relative;
+  font-family: inherit;
+  transition: none;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radio);
+    transition: background 0.25s;
+    background: var(--background, var(--background-default));
+    box-shadow: 0 3px 0 rgba(0, 0, 0, 0.28);
+    transform: scaleX(var(--background-scale)) translateZ(0);
+  }
+
+  &:not(.active):hover,
+  .tarjeta:hover &:not(.active) {
+    --background: var(--background-hover);
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--kb-yellow, #ffd90f);
+    outline-offset: 3px;
+  }
+
+  .kb-add-texto {
+    display: block;
+    width: fit-content;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    white-space: nowrap;
+    line-height: 24px;
+    color: var(--text-color);
+    opacity: var(--text-o);
+    transform: translateX(var(--text-x)) translateZ(0);
+  }
+
+  .kb-add-texto i {
+    display: none;
+  }
+
+  svg {
+    display: block;
+    width: var(--svg-width, 24px);
+    height: var(--svg-height, 24px);
+    position: var(--svg-position, relative);
+    left: var(--svg-left, 0);
+    top: var(--svg-top, 0);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  svg path {
+    fill: var(--svg-fill, none);
+    stroke: var(--svg-stroke, none);
+    stroke-width: var(--svg-stroke-width, 2);
+  }
+
+  .kb-add-curva {
+    --svg-width: 64px;
+    --svg-height: 13px;
+    --svg-left: 50%;
+    --svg-top: -12px;
+    --svg-position: absolute;
+    --svg-fill: var(--background, var(--background-default));
+    transition: fill 0.25s;
+    pointer-events: none;
+    margin-left: -32px;
+  }
+
+  .kb-add-burger,
+  .kb-add-cart {
+    display: block;
+    pointer-events: none;
+    position: absolute;
+    left: 50%;
+  }
+
+  .kb-add-burger {
+    margin: -12px 0 0 -12px;
+    top: 0;
+    transform-origin: 50% 100%;
+    transform: translateY(var(--shirt-y)) scale(var(--shirt-scale));
+  }
+
+  .kb-add-burger svg {
+    --svg-fill: var(--shirt-color);
+  }
+
+  .kb-add-burger svg g {
+    --svg-fill: var(--svg-g-fill, var(--shirt-logo));
+  }
+
+  .kb-add-burger svg.segundo {
+    --svg-fill: var(--shirt-second-color);
+    --svg-g-fill: var(--shirt-second-logo);
+    --svg-position: absolute;
+    clip-path: polygon(0 var(--shirt-second-y),
+        24px var(--shirt-second-y),
+        24px 24px,
+        0 24px);
+  }
+
+  .kb-add-cart {
+    --svg-width: 36px;
+    --svg-height: 26px;
+    --svg-stroke: var(--cart);
+    top: 10px;
+    margin-left: -18px;
+    transform: translate(var(--cart-x), var(--cart-y)) rotate(var(--cart-rotate)) scale(var(--cart-scale)) translateZ(0);
+  }
+
+  .kb-add-cart::before {
+    content: "";
+    display: block;
+    width: 22px;
+    height: 12px;
+    position: absolute;
+    left: 7px;
+    top: 7px;
+    background: var(--cart);
+    clip-path: polygon(0 0,
+        22px 0,
+        calc(22px - var(--cart-clip-x)) var(--cart-clip),
+        var(--cart-clip-x) var(--cart-clip));
+  }
+
+  .kb-add-cart path.rueda {
+    --svg-stroke-width: 1.5;
+  }
+
+  .kb-add-cart path.visto {
+    --svg-stroke: var(--cart-tick-color);
+    stroke-dasharray: 10px;
+    stroke-dashoffset: var(--cart-tick-offset);
+  }
+}
+
+.producto-menu .kb-add-to-cart.kb-add-to-cart.kb-add-to-cart {
+  --background-default: var(--kb-yellow, #ffd90f);
+  --background-hover: #f0c800;
+  --text-color: var(--kb-dark, #1a1a1a);
+  --radio: 8px;
+}
+
+.kb-add-to-cart.boton-carrito.kb-add-to-cart {
+  --background-default: var(--kb-red-dark, #d9121d);
+  --background-hover: var(--kb-red, #ed1c24);
+  --text-color: #fff;
+  --radio: 10px;
+  width: min(100%, 320px);
+  padding: 16px 0;
+}
+
+.kb-gsap-anim {
+  transition: none !important;
+}
+
+.kb-hero {
+  position: relative;
+}
+
+.kb-hero>.hero-text,
+.kb-hero>.kb-hero-img {
+  position: relative;
+  z-index: 1;
+}
+
+.kb-fondo-flotante {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.kb-rosquilla-fondo {
+  position: absolute;
+  height: auto;
+  opacity: 0.85;
+}
+
+.kb-cortina {
+  position: fixed;
+  inset: 0;
+  z-index: 2500;
+  display: flex;
+  pointer-events: none;
+  visibility: hidden;
+}
+
+.kb-cortina span {
+  flex: 1;
+  background: var(--kb-yellow, #ffd90f);
+  border-right: 3px solid var(--kb-dark, #1a1a1a);
+}
+
+.kb-cortina span:nth-child(even) {
+  background: var(--kb-red, #ed1c24);
+}
+
+.kb-cursor-rosquilla {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2900;
+  width: 30px;
+  height: auto;
+  pointer-events: none;
+  visibility: hidden;
+  opacity: 0;
+}

@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import LogoKrusty from "./LogoKrusty";
 import MenuCuenta from "./MenuCuenta";
 import ControlesSonido from "./ControlesSonido";
 import { useCarrito } from "../context/CarritoContext";
+import { useAnimacionesNavbar } from "../animaciones/paginas";
 
 function Navbar() {
   const [abierto, setAbierto] = useState(false);
   const { items } = useCarrito();
   const cantidadCarrito = items.reduce((total, item) => total + item.cantidad, 0);
+  const navRef = useRef(null);
+  useAnimacionesNavbar(navRef, cantidadCarrito);
   const etiquetaCarrito =
     cantidadCarrito === 0
       ? "Carrito, sin productos"
@@ -17,7 +20,7 @@ function Navbar() {
         }`;
 
   return (
-    <nav className="navbar navbar-expand-lg bg-white border-bottom border-3 border-dark px-4 px-lg-5 py-3">
+    <nav ref={navRef} className="navbar navbar-expand-lg bg-white border-bottom border-3 border-dark px-4 px-lg-5 py-3">
       <div className="container-fluid p-0 gap-3">
         <h2 className="kb-logo m-0">
           <Link to="/">

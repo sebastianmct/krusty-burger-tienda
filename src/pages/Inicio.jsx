@@ -4,17 +4,22 @@ import PersonajeDelDia from "../components/PersonajeDelDia";
 import VecinosSpringfield from "../components/VecinosSpringfield";
 import TarjetaProducto from "../components/TarjetaProducto";
 import useEstilos from "../hooks/useEstilos";
+import FondoFlotante from "../components/FondoFlotante";
+import { useAnimacionesInicio, useEntradaTarjetas } from "../animaciones/paginas";
 import { obtenerCatalogo, obtenerCategorias } from "../data/productos";
 import estiloHome from "../styles/style-home.css?inline";
+import DonaDevoradora from "../components/DonaDevoradora";
 
 const estilos = [estiloHome];
 
 function Inicio() {
   useEstilos(estilos);
+  useAnimacionesInicio();
 
   const categorias = obtenerCategorias();
   const [productos] = useState(obtenerCatalogo);
   const [categoriaActiva, setCategoriaActiva] = useState("hamburguesas");
+  useEntradaTarjetas(".tarjeta", [categoriaActiva]);
 
   const productosVisibles = productos.filter(
     (producto) => producto.categoria === categoriaActiva,
@@ -23,6 +28,7 @@ function Inicio() {
   return (
     <>
       <header className="kb-hero d-flex flex-column flex-lg-row align-items-center justify-content-between gap-4 gap-lg-5 px-4 px-lg-5 py-5">
+        <FondoFlotante />
         <div className="hero-text">
           <h1 className="kb-hero-title">
             !LA BURGER FAVORITA DE <span>SPRINGFIELD!</span>
@@ -41,11 +47,7 @@ function Inicio() {
             </Link>
           </div>
         </div>
-        <img
-          src="assets/rosquilla-homero.png"
-          alt="Dona Homero"
-          className="kb-hero-img"
-        />
+        <DonaDevoradora />
       </header>
 
       <section className="kb-menu-section px-3 px-lg-5 py-5">
